@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テックブリッジ株式会社 | ITで、つなぐ。</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; color: #333; line-height: 1.8; }
+
+/* --- Header --- */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center; height: 68px;
+}
+.logo { font-size: 1.25rem; font-weight: 700; color: #1a1a2e; letter-spacing: .02em; }
+.logo span { color: #4361ee; }
+nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+nav a:hover { color: #4361ee; }
+
+/* --- Hero --- */
+.hero {
+  margin-top: 68px; padding: 100px 24px 120px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  text-align: center; color: #fff; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(67,97,238,0.25) 0%, transparent 70%);
+  top: -200px; right: -100px; border-radius: 50%;
+}
+.hero h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.4; margin-bottom: 20px; position: relative; }
+.hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 40px; position: relative; }
+.btn-primary {
+  display: inline-block; padding: 16px 40px; border-radius: 50px;
+  background: linear-gradient(135deg, #4361ee, #3a0ca3); color: #fff;
+  text-decoration: none; font-weight: 600; font-size: 1rem;
+  box-shadow: 0 4px 20px rgba(67,97,238,0.4); transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(67,97,238,0.55); }
+
+/* --- Section common --- */
+.section { padding: 90px 24px; }
+.section-title { text-align: center; font-size: 1.9rem; font-weight: 700; margin-bottom: 12px; color: #1a1a2e; }
+.section-sub { text-align: center; color: #777; margin-bottom: 56px; font-size: 0.95rem; }
+
+/* --- Services --- */
+.services { background: #f8f9fc; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; }
+.card {
+  background: #fff; border-radius: 16px; padding: 40px 32px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05); transition: transform .25s, box-shadow .25s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+.card-icon {
+  width: 56px; height: 56px; border-radius: 14px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: #fff; font-weight: 700;
+}
+.card:nth-child(1) .card-icon { background: linear-gradient(135deg, #4361ee, #3a86ff); }
+.card:nth-child(2) .card-icon { background: linear-gradient(135deg, #f72585, #b5179e); }
+.card:nth-child(3) .card-icon { background: linear-gradient(135deg, #06d6a0, #118ab2); }
+.card h3 { font-size: 1.2rem; margin-bottom: 12px; color: #1a1a2e; }
+.card p { color: #666; font-size: 0.93rem; }
+
+/* --- About --- */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto; align-items: center; }
+.about-text h3 { font-size: 1.5rem; margin-bottom: 16px; color: #1a1a2e; }
+.about-text p { color: #555; margin-bottom: 16px; }
+.about-visual {
+  height: 320px; border-radius: 20px;
+  background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 50%, #7209b7 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.15); font-size: 5rem; font-weight: 900;
+}
+.info-table { width: 100%; margin-top: 24px; border-collapse: collapse; }
+.info-table th, .info-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; font-size: 0.92rem; }
+.info-table th { color: #1a1a2e; font-weight: 600; width: 140px; background: #f8f9fc; }
+.info-table td { color: #555; }
+
+/* --- Contact --- */
+.contact { background: #f8f9fc; }
+.form-wrap { max-width: 640px; margin: 0 auto; }
+.form-group { margin-bottom: 22px; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 600; color: #1a1a2e; margin-bottom: 6px; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 14px 16px; border: 1px solid #ddd; border-radius: 10px;
+  font-size: 0.95rem; font-family: inherit; transition: border-color .2s;
+  background: #fff;
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #4361ee; }
+.form-group textarea { height: 140px; resize: vertical; }
+.btn-submit {
+  display: block; width: 100%; padding: 16px; border: none; border-radius: 50px; cursor: pointer;
+  background: linear-gradient(135deg, #4361ee, #3a0ca3); color: #fff;
+  font-size: 1rem; font-weight: 600; font-family: inherit;
+  box-shadow: 0 4px 20px rgba(67,97,238,0.3); transition: transform .2s, box-shadow .2s;
+}
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(67,97,238,0.45); }
+
+/* --- Footer --- */
+.footer {
+  background: #1a1a2e; color: rgba(255,255,255,0.6); text-align: center;
+  padding: 40px 24px; font-size: 0.85rem;
+}
+.footer a { color: rgba(255,255,255,0.8); text-decoration: none; margin: 0 12px; }
+.footer-links { margin-bottom: 16px; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .cards { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { height: 200px; font-size: 3rem; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero { padding: 70px 20px 80px; }
+  nav { display: none; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">Tech<span>Bridge</span></div>
+    <nav>
+      <a href="#services">事業内容</a>
+      <a href="#about">会社概要</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>テクノロジーで、<br>ビジネスの架け橋を。</h1>
+  <p>DX推進・システム開発・AI導入まで、御社の成長をワンストップで支援します。</p>
+  <a href="#contact" class="btn-primary">まずは無料で相談する</a>
+</section>
+
+<!-- Services -->
+<section class="section services" id="services">
+  <h2 class="section-title">事業内容</h2>
+  <p class="section-sub">テックブリッジが提供する3つのコアサービス</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">W</div>
+      <h3>Webシステム開発</h3>
+      <p>業務効率化に直結するWebアプリケーションを、要件定義から運用保守まで一貫して開発。React / Next.js を中心としたモダンな技術スタックで、スピーディに価値を届けます。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">A</div>
+      <h3>AI・データ活用支援</h3>
+      <p>ChatGPT API連携、社内RAG構築、データ分析基盤の設計など、AIをビジネスに実装するための戦略立案から開発までをサポートします。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">D</div>
+      <h3>DXコンサルティング</h3>
+      <p>「何から始めればいいかわからない」を解決。現状分析・業務フロー可視化・ツール選定を通じて、御社に最適なDXロードマップを策定します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <h2 class="section-title">会社概要</h2>
+  <p class="section-sub">テックブリッジ株式会社について</p>
+  <div class="about-grid">
+    <div class="about-visual">TB</div>
+    <div class="about-text">
+      <h3>「つなぐ」をテクノロジーで。</h3>
+      <p>私たちテックブリッジは、2020年の設立以来、中小企業のデジタル変革を支援してきました。大手SIerでは手が届かない「ちょうどいい規模」のIT投資を、確かな技術力とスピードで実現します。</p>
+      <table class="info-table">
+        <tr><th>会社名</th><td>テックブリッジ株式会社</td></tr>
+        <tr><th>設立</th><td>2020年4月</td></tr>
+        <tr><th>代表取締役</th><td>橋本 拓也</td></tr>
+        <tr><th>所在地</th><td>東京都渋谷区神南1-2-3 テックビル5F</td></tr>
+        <tr><th>事業内容</th><td>Webシステム開発 / AI活用支援 / DXコンサルティング</td></tr>
+        <tr><th>従業員数</th><td>28名（2026年4月時点）</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <h2 class="section-title">お問い合わせ</h2>
+  <p class="section-sub">まずはお気軽にご相談ください。通常1営業日以内にご返信します。</p>
+  <div class="form-wrap">
+    <form onsubmit="event.preventDefault(); alert('これはデモサイトです。実際の送信は行われません。');">
+      <div class="form-group">
+        <label>会社名</label>
+        <input type="text" placeholder="例：株式会社サンプル">
+      </div>
+      <div class="form-group">
+        <label>お名前</label>
+        <input type="text" placeholder="例：山田 太郎">
+      </div>
+      <div class="form-group">
+        <label>メールアドレス</label>
+        <input type="email" placeholder="例：info@example.com">
+      </div>
+      <div class="form-group">
+        <label>ご相談内容</label>
+        <textarea placeholder="ご依頼の背景やご要望をお聞かせください"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">送信する</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">利用規約</a>
+    <a href="#">採用情報</a>
+  </div>
+  <p>&copy; 2026 テックブリッジ株式会社 All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

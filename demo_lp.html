@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartTask — チームの生産性を、もっとスマートに。</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; color: #333; line-height: 1.8; }
+
+/* --- Header --- */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center; height: 64px;
+}
+.logo { font-size: 1.3rem; font-weight: 800; color: #1a1a2e; }
+.logo span { color: #f55; }
+.header-cta {
+  padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, #f55, #e63946); color: #fff;
+  font-size: 0.85rem; font-weight: 600; font-family: inherit;
+  text-decoration: none; transition: transform .2s;
+}
+.header-cta:hover { transform: translateY(-1px); }
+
+/* --- First View --- */
+.fv {
+  margin-top: 64px; padding: 110px 24px 130px; text-align: center;
+  background: linear-gradient(160deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #fff; position: relative; overflow: hidden;
+}
+.fv::before {
+  content: ""; position: absolute; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,85,85,0.2) 0%, transparent 70%);
+  top: -150px; left: -100px; border-radius: 50%;
+}
+.fv::after {
+  content: ""; position: absolute; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(114,9,183,0.2) 0%, transparent 70%);
+  bottom: -150px; right: -50px; border-radius: 50%;
+}
+.fv-badge {
+  display: inline-block; padding: 6px 20px; border-radius: 50px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.8rem; color: rgba(255,255,255,0.8); margin-bottom: 28px;
+  position: relative;
+}
+.fv h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.45; margin-bottom: 20px; position: relative; }
+.fv h1 em { font-style: normal; color: #f55; }
+.fv p { font-size: 1.05rem; color: rgba(255,255,255,0.7); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; position: relative; }
+.btn-cta {
+  display: inline-block; padding: 18px 48px; border-radius: 50px;
+  background: linear-gradient(135deg, #f55, #e63946); color: #fff;
+  text-decoration: none; font-weight: 700; font-size: 1.05rem;
+  box-shadow: 0 4px 24px rgba(255,85,85,0.4); transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(255,85,85,0.55); }
+.fv-note { margin-top: 16px; font-size: 0.8rem; color: rgba(255,255,255,0.45); position: relative; }
+
+/* --- Section common --- */
+.section { padding: 90px 24px; }
+.section-title { text-align: center; font-size: 1.9rem; font-weight: 700; margin-bottom: 12px; color: #1a1a2e; }
+.section-sub { text-align: center; color: #777; margin-bottom: 56px; font-size: 0.95rem; }
+
+/* --- Features --- */
+.features { background: #fff; }
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+.feat-card {
+  background: #f8f9fc; border-radius: 16px; padding: 40px 32px;
+  border: 1px solid #eee; transition: transform .25s, box-shadow .25s;
+}
+.feat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.feat-num {
+  display: inline-block; width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, #f55, #e63946); color: #fff;
+  font-weight: 800; font-size: 1.1rem; text-align: center; line-height: 40px;
+  margin-bottom: 20px;
+}
+.feat-card h3 { font-size: 1.15rem; margin-bottom: 12px; color: #1a1a2e; }
+.feat-card p { color: #666; font-size: 0.92rem; }
+
+/* --- Pricing --- */
+.pricing { background: #f8f9fc; }
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1000px; margin: 0 auto; }
+.price-card {
+  background: #fff; border-radius: 16px; padding: 40px 28px; text-align: center;
+  border: 2px solid transparent; transition: transform .25s, box-shadow .25s;
+  position: relative;
+}
+.price-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.price-card.popular {
+  border-color: #f55;
+  box-shadow: 0 4px 24px rgba(255,85,85,0.15);
+}
+.popular-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, #f55, #e63946); color: #fff;
+  padding: 4px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+}
+.price-card h3 { font-size: 1.1rem; color: #1a1a2e; margin-bottom: 8px; }
+.price-amount { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
+.price-amount span { font-size: 0.9rem; font-weight: 500; color: #888; }
+.price-desc { color: #999; font-size: 0.82rem; margin-bottom: 24px; }
+.price-features { list-style: none; text-align: left; margin-bottom: 28px; }
+.price-features li {
+  padding: 8px 0; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 0.9rem;
+  padding-left: 20px; position: relative;
+}
+.price-features li::before { content: "\2713"; position: absolute; left: 0; color: #06d6a0; font-weight: 700; }
+.btn-plan {
+  display: block; padding: 14px; border-radius: 50px; text-decoration: none;
+  font-weight: 600; font-size: 0.92rem; transition: transform .2s;
+  border: 2px solid #ddd; color: #555; background: #fff;
+}
+.btn-plan:hover { transform: translateY(-1px); }
+.btn-plan.primary {
+  background: linear-gradient(135deg, #f55, #e63946); color: #fff; border-color: transparent;
+  box-shadow: 0 4px 16px rgba(255,85,85,0.3);
+}
+
+/* --- FAQ --- */
+.faq { background: #fff; }
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid #e8e8e8; }
+.faq-q {
+  width: 100%; padding: 20px 0; background: none; border: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 1rem; font-weight: 600; color: #1a1a2e; text-align: left;
+  font-family: inherit; line-height: 1.6;
+}
+.faq-q::after { content: "+"; font-size: 1.4rem; color: #aaa; transition: transform .3s; flex-shrink: 0; margin-left: 16px; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); color: #f55; }
+.faq-a {
+  max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease;
+  color: #666; font-size: 0.93rem;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+/* --- Bottom CTA --- */
+.bottom-cta {
+  padding: 100px 24px; text-align: center;
+  background: linear-gradient(160deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #fff;
+}
+.bottom-cta h2 { font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+.bottom-cta p { color: rgba(255,255,255,0.65); margin-bottom: 36px; font-size: 1rem; }
+
+/* --- Footer --- */
+.footer {
+  background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center;
+  padding: 32px 24px; font-size: 0.82rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .feat-grid, .price-grid { grid-template-columns: 1fr; }
+  .fv h1 { font-size: 1.7rem; }
+  .fv { padding: 80px 20px 90px; }
+  .section { padding: 60px 20px; }
+  .price-amount { font-size: 2rem; }
+  .header-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">Smart<span>Task</span></div>
+    <a href="#bottom-cta" class="header-cta">無料で始める</a>
+  </div>
+</header>
+
+<!-- First View -->
+<section class="fv">
+  <div class="fv-badge">導入企業 1,200社突破</div>
+  <h1>タスク管理を、<br><em>もっとスマート</em>に。</h1>
+  <p>チームの「誰が・何を・いつまでに」を一目で把握。<br>直感的な操作で、今日からすぐに使えるタスク管理ツールです。</p>
+  <a href="#bottom-cta" class="btn-cta">14日間 無料トライアル</a>
+  <div class="fv-note">クレジットカード不要 ・ 即日利用可能</div>
+</section>
+
+<!-- Features -->
+<section class="section features" id="features">
+  <h2 class="section-title">選ばれる3つの理由</h2>
+  <p class="section-sub">SmartTaskが多くのチームに支持される理由をご紹介します</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-num">1</div>
+      <h3>直感的なボード表示</h3>
+      <p>ドラッグ&ドロップでタスクのステータスを変更。カンバン・リスト・ガントの3つのビューを自由に切り替えられるので、チームの働き方に合わせて使えます。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">2</div>
+      <h3>Slack・Google連携</h3>
+      <p>SlackやGoogle Calendarとワンクリックで連携。タスクの期限が近づくと自動通知が届くので、抜け漏れがなくなります。連携設定は5分で完了します。</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">3</div>
+      <h3>AI自動分類</h3>
+      <p>タスクを登録するだけでAIが優先度・カテゴリを自動で分類。メンバーの負荷状況も可視化されるので、マネージャーの意思決定をサポートします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section pricing" id="pricing">
+  <h2 class="section-title">料金プラン</h2>
+  <p class="section-sub">チームの規模に合わせて選べるシンプルな料金体系</p>
+  <div class="price-grid">
+    <div class="price-card">
+      <h3>Free</h3>
+      <div class="price-amount">&yen;0<span> / 月</span></div>
+      <div class="price-desc">個人や小規模チーム向け</div>
+      <ul class="price-features">
+        <li>ユーザー3名まで</li>
+        <li>プロジェクト5件まで</li>
+        <li>基本ボード表示</li>
+        <li>メール通知</li>
+      </ul>
+      <a href="#bottom-cta" class="btn-plan">無料で始める</a>
+    </div>
+    <div class="price-card popular">
+      <div class="popular-badge">人気No.1</div>
+      <h3>Pro</h3>
+      <div class="price-amount">&yen;980<span> / 人 / 月</span></div>
+      <div class="price-desc">成長中のチームに最適</div>
+      <ul class="price-features">
+        <li>ユーザー無制限</li>
+        <li>プロジェクト無制限</li>
+        <li>ガントチャート</li>
+        <li>Slack / Google連携</li>
+        <li>AI自動分類</li>
+      </ul>
+      <a href="#bottom-cta" class="btn-plan primary">14日間 無料トライアル</a>
+    </div>
+    <div class="price-card">
+      <h3>Enterprise</h3>
+      <div class="price-amount">要問合せ</div>
+      <div class="price-desc">大規模組織・セキュリティ重視</div>
+      <ul class="price-features">
+        <li>Proの全機能</li>
+        <li>SSO / SAML認証</li>
+        <li>監査ログ</li>
+        <li>専任サポート</li>
+        <li>SLA保証</li>
+      </ul>
+      <a href="#bottom-cta" class="btn-plan">お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+  <h2 class="section-title">よくある質問</h2>
+  <p class="section-sub">お問い合わせ前にこちらをご確認ください</p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">無料トライアル中に料金は発生しますか？</button>
+      <div class="faq-a">いいえ、14日間のトライアル期間中は一切料金はかかりません。クレジットカードの登録も不要です。トライアル終了後に自動的に課金されることもありませんのでご安心ください。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">他のツールからデータを移行できますか？</button>
+      <div class="faq-a">はい、Trello・Asana・Notion・Jiraなどの主要なタスク管理ツールからのインポート機能を標準搭載しています。CSVファイルからのインポートにも対応していますので、ほとんどのケースでスムーズに移行が可能です。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">途中でプランを変更できますか？</button>
+      <div class="faq-a">はい、いつでもプランの変更が可能です。アップグレードは即日反映、ダウングレードは次の請求サイクルから適用されます。差額は日割り計算されますので、無駄なお支払いは発生しません。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">セキュリティ対策はどうなっていますか？</button>
+      <div class="faq-a">全通信はSSL/TLSで暗号化されており、データは国内のデータセンターに保管しています。Enterpriseプランでは、SSO/SAML認証・IP制限・監査ログなど、エンタープライズグレードのセキュリティ機能をご利用いただけます。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">解約に縛り期間はありますか？</button>
+      <div class="faq-a">いいえ、最低契約期間はありません。月額プランの場合はいつでも解約可能です。年額プランの場合も、残りの期間分を日割りで返金いたします。</div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="bottom-cta" id="bottom-cta">
+  <h2>まずは14日間、無料で試してみませんか？</h2>
+  <p>クレジットカード不要。3分で登録完了。チームの生産性が変わる体験を。</p>
+  <a href="#" class="btn-cta" onclick="event.preventDefault(); alert('これはデモサイトです。実際の登録は行われません。');">無料トライアルを始める</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2026 SmartTask Inc. All Rights Reserved. &#124; This is a demo site.</p>
+</footer>
+
+</body>
+</html>
