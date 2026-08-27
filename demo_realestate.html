@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不動産AI自動対応エージェント - デモ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif; background: #f5f7fa; color: #333; }
+
+.header {
+    background: linear-gradient(135deg, #1a5276 0%, #2e86c1 50%, #3498db 100%);
+    color: white; padding: 40px 20px; text-align: center;
+}
+.header h1 { font-size: 28px; margin-bottom: 8px; }
+.header p { font-size: 16px; opacity: 0.9; }
+.header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 16px; border-radius: 20px; margin-top: 12px; font-size: 13px; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+/* フロー図 */
+.flow-section { background: white; border-radius: 12px; padding: 30px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.flow-section h2 { font-size: 20px; margin-bottom: 20px; color: #1a5276; border-left: 4px solid #2e86c1; padding-left: 12px; }
+
+.flow-diagram {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 8px; padding: 20px 0;
+}
+.flow-step {
+    background: #eaf2f8; border: 2px solid #2e86c1; border-radius: 10px;
+    padding: 14px 18px; text-align: center; min-width: 140px; position: relative;
+}
+.flow-step .step-num {
+    position: absolute; top: -10px; left: -10px; background: #2e86c1; color: white;
+    width: 24px; height: 24px; border-radius: 50%; font-size: 12px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+}
+.flow-step .step-title { font-weight: bold; font-size: 13px; color: #1a5276; }
+.flow-step .step-detail { font-size: 11px; color: #666; margin-top: 4px; }
+.flow-step.trigger { background: #fdebd0; border-color: #e67e22; }
+.flow-step.trigger .step-num { background: #e67e22; }
+.flow-step.ai { background: #d5f5e3; border-color: #27ae60; }
+.flow-step.ai .step-num { background: #27ae60; }
+.flow-step.output { background: #fadbd8; border-color: #e74c3c; }
+.flow-step.output .step-num { background: #e74c3c; }
+.flow-arrow { font-size: 24px; color: #2e86c1; font-weight: bold; }
+
+/* デモUI */
+.demo-section { background: white; border-radius: 12px; padding: 30px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.demo-section h2 { font-size: 20px; margin-bottom: 6px; color: #1a5276; border-left: 4px solid #2e86c1; padding-left: 12px; }
+.demo-section .subtitle { font-size: 14px; color: #777; margin-bottom: 20px; padding-left: 16px; }
+
+.demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .demo-grid { grid-template-columns: 1fr; } }
+
+.demo-panel { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+.demo-panel .panel-header {
+    background: #f8f9fa; padding: 10px 14px; font-weight: bold; font-size: 13px;
+    border-bottom: 1px solid #ddd; color: #555;
+}
+.demo-panel .panel-body { padding: 14px; font-size: 13px; line-height: 1.7; }
+.demo-panel .panel-body pre {
+    white-space: pre-wrap; font-family: inherit; margin: 0;
+}
+
+.label-tag {
+    display: inline-block; padding: 2px 10px; border-radius: 4px;
+    font-size: 11px; font-weight: bold; margin-right: 6px;
+}
+.label-purchase { background: #d4efdf; color: #1e8449; }
+.label-high { background: #fadbd8; color: #c0392b; }
+.label-medium { background: #fdebd0; color: #d68910; }
+.label-complete { background: #d5f5e3; color: #27ae60; }
+
+/* 機能一覧 */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.feature-card {
+    background: white; border-radius: 10px; padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #2e86c1;
+    transition: transform 0.2s;
+}
+.feature-card:hover { transform: translateY(-2px); }
+.feature-card h3 { font-size: 16px; color: #1a5276; margin-bottom: 8px; }
+.feature-card p { font-size: 13px; color: #666; line-height: 1.6; }
+.feature-card .tech { font-size: 11px; color: #2e86c1; margin-top: 8px; }
+
+/* 料金 */
+.pricing {
+    background: linear-gradient(135deg, #1a5276, #2e86c1);
+    border-radius: 12px; padding: 30px; margin: 20px 0; color: white;
+}
+.pricing h2 { font-size: 20px; margin-bottom: 20px; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+    background: rgba(255,255,255,0.15); border-radius: 10px; padding: 24px;
+    backdrop-filter: blur(10px);
+}
+.pricing-card h3 { font-size: 18px; margin-bottom: 6px; }
+.pricing-card .price { font-size: 32px; font-weight: bold; margin: 10px 0; }
+.pricing-card .price span { font-size: 14px; font-weight: normal; }
+.pricing-card ul { list-style: none; margin-top: 12px; }
+.pricing-card ul li { padding: 4px 0; font-size: 13px; }
+.pricing-card ul li::before { content: "✓ "; color: #82e0aa; font-weight: bold; }
+
+/* 比較表 */
+.comparison { margin: 20px 0; }
+.comparison table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.comparison th { background: #1a5276; color: white; padding: 12px; font-size: 13px; text-align: center; }
+.comparison td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid #eee; text-align: center; }
+.comparison tr:nth-child(even) { background: #f8f9fa; }
+.comparison .highlight { background: #d5f5e3; font-weight: bold; }
+
+.back-link { display: inline-block; margin: 20px 0; color: #2e86c1; text-decoration: none; font-size: 14px; }
+.back-link:hover { text-decoration: underline; }
+
+.cta-section { text-align: center; padding: 40px 20px; }
+.cta-btn {
+    display: inline-block; background: #e67e22; color: white; padding: 16px 48px;
+    border-radius: 8px; text-decoration: none; font-size: 18px; font-weight: bold;
+    transition: background 0.3s;
+}
+.cta-btn:hover { background: #d35400; }
+.cta-note { margin-top: 12px; font-size: 13px; color: #777; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>不動産AI自動対応エージェント</h1>
+    <p>TERASS × Gemini × Make連携で反響対応を全自動化</p>
+    <div class="badge">Gmail / LINE / TERASS Offer / HOME'S / SUUMO 対応</div>
+</div>
+
+<div class="container">
+    <a href="index.html" class="back-link">← ポートフォリオに戻る</a>
+
+    <!-- フロー図 -->
+    <div class="flow-section">
+        <h2>自動化フロー全体像</h2>
+        <div class="flow-diagram">
+            <div class="flow-step trigger">
+                <div class="step-num">1</div>
+                <div class="step-title">メール受信</div>
+                <div class="step-detail">TERASS Offer<br>HOME'S査定<br>Gmail</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="step-num">2</div>
+                <div class="step-title">Make起動</div>
+                <div class="step-detail">Gmail Trigger<br>自動振り分け</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step ai">
+                <div class="step-num">3</div>
+                <div class="step-title">Gemini AI分類</div>
+                <div class="step-detail">カテゴリ判定<br>緊急度判定<br>条件抽出</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step ai">
+                <div class="step-num">4</div>
+                <div class="step-title">返信文生成</div>
+                <div class="step-detail">物件提案<br>パーソナライズ<br>次アクション提示</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step output">
+                <div class="step-num">5</div>
+                <div class="step-title">下書き保存</div>
+                <div class="step-detail">Gmail下書き<br>確認→送信<br>対応記録</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- デモ: 反響自動対応 -->
+    <div class="demo-section">
+        <h2>デモ: TERASS Offer反響 → AI自動対応</h2>
+        <p class="subtitle">実際のメール受信から返信文生成までの全自動フロー</p>
+
+        <div class="demo-grid">
+            <div class="demo-panel">
+                <div class="panel-header">受信メール（TERASS Offer）</div>
+                <div class="panel-body">
+<pre>件名: 【TERASS Offer】新規お問い合わせ
+
+お客様名: 田中太郎 様
+メールアドレス: tanaka@example.com
+電話番号: 090-1234-5678
+
+お問い合わせ内容:
+横浜市内で3LDK以上のマンションを探しています。
+予算は3,500万円前後、駅徒歩10分以内が希望です。
+小学校が近いエリアだと助かります。
+来月中には内見を始めたいと思っています。</pre>
+                </div>
+            </div>
+            <div class="demo-panel">
+                <div class="panel-header">AI分類結果（自動）</div>
+                <div class="panel-body">
+                    <p><span class="label-tag label-purchase">購入問い合わせ</span><span class="label-tag label-high">緊急度: 高</span></p>
+                    <br>
+                    <p><strong>顧客:</strong> 田中太郎 様</p>
+                    <p><strong>要約:</strong> 横浜市内3LDK以上、3,500万円前後、駅近、学区重視</p>
+                    <br>
+                    <p><strong>抽出条件:</strong></p>
+                    <p>・横浜市内 ・3LDK以上 ・3,500万円前後</p>
+                    <p>・駅徒歩10分以内 ・小学校近い</p>
+                    <p>・来月中に内見希望</p>
+                    <br>
+                    <p><strong>推奨:</strong> 即日返信 → 物件3件提案 → 内見日程調整</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div class="demo-panel">
+                <div class="panel-header">Makeワークフロー実行ログ</div>
+                <div class="panel-body" style="font-family: monospace; font-size: 12px; background: #f8f9fa;">
+<pre>Step 1: メール受信・自動分類 <span class="label-tag label-complete">完了</span> → 購入問い合わせ / 高（即日対応）
+Step 2: 物件マッチング（REINS連携） <span class="label-tag label-complete">完了</span> → 3件マッチ
+Step 3: AI返信文生成（Gemini） <span class="label-tag label-complete">完了</span> → パーソナライズ済み
+Step 4: Gmail下書き保存 <span class="label-tag label-complete">完了</span> → 確認後ワンクリック送信</pre>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div class="demo-panel">
+                <div class="panel-header">マッチ物件（REINS連携）</div>
+                <div class="panel-body">
+                    <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+                        <tr style="background: #eaf2f8;">
+                            <th style="padding: 8px; text-align: left;">物件名</th>
+                            <th style="padding: 8px;">間取り</th>
+                            <th style="padding: 8px;">価格</th>
+                            <th style="padding: 8px;">アクセス</th>
+                            <th style="padding: 8px;">特徴</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">ライオンズマンション横浜港南台</td>
+                            <td style="padding: 8px; text-align: center;">3LDK / 72.5m2</td>
+                            <td style="padding: 8px; text-align: center; color: #c0392b; font-weight: bold;">3,280万円</td>
+                            <td style="padding: 8px;">港南台駅 徒歩8分</td>
+                            <td style="padding: 8px; font-size: 11px;">南向き、リフォーム済、ペット可</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 8px;">サンクレイドル茅ヶ崎</td>
+                            <td style="padding: 8px; text-align: center;">3LDK / 68.4m2</td>
+                            <td style="padding: 8px; text-align: center; color: #c0392b; font-weight: bold;">2,980万円</td>
+                            <td style="padding: 8px;">茅ヶ崎駅 徒歩5分</td>
+                            <td style="padding: 8px; font-size: 11px;">小学校徒歩3分、スーパー隣接</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">パークハウス藤沢</td>
+                            <td style="padding: 8px; text-align: center;">4LDK / 85.3m2</td>
+                            <td style="padding: 8px; text-align: center; color: #c0392b; font-weight: bold;">4,180万円</td>
+                            <td style="padding: 8px;">藤沢駅 徒歩12分</td>
+                            <td style="padding: 8px; font-size: 11px;">角部屋、食洗機、床暖房</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <div class="demo-panel">
+                <div class="panel-header">自動生成された返信メール（Gmail下書き → 確認後送信）</div>
+                <div class="panel-body" style="background: #fffef5;">
+<pre>件名: 【ご返信】横浜エリアの物件についてご案内いたします
+
+田中太郎 様
+
+この度はお問い合わせいただき、誠にありがとうございます。
+横浜エリアで3LDK以上、駅近のマンションをお探しとのこと、
+承知いたしました。
+
+ご希望の条件に近い物件を3件ご紹介させていただきます。
+
+■ ライオンズマンション横浜港南台
+  3LDK / 72.5m2 / 3,280万円
+  港南台駅 徒歩8分 / 南向き・リフォーム済
+  → 港南台小学校まで徒歩5分の好立地です
+
+■ サンクレイドル茅ヶ崎
+  3LDK / 68.4m2 / 2,980万円
+  茅ヶ崎駅 徒歩5分 / 小学校徒歩3分
+  → ご予算内で学区条件にぴったりです
+
+■ パークハウス藤沢
+  4LDK / 85.3m2 / 4,180万円
+  藤沢駅 徒歩12分 / 角部屋・床暖房付き
+  → 少し予算は上がりますが、広さと設備が充実しています
+
+来月中の内見開始をご希望とのこと、
+今月末〜来月初旬で内見日程を調整できればと思います。
+
+つきましては、以下からご都合の良い日時を
+お知らせいただけますでしょうか？
+
+・平日午前 / 午後
+・土曜日 / 日曜日
+
+まずは2〜3件まとめてご案内し、
+実際にエリアの雰囲気もご確認いただければと思います。
+
+ご不明な点がございましたら、
+お気軽にお申し付けください。</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 機能一覧 -->
+    <div class="flow-section">
+        <h2>対応可能な業務一覧</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>反響メール自動対応</h3>
+                <p>TERASS Offer、HOME'S一括査定、SUUMO等の反響メールを自動分類。顧客の条件を抽出し、パーソナライズされた返信を自動生成してGmail下書きに保存。</p>
+                <div class="tech">Make + Gmail API + Gemini</div>
+            </div>
+            <div class="feature-card">
+                <h3>物件マッチング・提案</h3>
+                <p>顧客の希望条件（エリア・予算・間取り等）をAIが抽出し、REINS等の物件データから最適な物件を自動選定。提案メールに自動挿入。</p>
+                <div class="tech">Gemini + 物件DB連携</div>
+            </div>
+            <div class="feature-card">
+                <h3>AI査定報告書</h3>
+                <p>物件情報を入力するだけで、周辺相場・築年数・市場動向を考慮した査定報告書を自動生成。訪問前の事前準備を大幅短縮。</p>
+                <div class="tech">Gemini + 不動産データ分析</div>
+            </div>
+            <div class="feature-card">
+                <h3>追客メール自動生成</h3>
+                <p>不在着信・未返信のお客様に対して、経過日数に応じた最適なフォローメールを自動生成。しつこくならない自然な文面。</p>
+                <div class="tech">Make + Gemini + スケジュール連携</div>
+            </div>
+            <div class="feature-card">
+                <h3>LINE自動応答</h3>
+                <p>既存顧客からのLINE問い合わせに対して、内容を分析し最適な返信案を生成。住宅ローン相談にも対応。</p>
+                <div class="tech">LINE Official API + Gemini</div>
+            </div>
+            <div class="feature-card">
+                <h3>チラシ文面作成</h3>
+                <p>エリア・目的を指定するだけで、反応率の高いチラシ文面を自動生成。高額買取、売却依頼、無料査定など各種対応。</p>
+                <div class="tech">Gemini + テンプレート</div>
+            </div>
+            <div class="feature-card">
+                <h3>いえらぶ入力代行</h3>
+                <p>SUUMO・HOME'S・at homeへの物件掲載データを自動入力。いえらぶCLOUDとの連携で手動入力を削減。</p>
+                <div class="tech">Make + いえらぶAPI / RPA</div>
+            </div>
+            <div class="feature-card">
+                <h3>自己PR・提案書作成</h3>
+                <p>TERASS、各ポータルサイト向けの自己PR文を自動生成。ZOOMでの自己紹介資料作成もサポート。</p>
+                <div class="tech">Gemini プロンプト設計</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 導入効果 -->
+    <div class="demo-section">
+        <h2>導入による時間削減効果</h2>
+        <div class="comparison">
+            <table>
+                <tr>
+                    <th style="text-align: left;">業務内容</th>
+                    <th>現状（手動）</th>
+                    <th>導入後（AI自動化）</th>
+                    <th>削減率</th>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">反響メール返信（1件）</td>
+                    <td>15〜30分</td>
+                    <td>確認1分で送信</td>
+                    <td class="highlight">95%削減</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">物件選定・提案作成</td>
+                    <td>30〜60分</td>
+                    <td>自動マッチング+提案文</td>
+                    <td class="highlight">90%削減</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">査定報告書作成</td>
+                    <td>2〜3時間</td>
+                    <td>10分で完成</td>
+                    <td class="highlight">90%削減</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">追客メール作成</td>
+                    <td>10〜20分/件</td>
+                    <td>自動生成+確認1分</td>
+                    <td class="highlight">90%削減</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">チラシ文面作成</td>
+                    <td>1〜2時間</td>
+                    <td>5分で完成</td>
+                    <td class="highlight">90%削減</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">ポータル掲載入力</td>
+                    <td>20〜30分/件</td>
+                    <td>自動入力</td>
+                    <td class="highlight">95%削減</td>
+                </tr>
+            </table>
+        </div>
+        <p style="text-align: center; margin-top: 16px; color: #1a5276; font-weight: bold; font-size: 18px;">
+            1日あたり約3〜4時間の業務時間を削減 → 内見・商談に集中できます
+        </p>
+    </div>
+
+    <!-- 料金 -->
+    <div class="pricing">
+        <h2>料金プラン</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>初期構築</h3>
+                <div class="price">20<span>万円〜</span></div>
+                <p>ヒアリング → 設計 → 構築 → テスト → 納品</p>
+                <ul>
+                    <li>Make(Integromat)シナリオ構築</li>
+                    <li>Gemini APIプロンプト設計・最適化</li>
+                    <li>Gmail / LINE連携設定</li>
+                    <li>物件データベース連携</li>
+                    <li>操作マニュアル作成</li>
+                    <li>2週間のテスト運用サポート</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>月額保守</h3>
+                <div class="price">3<span>万円/月〜</span></div>
+                <p>安定運用と継続改善をサポート</p>
+                <ul>
+                    <li>プロンプト調整・精度改善</li>
+                    <li>新機能追加・フロー変更</li>
+                    <li>トラブル対応（24h以内）</li>
+                    <li>月次レポート</li>
+                    <li>Gemini API利用料込み</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <a href="https://www.lancers.jp/profile/bengalcatlover" class="cta-btn" target="_blank">
+            お問い合わせ・ご相談はこちら
+        </a>
+        <p class="cta-note">初回ヒアリング無料 / オンライン対応可 / 最短1週間で稼働開始</p>
+    </div>
+</div>
+
+</body>
+</html>
