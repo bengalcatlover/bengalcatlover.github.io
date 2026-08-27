@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.S - Web制作・AI開発 ポートフォリオ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  color: #333;
+  line-height: 1.8;
+  background: #fafafa;
+}
+
+/* ヘッダー */
+.header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.header .tagline {
+  font-size: 1.3rem;
+  margin-top: 16px;
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* セクション共通 */
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+.section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0f3460;
+  display: inline-block;
+}
+
+/* プロフィール */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.profile-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.profile-item h3 {
+  font-size: 0.95rem;
+  color: #0f3460;
+  margin-bottom: 8px;
+}
+.profile-item p {
+  font-size: 0.9rem;
+}
+
+/* スキル */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.skill-tag {
+  background: #e8edf5;
+  color: #1a1a2e;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ポートフォリオ */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+.portfolio-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.portfolio-card .card-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+.portfolio-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portfolio-card .card-body {
+  padding: 24px;
+}
+.portfolio-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #1a1a2e;
+}
+.portfolio-card .tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+.portfolio-card .tech-tag {
+  background: #f0f4ff;
+  color: #0f3460;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+.portfolio-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+.feature-list li {
+  padding: 4px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+.feature-list li::before {
+  content: "- ";
+  color: #0f3460;
+  font-weight: bold;
+}
+
+/* 経歴 */
+.career-list {
+  list-style: none;
+}
+.career-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+.career-list li:last-child {
+  border-bottom: none;
+}
+.career-year {
+  color: #0f3460;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 120px;
+}
+
+/* 連絡先 */
+.contact-section {
+  background: #1a1a2e;
+  color: #fff;
+  text-align: center;
+  padding: 50px 20px;
+}
+.contact-section h2 {
+  color: #fff;
+  border-bottom-color: #fff;
+  margin-bottom: 20px;
+}
+.contact-section p {
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+.contact-btn {
+  display: inline-block;
+  background: #e94560;
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+.contact-btn:hover {
+  background: #c73650;
+}
+
+/* レスポンシブ */
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.5rem; }
+  .profile-grid { grid-template-columns: 1fr; }
+  .portfolio-card .card-img { height: 200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="header">
+  <h1>A.S - Web制作・AI開発</h1>
+  <p>Web制作25年以上の経験と最新AI技術を組み合わせ、業務自動化からシステム開発まで幅広く対応します。</p>
+  <p class="tagline">テーマだけください。あとは全部やります。</p>
+</div>
+
+<!-- プロフィール -->
+<div class="section">
+  <h2>Profile</h2>
+  <div class="profile-grid">
+    <div class="profile-item">
+      <h3>学歴</h3>
+      <p>慶應義塾大学 総合政策学部 卒業<br>東京大学大学院 学際情報学府 修士課程修了</p>
+    </div>
+    <div class="profile-item">
+      <h3>経験年数</h3>
+      <p>Web制作・開発: 25年以上<br>CMS構築（WordPress等）: 20年以上<br>AI活用開発: 2年</p>
+    </div>
+    <div class="profile-item">
+      <h3>対応可能な業務形態</h3>
+      <p>フルリモート対応<br>業務委託・スポット案件・継続契約いずれも可</p>
+    </div>
+    <div class="profile-item">
+      <h3>言語</h3>
+      <p>日本語: ネイティブ<br>英語: 読み書き実務レベル</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 40px;">Skills</h2>
+  <div class="skills">
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">Java</span>
+    <span class="skill-tag">C</span>
+    <span class="skill-tag">PHP</span>
+    <span class="skill-tag">JavaScript</span>
+    <span class="skill-tag">HTML/CSS</span>
+    <span class="skill-tag">WordPress</span>
+    <span class="skill-tag">Movable Type</span>
+    <span class="skill-tag">XOOPS</span>
+    <span class="skill-tag">SEO/MEO</span>
+    <span class="skill-tag">Claude API</span>
+    <span class="skill-tag">GPT API</span>
+    <span class="skill-tag">Gemini API</span>
+    <span class="skill-tag">RAG / ChromaDB</span>
+    <span class="skill-tag">AI動画制作</span>
+    <span class="skill-tag">業務自動化</span>
+    <span class="skill-tag">Webディレクション</span>
+    <span class="skill-tag">データ分析</span>
+    <span class="skill-tag">API連携開発</span>
+  </div>
+</div>
+
+<!-- ポートフォリオ -->
+<div class="section">
+  <h2>Portfolio</h2>
+  <div class="portfolio-grid">
+
+    <!-- 1. RAGチャットボット -->
+    <div class="portfolio-card">
+      <div class="card-img" id="img-rag">
+        <img src="screenshots/rag_chatbot.png" alt="RAGチャットボット" onerror="this.parentElement.textContent='スクリーンショット準備中'">
+      </div>
+      <div class="card-body">
+        <h3>RAG チャットボット</h3>
+        <p>社内文書（PDF・テキスト）をアップロードするだけで、AIが文書内容に基づいて質問に回答するチャットボットシステム。出典表示付きで、ハルシネーション（誤情報）を防止。</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Claude API</span>
+          <span class="tech-tag">ChromaDB</span>
+          <span class="tech-tag">Sentence Transformers</span>
+          <span class="tech-tag">Gradio</span>
+        </div>
+        <ul class="feature-list">
+          <li>PDF / テキスト / CSV等の文書を自動チャンク分割・ベクトル化</li>
+          <li>多言語対応の埋め込みモデル（multilingual-e5-small）</li>
+          <li>意味検索で関連箇所を自動抽出し、AIが回答を生成</li>
+          <li>全回答に出典ファイル名を表示</li>
+          <li>Web UIからファイルアップロード・質問が可能</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. AIエージェント -->
+    <div class="portfolio-card">
+      <div class="card-img" id="img-agent">
+        <img src="screenshots/ai_agent.png" alt="AI問い合わせ対応エージェント" onerror="this.parentElement.textContent='スクリーンショット準備中'">
+      </div>
+      <div class="card-body">
+        <h3>AI 問い合わせ対応エージェント</h3>
+        <p>顧客からの問い合わせをAIが自律的に処理。分類・FAQ検索・回答生成・エスカレーション判定・ログ記録までを自動で実行するマルチステップAIエージェント。</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Claude API (Tool Use)</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Gradio</span>
+        </div>
+        <ul class="feature-list">
+          <li>問い合わせの自動分類（技術サポート/営業/請求/一般）</li>
+          <li>緊急度の自動判定（高/中/低）</li>
+          <li>FAQデータベースから既存回答を検索・活用</li>
+          <li>対応不可能な問い合わせは人間へ自動エスカレーション</li>
+          <li>全対応履歴をDBに自動記録・ダッシュボードで閲覧</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. AI動画制作 -->
+    <div class="portfolio-card">
+      <div class="card-img" id="img-video">
+        <img src="screenshots/ai_video.png" alt="AI PR動画制作" onerror="this.parentElement.textContent='スクリーンショット準備中'">
+      </div>
+      <div class="card-body">
+        <h3>AI PR動画 自動制作システム</h3>
+        <p>テーマを入力するだけで、企業PR動画を全自動で生成。台本作成・画像生成・ナレーション・テロップ付き動画合成までAIが一貫して処理。</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Claude API</span>
+          <span class="tech-tag">DALL-E / Gemini Imagen</span>
+          <span class="tech-tag">VOICEVOX</span>
+          <span class="tech-tag">FFmpeg</span>
+        </div>
+        <ul class="feature-list">
+          <li>テーマから4〜6シーンの台本をAIが自動生成</li>
+          <li>各シーンの背景画像をDALL-E / Geminiで生成</li>
+          <li>ナレーション音声をVOICEVOXで合成（話者選択可能）</li>
+          <li>テロップ付き動画をFFmpegで自動合成</li>
+          <li>30秒〜1分のPR動画を数分で生成</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. 過去実績 -->
+    <div class="portfolio-card">
+      <div class="card-img" style="background: linear-gradient(135deg, #1a1a2e, #0f3460); color: #fff; font-size: 1.2rem; font-weight: 600;">
+        過去のWeb制作実績
+      </div>
+      <div class="card-body">
+        <h3>Web制作・ディレクション実績</h3>
+        <p>2000年頃からWeb制作に携わり、企業サイト・ECサイト・プロモーションサイトなど多数の実績があります。</p>
+        <div class="tech-stack">
+          <span class="tech-tag">WordPress</span>
+          <span class="tech-tag">Movable Type</span>
+          <span class="tech-tag">XOOPS</span>
+          <span class="tech-tag">ECサイト</span>
+          <span class="tech-tag">SEO/MEO</span>
+        </div>
+        <ul class="feature-list">
+          <li>健康食品企業のECサイト構築（フルスクラッチ開発）</li>
+          <li>大手PCメーカーのプロモーションサイト ディレクション・制作</li>
+          <li>グループ企業のWebサイト統括管理</li>
+          <li>WordPress / Movable Type / XOOPS による企業サイト多数構築</li>
+          <li>SEO対策・MEO対策・スマートフォン対応</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 経歴 -->
+<div class="section">
+  <h2>Career</h2>
+  <ul class="career-list">
+    <li><span class="career-year">1999年</span>在学中に企業ECサイトを構築。Web制作を開始</li>
+    <li><span class="career-year">2002年</span>慶應義塾大学 総合政策学部 卒業</li>
+    <li><span class="career-year">2002-2003年</span>Java SI企業にてシステム開発に従事</li>
+    <li><span class="career-year">2003年〜</span>独立。Web制作・教育事業を個人事業として開始</li>
+    <li><span class="career-year">2007年</span>大手PCメーカーのプロモーションサイト制作、グループ企業のWeb統括</li>
+    <li><span class="career-year">2008年</span>東京大学大学院 学際情報学府 修士課程修了</li>
+    <li><span class="career-year">2013年〜</span>学習塾を開業、運営（現在も継続）</li>
+    <li><span class="career-year">2024年〜</span>Pythonによる金融商品取引システムを設計・開発</li>
+    <li><span class="career-year">2025年〜</span>AI活用による業務自動化・受託事業を開始</li>
+  </ul>
+</div>
+
+<!-- 連絡先 -->
+<div class="contact-section">
+  <h2>Contact</h2>
+  <p>お仕事のご相談、お気軽にご連絡ください。<br>まずはテーマをお聞かせください。お見積もりは無料です。</p>
+  <a href="https://www.lancers.jp/profile/bengalcatlover" class="contact-btn">ランサーズからお問い合わせ</a>
+</div>
+
+</body>
+</html>
