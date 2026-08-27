@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalonBook - 予約・顧客管理システム</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Yu Gothic UI',sans-serif;background:#f8f6f3;color:#3a3a3a;line-height:1.6;min-height:100vh;}
+header{background:#fff;border-bottom:2px solid #e8dfd5;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06);}
+header h1{font-size:22px;font-weight:700;color:#6b5b73;letter-spacing:1px;}
+header h1 span{color:#c9a0dc;font-weight:400;}
+.header-date{font-size:14px;color:#888;background:#faf5ff;padding:6px 16px;border-radius:20px;}
+.layout{display:grid;grid-template-columns:200px 1fr 260px;min-height:calc(100vh - 60px);}
+/* -- Left Sidebar -- */
+.sidebar-left{background:#fff;border-right:1px solid #ece6e0;padding:20px 0;}
+.sidebar-left nav ul{list-style:none;}
+.sidebar-left nav li{margin:0;}
+.sidebar-left nav a{display:flex;align-items:center;gap:10px;padding:12px 22px;font-size:14px;color:#5a5a5a;text-decoration:none;border-left:3px solid transparent;transition:all .15s;}
+.sidebar-left nav a:hover,.sidebar-left nav a.active{background:#faf5ff;color:#6b5b73;border-left-color:#c9a0dc;}
+.sidebar-left nav a.active{font-weight:600;}
+.menu-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;}
+/* -- Main -- */
+.main{padding:24px 28px;overflow-y:auto;}
+.section-title{font-size:17px;font-weight:600;color:#6b5b73;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title::before{content:'';width:4px;height:18px;background:#c9a0dc;border-radius:2px;display:inline-block;}
+/* Timeline */
+.timeline-wrap{background:#fff;border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-bottom:20px;}
+.timeline{position:relative;padding-left:70px;}
+.time-slot{position:relative;min-height:56px;border-left:2px solid #e8dfd5;padding:0 0 4px 20px;}
+.time-slot:last-child{border-left-color:transparent;}
+.time-label{position:absolute;left:-70px;top:0;width:56px;text-align:right;font-size:12px;color:#aaa;font-weight:600;}
+.time-dot{position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:#e0d6e6;}
+.booking-block{border-radius:8px;padding:10px 14px;margin-bottom:6px;font-size:13px;display:flex;justify-content:space-between;align-items:center;transition:transform .15s;}
+.booking-block:hover{transform:translateX(3px);}
+.bb-purple{background:#f3e8ff;border-left:4px solid #c9a0dc;}
+.bb-pink{background:#fce4ec;border-left:4px solid #f3a0b5;}
+.bb-mint{background:#e0f7f1;border-left:4px solid #7ecbb7;}
+.bb-peach{background:#fff3e0;border-left:4px solid #f5c27a;}
+.bb-blue{background:#e3f2fd;border-left:4px solid #90bde6;}
+.bb-name{font-weight:600;}
+.bb-menu{color:#777;font-size:12px;}
+.bb-staff{font-size:12px;color:#999;white-space:nowrap;}
+.btn-new{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#c9a0dc,#a88bc3);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .2s;box-shadow:0 2px 8px rgba(169,139,195,.3);}
+.btn-new:hover{opacity:.88;}
+/* -- Right Sidebar -- */
+.sidebar-right{background:#fff;border-left:1px solid #ece6e0;padding:20px 18px;}
+.summary-card{background:#faf5ff;border-radius:10px;padding:16px;margin-bottom:18px;}
+.summary-card h3{font-size:13px;font-weight:600;color:#6b5b73;margin-bottom:10px;}
+.summary-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px dashed #e8dfd5;}
+.summary-row:last-child{border-bottom:none;}
+.summary-val{font-weight:700;color:#6b5b73;}
+.next-card{background:#fff;border:1px solid #ece6e0;border-radius:10px;padding:16px;}
+.next-card h3{font-size:13px;font-weight:600;color:#6b5b73;margin-bottom:10px;}
+.next-row{font-size:13px;padding:4px 0;display:flex;gap:6px;}
+.next-label{color:#aaa;min-width:72px;flex-shrink:0;}
+.next-val{color:#3a3a3a;}
+/* -- Customer Table -- */
+.customer-section{padding:0 28px 32px;}
+.customer-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.customer-table th{background:#f5f0fa;color:#6b5b73;font-size:13px;font-weight:600;padding:12px 16px;text-align:left;}
+.customer-table td{padding:11px 16px;font-size:13px;border-top:1px solid #f2ede8;}
+.customer-table tr:hover td{background:#fdfbff;}
+.rank{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.rank-gold{background:#fff3d6;color:#c48a00;}
+.rank-silver{background:#f0eef5;color:#7a7a9c;}
+.rank-bronze{background:#fce8e0;color:#b87350;}
+.rank-regular{background:#eef7ee;color:#5a8a5a;}
+/* Responsive */
+@media(max-width:1024px){
+.layout{grid-template-columns:180px 1fr;}
+.sidebar-right{display:none;}
+}
+@media(max-width:768px){
+.layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
+.sidebar-left{border-right:none;border-bottom:1px solid #ece6e0;padding:10px 0;}
+.sidebar-left nav ul{display:flex;overflow-x:auto;gap:2px;padding:0 12px;}
+.sidebar-left nav a{padding:8px 14px;border-left:none;border-bottom:2px solid transparent;white-space:nowrap;font-size:13px;}
+.sidebar-left nav a:hover,.sidebar-left nav a.active{border-left-color:transparent;border-bottom-color:#c9a0dc;}
+.main{padding:16px;}
+.customer-section{padding:0 16px 24px;}
+.timeline{padding-left:56px;}
+.time-label{left:-56px;width:44px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <h1>Salon<span>Book</span></h1>
+  <div class="header-date">2026年8月27日（木）</div>
+</header>
+
+<!-- ===== 3-Column Layout ===== -->
+<div class="layout">
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar-left">
+    <nav>
+      <ul>
+        <li><a href="#" class="active"><span class="menu-icon">&#128197;</span> 予約管理</a></li>
+        <li><a href="#"><span class="menu-icon">&#128101;</span> 顧客一覧</a></li>
+        <li><a href="#"><span class="menu-icon">&#128200;</span> 売上レポート</a></li>
+        <li><a href="#"><span class="menu-icon">&#128100;</span> スタッフ管理</a></li>
+        <li><a href="#"><span class="menu-icon">&#9881;</span> 設定</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="section-title">本日の予約一覧</div>
+
+    <div class="timeline-wrap">
+      <div class="timeline">
+
+        <!-- 9:00 -->
+        <div class="time-slot">
+          <span class="time-label">9:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 10:00 -->
+        <div class="time-slot">
+          <span class="time-label">10:00</span>
+          <div class="time-dot" style="background:#c9a0dc;"></div>
+          <div class="booking-block bb-purple">
+            <div><span class="bb-name">田中 様</span><span class="bb-menu"> - カット + カラー</span></div>
+            <div class="bb-staff">担当: 山田</div>
+          </div>
+        </div>
+
+        <!-- 11:00 -->
+        <div class="time-slot">
+          <span class="time-label">11:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 11:30 -->
+        <div class="time-slot">
+          <span class="time-label">11:30</span>
+          <div class="time-dot" style="background:#f3a0b5;"></div>
+          <div class="booking-block bb-pink">
+            <div><span class="bb-name">鈴木 様</span><span class="bb-menu"> - パーマ</span></div>
+            <div class="bb-staff">担当: 佐藤</div>
+          </div>
+        </div>
+
+        <!-- 12:00 -->
+        <div class="time-slot">
+          <span class="time-label">12:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 13:00 -->
+        <div class="time-slot">
+          <span class="time-label">13:00</span>
+          <div class="time-dot" style="background:#7ecbb7;"></div>
+          <div class="booking-block bb-mint">
+            <div><span class="bb-name">高橋 様</span><span class="bb-menu"> - カット</span></div>
+            <div class="bb-staff">担当: 山田</div>
+          </div>
+        </div>
+
+        <!-- 14:00 -->
+        <div class="time-slot">
+          <span class="time-label">14:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 14:30 -->
+        <div class="time-slot">
+          <span class="time-label">14:30</span>
+          <div class="time-dot" style="background:#f5c27a;"></div>
+          <div class="booking-block bb-peach">
+            <div><span class="bb-name">伊藤 様</span><span class="bb-menu"> - トリートメント</span></div>
+            <div class="bb-staff">担当: 佐藤</div>
+          </div>
+        </div>
+
+        <!-- 15:00 -->
+        <div class="time-slot">
+          <span class="time-label">15:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 16:00 -->
+        <div class="time-slot">
+          <span class="time-label">16:00</span>
+          <div class="time-dot" style="background:#90bde6;"></div>
+          <div class="booking-block bb-blue">
+            <div><span class="bb-name">渡辺 様</span><span class="bb-menu"> - カット + カラー + パーマ</span></div>
+            <div class="bb-staff">担当: 山田</div>
+          </div>
+        </div>
+
+        <!-- 17:00 -->
+        <div class="time-slot">
+          <span class="time-label">17:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+        <!-- 18:00 -->
+        <div class="time-slot">
+          <span class="time-label">18:00</span>
+          <div class="time-dot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="btn-new">＋ 新規予約</button>
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="sidebar-right">
+
+    <div class="summary-card">
+      <h3>本日のサマリー</h3>
+      <div class="summary-row"><span>予約数</span><span class="summary-val">5 件</span></div>
+      <div class="summary-row"><span>売上見込</span><span class="summary-val">&yen;47,500</span></div>
+      <div class="summary-row"><span>空き枠</span><span class="summary-val">3 枠</span></div>
+    </div>
+
+    <div class="next-card">
+      <h3>次の予約</h3>
+      <div class="next-row"><span class="next-label">顧客名</span><span class="next-val">田中 美咲 様</span></div>
+      <div class="next-row"><span class="next-label">メニュー</span><span class="next-val">カット + カラー</span></div>
+      <div class="next-row"><span class="next-label">担当者</span><span class="next-val">山田 翔太</span></div>
+      <div class="next-row"><span class="next-label">前回来店</span><span class="next-val">2026/07/15</span></div>
+      <div class="next-row"><span class="next-label">メモ</span><span class="next-val" style="font-size:12px;color:#888;">明るめのアッシュ系希望。前回よりトーンアップ。</span></div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ===== Customer Table ===== -->
+<section class="customer-section" style="margin-top:8px;">
+  <div class="section-title" style="padding:0 0 14px;">顧客情報</div>
+  <table class="customer-table">
+    <thead>
+      <tr>
+        <th>顧客名</th>
+        <th>電話番号</th>
+        <th>来店回数</th>
+        <th>最終来店日</th>
+        <th>ランク</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>田中 美咲</td>
+        <td>090-1234-5678</td>
+        <td>24 回</td>
+        <td>2026/07/15</td>
+        <td><span class="rank rank-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td>鈴木 花子</td>
+        <td>080-2345-6789</td>
+        <td>15 回</td>
+        <td>2026/07/28</td>
+        <td><span class="rank rank-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td>高橋 太郎</td>
+        <td>070-3456-7890</td>
+        <td>8 回</td>
+        <td>2026/08/05</td>
+        <td><span class="rank rank-bronze">Bronze</span></td>
+      </tr>
+      <tr>
+        <td>伊藤 由美</td>
+        <td>090-4567-8901</td>
+        <td>3 回</td>
+        <td>2026/08/12</td>
+        <td><span class="rank rank-regular">Regular</span></td>
+      </tr>
+      <tr>
+        <td>渡辺 健一</td>
+        <td>080-5678-9012</td>
+        <td>12 回</td>
+        <td>2026/08/01</td>
+        <td><span class="rank rank-silver">Silver</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

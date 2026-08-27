@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNS AutoPilot - AI SNS運用自動化システム</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.6}
+header{background:linear-gradient(135deg,#4361ee,#3a0ca3);color:#fff;padding:20px 0;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.logo{font-size:1.7rem;font-weight:800;letter-spacing:-.5px}
+.logo span{color:#a0c4ff}
+.header-sub{font-size:.85rem;opacity:.85}
+.container{max-width:1200px;margin:0 auto;padding:24px 20px}
+h2{font-size:1.15rem;font-weight:700;margin-bottom:16px;color:#1a1a2e}
+.section{margin-bottom:32px}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi-card{background:#fff;border-radius:12px;padding:24px 20px;box-shadow:0 1px 4px rgba(0,0,0,.06);text-align:center;transition:transform .15s}
+.kpi-card:hover{transform:translateY(-3px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.kpi-icon{font-size:1.6rem;margin-bottom:8px}
+.kpi-value{font-size:2rem;font-weight:800;color:#4361ee}
+.kpi-label{font-size:.82rem;color:#666;margin-top:4px}
+
+/* SNS accounts */
+.accounts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.account-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.account-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.account-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#fff}
+.icon-x{background:#000}
+.icon-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.icon-tt{background:#010101}
+.account-name{font-weight:700;font-size:1rem}
+.account-handle{font-size:.8rem;color:#888}
+.account-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stat-num{font-size:1.15rem;font-weight:700;color:#4361ee}
+.stat-label{font-size:.72rem;color:#888}
+.account-status{margin-top:14px;font-size:.78rem;padding:5px 10px;border-radius:20px;display:inline-block;background:#e8f5e9;color:#2e7d32;font-weight:600}
+
+/* Schedule */
+.schedule-week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.day-col{min-height:160px}
+.day-header{text-align:center;font-weight:700;font-size:.82rem;padding:8px 0;border-bottom:2px solid #4361ee;margin-bottom:8px;color:#4361ee}
+.day-header .date{display:block;font-size:.72rem;color:#999;font-weight:400}
+.sched-item{font-size:.7rem;background:#eef1ff;border-left:3px solid #4361ee;border-radius:0 6px 6px 0;padding:6px 8px;margin-bottom:6px;line-height:1.4}
+.sched-item.ig{background:#fce4ec;border-color:#e91e63}
+.sched-item.tt{background:#e0f7fa;border-color:#00bcd4}
+.sched-time{font-weight:700;color:#555;display:block;margin-bottom:2px}
+
+/* Preview */
+.preview-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.preview-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;flex-direction:column;justify-content:space-between}
+.preview-badge{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;width:fit-content}
+.badge-x{background:#e8e8e8;color:#000}
+.badge-ig{background:#fce4ec;color:#c2185b}
+.badge-tt{background:#e0f7fa;color:#00838f}
+.preview-text{font-size:.88rem;line-height:1.7;color:#333;flex:1;margin-bottom:16px}
+.preview-meta{font-size:.72rem;color:#999;margin-bottom:12px}
+.preview-actions{display:flex;gap:8px}
+.btn{border:none;padding:8px 16px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.btn:hover{opacity:.8}
+.btn-approve{background:#4361ee;color:#fff}
+.btn-edit{background:#e8e8e8;color:#333}
+.btn-reject{background:#fff;color:#e53935;border:1px solid #e53935}
+
+/* Chart */
+.chart-container{background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.bar-chart{display:flex;align-items:flex-end;gap:16px;height:200px;padding-top:20px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar{width:100%;max-width:60px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#4361ee,#7b8cff);transition:height .3s;position:relative}
+.bar-val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.72rem;font-weight:700;color:#4361ee;white-space:nowrap}
+.bar-label{margin-top:8px;font-size:.78rem;color:#666;font-weight:600}
+
+footer{text-align:center;padding:24px;font-size:.75rem;color:#aaa}
+
+@media(max-width:900px){
+.kpi-grid{grid-template-columns:repeat(2,1fr)}
+.accounts-grid,.preview-list{grid-template-columns:1fr}
+.schedule-week{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:600px){
+.kpi-grid{grid-template-columns:1fr}
+.schedule-week{grid-template-columns:repeat(2,1fr)}
+.bar-chart{gap:8px}
+.header-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<div>
+<div class="logo">SNS <span>AutoPilot</span></div>
+<div class="header-sub">AI SNS運用自動化システム</div>
+</div>
+<div class="header-sub">ダッシュボード | 2026年8月</div>
+</div>
+</header>
+
+<div class="container">
+
+<!-- KPI -->
+<div class="section">
+<h2>今月のパフォーマンス</h2>
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-icon">&#128203;</div>
+<div class="kpi-value">94</div>
+<div class="kpi-label">今月の投稿数</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon">&#128101;</div>
+<div class="kpi-value">+1,247</div>
+<div class="kpi-label">フォロワー増加</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon">&#128200;</div>
+<div class="kpi-value">4.8%</div>
+<div class="kpi-label">エンゲージメント率</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon">&#129302;</div>
+<div class="kpi-value">78</div>
+<div class="kpi-label">自動生成コンテンツ</div>
+</div>
+</div>
+</div>
+
+<!-- SNS Accounts -->
+<div class="section">
+<h2>SNSアカウント一覧</h2>
+<div class="accounts-grid">
+<div class="account-card">
+<div class="account-header">
+<div class="account-icon icon-x">X</div>
+<div>
+<div class="account-name">X (旧Twitter)</div>
+<div class="account-handle">@autopilot_demo</div>
+</div>
+</div>
+<div class="account-stats">
+<div><div class="stat-num">12,840</div><div class="stat-label">フォロワー</div></div>
+<div><div class="stat-num">38</div><div class="stat-label">今月の投稿</div></div>
+<div><div class="stat-num">5.2%</div><div class="stat-label">エンゲージメント</div></div>
+</div>
+<div class="account-status">自動運用中</div>
+</div>
+<div class="account-card">
+<div class="account-header">
+<div class="account-icon icon-ig">IG</div>
+<div>
+<div class="account-name">Instagram</div>
+<div class="account-handle">@autopilot.demo</div>
+</div>
+</div>
+<div class="account-stats">
+<div><div class="stat-num">8,530</div><div class="stat-label">フォロワー</div></div>
+<div><div class="stat-num">32</div><div class="stat-label">今月の投稿</div></div>
+<div><div class="stat-num">4.5%</div><div class="stat-label">エンゲージメント</div></div>
+</div>
+<div class="account-status">自動運用中</div>
+</div>
+<div class="account-card">
+<div class="account-header">
+<div class="account-icon icon-tt">TT</div>
+<div>
+<div class="account-name">TikTok</div>
+<div class="account-handle">@autopilot_demo</div>
+</div>
+</div>
+<div class="account-stats">
+<div><div class="stat-num">5,270</div><div class="stat-label">フォロワー</div></div>
+<div><div class="stat-num">24</div><div class="stat-label">今月の投稿</div></div>
+<div><div class="stat-num">4.6%</div><div class="stat-label">エンゲージメント</div></div>
+</div>
+<div class="account-status">自動運用中</div>
+</div>
+</div>
+</div>
+
+<!-- Schedule -->
+<div class="section">
+<h2>投稿スケジュール（今週）</h2>
+<div class="schedule-week">
+<div class="day-col">
+<div class="day-header">月<span class="date">8/24</span></div>
+<div class="sched-item"><span class="sched-time">9:00</span>X: 業界ニュースまとめ</div>
+<div class="sched-item ig"><span class="sched-time">12:00</span>IG: カルーセル投稿</div>
+<div class="sched-item tt"><span class="sched-time">19:00</span>TT: Tips動画</div>
+</div>
+<div class="day-col">
+<div class="day-header">火<span class="date">8/25</span></div>
+<div class="sched-item"><span class="sched-time">8:30</span>X: モチベ投稿</div>
+<div class="sched-item ig"><span class="sched-time">18:00</span>IG: ストーリーズ</div>
+</div>
+<div class="day-col">
+<div class="day-header">水<span class="date">8/26</span></div>
+<div class="sched-item"><span class="sched-time">10:00</span>X: アンケート投稿</div>
+<div class="sched-item tt"><span class="sched-time">12:30</span>TT: トレンド解説</div>
+<div class="sched-item ig"><span class="sched-time">20:00</span>IG: リール</div>
+</div>
+<div class="day-col">
+<div class="day-header">木<span class="date">8/27</span></div>
+<div class="sched-item"><span class="sched-time">9:00</span>X: 実績シェア</div>
+<div class="sched-item ig"><span class="sched-time">12:00</span>IG: 事例紹介</div>
+<div class="sched-item tt"><span class="sched-time">21:00</span>TT: Q&A動画</div>
+</div>
+<div class="day-col">
+<div class="day-header">金<span class="date">8/28</span></div>
+<div class="sched-item"><span class="sched-time">8:00</span>X: スレッド投稿</div>
+<div class="sched-item ig"><span class="sched-time">17:00</span>IG: まとめ投稿</div>
+</div>
+<div class="day-col">
+<div class="day-header">土<span class="date">8/29</span></div>
+<div class="sched-item tt"><span class="sched-time">11:00</span>TT: 裏側公開</div>
+<div class="sched-item"><span class="sched-time">15:00</span>X: 週末限定Tips</div>
+</div>
+<div class="day-col">
+<div class="day-header">日<span class="date">8/30</span></div>
+<div class="sched-item ig"><span class="sched-time">10:00</span>IG: 週間まとめ</div>
+<div class="sched-item"><span class="sched-time">20:00</span>X: 来週の予告</div>
+<div class="sched-item tt"><span class="sched-time">21:30</span>TT: エンタメ系</div>
+</div>
+</div>
+</div>
+
+<!-- Preview -->
+<div class="section">
+<h2>AI生成コンテンツ - 承認待ち</h2>
+<div class="preview-list">
+<div class="preview-card">
+<div>
+<span class="preview-badge badge-x">X</span>
+<div class="preview-text">SNS運用を自動化してから、毎日2時間の作業がゼロになりました。<br><br>やったことはシンプル。<br>1. 投稿テーマをAIに学習させる<br>2. 曜日ごとのトーンを設定<br>3. 承認フローだけ人間が担当<br><br>結果、エンゲージメント率が1.5倍に。<br>時間をかければいいってもんじゃない。</div>
+<div class="preview-meta">予定: 8/28 8:00 | 文字数: 142</div>
+</div>
+<div class="preview-actions">
+<button class="btn btn-approve">承認</button>
+<button class="btn btn-edit">編集</button>
+<button class="btn btn-reject">却下</button>
+</div>
+</div>
+<div class="preview-card">
+<div>
+<span class="preview-badge badge-ig">Instagram</span>
+<div class="preview-text">AI時代のSNS運用、まだ手動でやってませんか?<br><br>投稿の企画から作成、スケジューリングまでAIが対応。人間は最終チェックだけ。<br><br>このアカウントも実は、8割がAI生成コンテンツです。気づきましたか?<br><br>#AI活用 #SNS運用 #業務効率化 #マーケティング</div>
+<div class="preview-meta">予定: 8/28 17:00 | 文字数: 158</div>
+</div>
+<div class="preview-actions">
+<button class="btn btn-approve">承認</button>
+<button class="btn btn-edit">編集</button>
+<button class="btn btn-reject">却下</button>
+</div>
+</div>
+<div class="preview-card">
+<div>
+<span class="preview-badge badge-tt">TikTok</span>
+<div class="preview-text">【検証】AIに1ヶ月SNS運用を任せてみた結果...<br><br>フォロワー: +1,247人<br>エンゲージメント: 3.2% → 4.8%<br>作業時間: 60時間 → 5時間<br><br>正直、人間がやるより数字いいんですけど...笑<br><br>詳しいやり方はプロフのリンクから!</div>
+<div class="preview-meta">予定: 8/29 11:00 | 文字数: 145</div>
+</div>
+<div class="preview-actions">
+<button class="btn btn-approve">承認</button>
+<button class="btn btn-edit">編集</button>
+<button class="btn btn-reject">却下</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Chart -->
+<div class="section">
+<h2>曜日別エンゲージメント率</h2>
+<div class="chart-container">
+<div class="bar-chart">
+<div class="bar-col"><div class="bar" style="height:68%"><span class="bar-val">3.8%</span></div><div class="bar-label">月</div></div>
+<div class="bar-col"><div class="bar" style="height:58%"><span class="bar-val">3.2%</span></div><div class="bar-label">火</div></div>
+<div class="bar-col"><div class="bar" style="height:82%"><span class="bar-val">4.6%</span></div><div class="bar-label">水</div></div>
+<div class="bar-col"><div class="bar" style="height:90%"><span class="bar-val">5.1%</span></div><div class="bar-label">木</div></div>
+<div class="bar-col"><div class="bar" style="height:78%"><span class="bar-val">4.4%</span></div><div class="bar-label">金</div></div>
+<div class="bar-col"><div class="bar" style="height:100%"><span class="bar-val">5.6%</span></div><div class="bar-label">土</div></div>
+<div class="bar-col"><div class="bar" style="height:95%"><span class="bar-val">5.3%</span></div><div class="bar-label">日</div></div>
+</div>
+</div>
+</div>
+
+</div>
+
+<footer>SNS AutoPilot - AI SNS運用自動化システム デモ画面</footer>
+
+</body>
+</html>

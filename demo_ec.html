@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ナチュラルマルシェ - オーガニック食品通販</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;color:#333;background:#fafaf7;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+
+/* ===== HEADER ===== */
+.header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0;z-index:100;}
+.header-top{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.logo{font-size:24px;font-weight:800;color:#3a7d44;white-space:nowrap;}
+.logo span{color:#e8a838;}
+.search-bar{flex:1;max-width:480px;min-width:200px;position:relative;}
+.search-bar input{width:100%;padding:10px 44px 10px 16px;border:2px solid #d4ddd6;border-radius:24px;font-size:14px;outline:none;transition:border .2s;}
+.search-bar input:focus{border-color:#3a7d44;}
+.search-bar button{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:#3a7d44;border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;}
+.cart-icon{position:relative;font-size:22px;cursor:pointer;padding:6px;}
+.cart-badge{position:absolute;top:-2px;right:-6px;background:#e05555;color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+nav{background:#3a7d44;}
+nav ul{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;list-style:none;gap:0;}
+nav li a{display:block;padding:12px 22px;color:#fff;font-size:14px;font-weight:600;transition:background .2s;}
+nav li a:hover{background:rgba(255,255,255,.15);}
+
+/* ===== HERO ===== */
+.hero{background:linear-gradient(135deg,#3a7d44 0%,#6db56e 40%,#e8a838 100%);color:#fff;text-align:center;padding:80px 20px;}
+.hero h1{font-size:clamp(26px,5vw,44px);margin-bottom:12px;text-shadow:0 2px 6px rgba(0,0,0,.15);}
+.hero p{font-size:clamp(14px,2.5vw,18px);opacity:.92;margin-bottom:28px;}
+.hero-btn{display:inline-block;padding:14px 40px;background:#fff;color:#3a7d44;font-weight:700;border-radius:30px;font-size:16px;transition:transform .2s,box-shadow .2s;}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2);}
+
+/* ===== SECTION COMMON ===== */
+.section{max-width:1200px;margin:0 auto;padding:56px 20px;}
+.section-title{text-align:center;font-size:26px;font-weight:800;color:#333;margin-bottom:8px;}
+.section-sub{text-align:center;font-size:14px;color:#888;margin-bottom:36px;}
+
+/* ===== CATEGORIES ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
+.cat-card{border-radius:16px;padding:36px 20px;text-align:center;color:#fff;font-weight:700;font-size:20px;cursor:pointer;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.18);}
+.cat-card .cat-emoji{font-size:48px;display:block;margin-bottom:12px;}
+.cat-card.veg{background:linear-gradient(135deg,#56ab2f,#a8e063);}
+.cat-card.fruit{background:linear-gradient(135deg,#f7971e,#ffd200);}
+.cat-card.processed{background:linear-gradient(135deg,#c0392b,#e67e22);}
+.cat-card.drink{background:linear-gradient(135deg,#2193b0,#6dd5ed);}
+.cat-count{font-size:13px;font-weight:400;opacity:.85;margin-top:4px;}
+
+/* ===== PRODUCTS ===== */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;}
+.prod-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;}
+.prod-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.12);}
+.prod-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;position:relative;}
+.prod-img::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.08);}
+.prod-body{padding:18px;flex:1;display:flex;flex-direction:column;}
+.prod-tag{display:inline-block;background:#eaf5eb;color:#3a7d44;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:8px;width:fit-content;}
+.prod-name{font-size:16px;font-weight:700;margin-bottom:6px;}
+.prod-desc{font-size:13px;color:#888;margin-bottom:12px;flex:1;}
+.prod-bottom{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-size:20px;font-weight:800;color:#e05555;}
+.prod-price span{font-size:13px;font-weight:400;color:#999;}
+.btn-cart{background:#3a7d44;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,transform .15s;}
+.btn-cart:hover{background:#2e6336;transform:scale(1.05);}
+.btn-cart:active{transform:scale(.97);}
+
+/* ===== FEATURES ===== */
+.features{background:#f0f5f1;padding:56px 20px;}
+.feat-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;}
+.feat-item{text-align:center;padding:24px;}
+.feat-icon{font-size:40px;margin-bottom:12px;}
+.feat-item h3{font-size:17px;margin-bottom:6px;color:#333;}
+.feat-item p{font-size:13px;color:#777;}
+
+/* ===== FOOTER ===== */
+.footer{background:#2c2c2c;color:#ccc;padding:48px 20px 24px;}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;}
+.footer h4{color:#fff;font-size:15px;margin-bottom:14px;}
+.footer ul{list-style:none;}
+.footer li{margin-bottom:8px;}
+.footer li a{color:#aaa;font-size:13px;transition:color .2s;}
+.footer li a:hover{color:#8fc98f;}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid #444;margin-top:32px;padding-top:18px;text-align:center;font-size:12px;color:#777;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .header-top{justify-content:center;text-align:center;}
+  nav ul{flex-wrap:wrap;justify-content:center;}
+  nav li a{padding:10px 16px;font-size:13px;}
+  .hero{padding:52px 16px;}
+  .section{padding:40px 16px;}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+  .prod-img{height:150px;font-size:15px;}
+  .prod-body{padding:14px;}
+  .prod-price{font-size:17px;}
+}
+@media(max-width:480px){
+  .prod-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .prod-img{height:130px;font-size:13px;}
+  .btn-cart{padding:8px 12px;font-size:12px;}
+  .cat-grid{grid-template-columns:1fr 1fr;gap:14px;}
+  .cat-card{padding:24px 14px;font-size:16px;}
+  .cat-card .cat-emoji{font-size:36px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div class="logo">Natural<span>Marche</span></div>
+    <div class="search-bar">
+      <input type="text" placeholder="商品を検索...">
+      <button>&#x1F50D;</button>
+    </div>
+    <div class="cart-icon">&#x1F6D2;<span class="cart-badge">3</span></div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">ホーム</a></li>
+      <li><a href="#">新着商品</a></li>
+      <li><a href="#">ランキング</a></li>
+      <li><a href="#">定期便</a></li>
+      <li><a href="#">生産者紹介</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>夏の恵み、届きました。</h1>
+  <p>全国のオーガニック農家から届く、旬の食材をお楽しみください</p>
+  <a href="#products" class="hero-btn">今すぐチェック</a>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <h2 class="section-title">カテゴリから探す</h2>
+  <p class="section-sub">お好みのジャンルからお選びください</p>
+  <div class="cat-grid">
+    <div class="cat-card veg">
+      <span class="cat-emoji">&#x1F966;</span>
+      野菜
+      <div class="cat-count">42 商品</div>
+    </div>
+    <div class="cat-card fruit">
+      <span class="cat-emoji">&#x1F351;</span>
+      果物
+      <div class="cat-count">28 商品</div>
+    </div>
+    <div class="cat-card processed">
+      <span class="cat-emoji">&#x1F36F;</span>
+      加工食品
+      <div class="cat-count">35 商品</div>
+    </div>
+    <div class="cat-card drink">
+      <span class="cat-emoji">&#x1F375;</span>
+      飲料
+      <div class="cat-count">19 商品</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <h2 class="section-title">人気のオーガニック商品</h2>
+  <p class="section-sub">スタッフが厳選した、いま注目の商品たち</p>
+  <div class="prod-grid">
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#7cb342,#aed581);">有機トマト</div>
+      <div class="prod-body">
+        <span class="prod-tag">野菜</span>
+        <div class="prod-name">熊本産 有機栽培トマト 1kg</div>
+        <div class="prod-desc">太陽をたっぷり浴びた完熟トマト。サラダにも加熱にも。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;680<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#f9a825,#fdd835);">有機バナナ</div>
+      <div class="prod-body">
+        <span class="prod-tag">果物</span>
+        <div class="prod-name">フェアトレード 有機バナナ 1房</div>
+        <div class="prod-desc">フィリピン産のもっちり甘いオーガニックバナナ。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;398<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#558b2f,#8bc34a);">有機ほうれん草</div>
+      <div class="prod-body">
+        <span class="prod-tag">野菜</span>
+        <div class="prod-name">千葉産 有機ほうれん草 200g</div>
+        <div class="prod-desc">えぐみが少なく、お子様にも食べやすい味わい。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;320<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#bf360c,#e65100);">有機はちみつ</div>
+      <div class="prod-body">
+        <span class="prod-tag">加工食品</span>
+        <div class="prod-name">国産 天然はちみつ 300g</div>
+        <div class="prod-desc">非加熱・無添加。花の香りが広がる百花蜜。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;1,980<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#4e342e,#795548);">有機コーヒー</div>
+      <div class="prod-body">
+        <span class="prod-tag">飲料</span>
+        <div class="prod-name">グアテマラ産 有機コーヒー豆 200g</div>
+        <div class="prod-desc">深いコクとフルーティな酸味のバランスが絶妙。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;1,280<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#e65100,#ff8f00);">有機にんじん</div>
+      <div class="prod-body">
+        <span class="prod-tag">野菜</span>
+        <div class="prod-name">北海道産 有機にんじん 500g</div>
+        <div class="prod-desc">甘みが濃く、ジュースやスープに最適。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;450<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#c62828,#ef5350);">有機いちご</div>
+      <div class="prod-body">
+        <span class="prod-tag">果物</span>
+        <div class="prod-name">栃木産 有機いちご 1パック</div>
+        <div class="prod-desc">農薬不使用で育てた、そのまま食べられるいちご。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;890<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card">
+      <div class="prod-img" style="background:linear-gradient(135deg,#1b5e20,#388e3c);">有機抹茶</div>
+      <div class="prod-body">
+        <span class="prod-tag">飲料</span>
+        <div class="prod-name">京都宇治 有機抹茶パウダー 30g</div>
+        <div class="prod-desc">石臼挽きの上質な抹茶。ラテやお菓子作りにも。</div>
+        <div class="prod-bottom">
+          <div class="prod-price">&yen;1,540<span> (税込)</span></div>
+          <button class="btn-cart">カートに追加</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feat-grid">
+    <div class="feat-item">
+      <div class="feat-icon">&#x1F33F;</div>
+      <h3>100% オーガニック</h3>
+      <p>全商品がJAS有機認証を取得した安心品質です。</p>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#x1F69A;</div>
+      <h3>産地直送</h3>
+      <p>収穫から最短翌日にお届け。鮮度が違います。</p>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#x1F4E6;</div>
+      <h3>送料無料</h3>
+      <p>5,000円以上のお買い物で全国送料無料。</p>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#x1F504;</div>
+      <h3>返品保証</h3>
+      <p>届いた商品に問題があれば全額返金いたします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>ナチュラルマルシェ</h4>
+      <ul>
+        <li><a href="#">会社概要</a></li>
+        <li><a href="#">採用情報</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="#">メディア掲載</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>お買い物ガイド</h4>
+      <ul>
+        <li><a href="#">ご注文方法</a></li>
+        <li><a href="#">お支払い方法</a></li>
+        <li><a href="#">配送について</a></li>
+        <li><a href="#">返品・交換</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>ご利用規約</h4>
+      <ul>
+        <li><a href="#">利用規約</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">特定商取引法に基づく表記</a></li>
+        <li><a href="#">サイトマップ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SNS</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">X (Twitter)</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">LINE公式アカウント</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 ナチュラルマルシェ All Rights Reserved.
+  </div>
+</footer>
+
+</body>
+</html>

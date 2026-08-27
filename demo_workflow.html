@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowForge - AI業務自動化ワークフロービルダー</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI','Hiragino Sans',sans-serif;background:#1a1a2e;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column;}
+
+/* ===== HEADER ===== */
+header{background:#16213e;border-bottom:1px solid #0f3460;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;z-index:10;}
+.logo{font-size:22px;font-weight:700;color:#e94560;letter-spacing:1px;}
+.logo span{color:#0f3460;background:#e94560;padding:2px 7px;border-radius:4px;margin-right:4px;color:#fff;}
+.workflow-name{font-size:14px;color:#8899aa;background:#0d1b3e;padding:6px 16px;border-radius:6px;border:1px solid #1a3a6a;}
+.header-actions{display:flex;gap:10px;}
+.btn{padding:8px 20px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-save{background:#1a3a6a;color:#7eb8ff;}
+.btn-save:hover{background:#244a80;}
+.btn-run{background:#e94560;color:#fff;}
+.btn-run:hover{background:#ff6b81;}
+
+/* ===== MAIN LAYOUT ===== */
+.main-container{display:flex;flex:1;overflow:hidden;}
+
+/* ===== CANVAS ===== */
+.canvas{flex:1;position:relative;overflow:auto;background:
+  linear-gradient(rgba(15,52,96,.3) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(15,52,96,.3) 1px,transparent 1px);
+background-size:24px 24px;background-color:#1a1a2e;padding:40px 30px;display:flex;align-items:center;justify-content:center;}
+
+.workflow{display:flex;align-items:flex-start;gap:0;position:relative;}
+
+/* ===== NODES ===== */
+.node-group{display:flex;flex-direction:column;align-items:center;position:relative;}
+.node{width:170px;padding:0;border-radius:12px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.node:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.5);}
+.node-header{padding:10px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+.node-body{background:#1e1e3a;padding:14px;font-size:13px;font-weight:600;line-height:1.4;}
+.node-status{position:absolute;top:8px;right:10px;width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 6px #4caf50;}
+.node-label{font-size:10px;color:#667;margin-top:6px;}
+
+/* node colors */
+.node-trigger .node-header{background:#1565c0;color:#bbdefb;}
+.node-trigger{border:1px solid #1565c0;}
+.node-ai .node-header{background:#7b1fa2;color:#e1bee7;}
+.node-ai{border:1px solid #7b1fa2;}
+.node-condition .node-header{background:#f9a825;color:#4a3800;}
+.node-condition{border:1px solid #f9a825;}
+.node-action .node-header{background:#2e7d32;color:#c8e6c9;}
+.node-action{border:1px solid #2e7d32;}
+
+/* ===== ARROWS ===== */
+.arrow-container{display:flex;align-items:center;justify-content:center;width:60px;align-self:center;position:relative;}
+.arrow-line{width:100%;height:2px;position:relative;}
+.arrow-line::before{content:'';position:absolute;top:0;left:0;right:10px;height:2px;}
+.arrow-line::after{content:'';position:absolute;right:0;top:-5px;border:6px solid transparent;border-left-width:10px;}
+
+.arrow-blue .arrow-line::before{background:#42a5f5;}
+.arrow-blue .arrow-line::after{border-left-color:#42a5f5;}
+.arrow-purple .arrow-line::before{background:#ab47bc;}
+.arrow-purple .arrow-line::after{border-left-color:#ab47bc;}
+.arrow-yellow .arrow-line::before{background:#fdd835;}
+.arrow-yellow .arrow-line::after{border-left-color:#fdd835;}
+.arrow-green .arrow-line::before{background:#66bb6a;}
+.arrow-green .arrow-line::after{border-left-color:#66bb6a;}
+
+/* ===== BRANCH SPLIT ===== */
+.branch-group{display:flex;flex-direction:column;gap:20px;position:relative;}
+.branch-group::before{content:'';position:absolute;left:-30px;top:30px;bottom:30px;width:2px;background:#fdd835;}
+.branch-row{display:flex;align-items:center;}
+.branch-connector{width:30px;height:2px;position:relative;}
+.branch-connector::before{content:'';position:absolute;top:0;left:0;right:10px;height:2px;background:#66bb6a;}
+.branch-connector::after{content:'';position:absolute;right:0;top:-5px;border:6px solid transparent;border-left-width:10px;border-left-color:#66bb6a;}
+
+/* node icons via CSS */
+.icon{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;}
+
+/* ===== SIDE PANEL ===== */
+.side-panel{width:320px;background:#16213e;border-left:1px solid #0f3460;overflow-y:auto;padding:0;flex-shrink:0;}
+.panel-header{padding:16px 20px;border-bottom:1px solid #0f3460;display:flex;align-items:center;gap:8px;}
+.panel-header .dot{width:10px;height:10px;border-radius:50%;background:#7b1fa2;}
+.panel-header h3{font-size:14px;font-weight:600;}
+.panel-section{padding:16px 20px;border-bottom:1px solid #0f3460aa;}
+.panel-section h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#667;margin-bottom:12px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:#8899aa;margin-bottom:5px;}
+.field select,.field input,.field textarea{width:100%;background:#0d1b3e;border:1px solid #1a3a6a;color:#c0d0e0;padding:8px 12px;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;}
+.field select:focus,.field input:focus,.field textarea:focus{outline:none;border-color:#7b1fa2;}
+.field textarea{height:90px;line-height:1.5;}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;margin:2px;background:#1a3a6a;color:#7eb8ff;}
+.output-preview{background:#0d1b3e;border:1px solid #1a3a6a;border-radius:8px;padding:12px;font-size:12px;font-family:'Consolas','Courier New',monospace;color:#7eb8ff;line-height:1.6;}
+
+/* ===== LOG PANEL ===== */
+.log-panel{background:#0d1117;border-top:1px solid #0f3460;padding:12px 24px;max-height:180px;overflow-y:auto;}
+.log-panel h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#556;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.log-panel h4::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 6px #4caf50;}
+.log-row{display:flex;gap:16px;padding:4px 0;font-size:12px;font-family:'Consolas','Courier New',monospace;border-bottom:1px solid #161b22;}
+.log-time{color:#556;min-width:80px;}
+.log-step{color:#8899aa;min-width:180px;}
+.log-status{font-weight:600;}
+.log-status.success{color:#4caf50;}
+.log-status.running{color:#fdd835;}
+.log-dur{color:#556;margin-left:auto;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1100px){
+  .main-container{flex-direction:column;}
+  .side-panel{width:100%;border-left:none;border-top:1px solid #0f3460;}
+}
+@media(max-width:768px){
+  .workflow{flex-direction:column;align-items:center;gap:0;}
+  .arrow-container{width:auto;height:40px;transform:rotate(90deg);}
+  .branch-group{flex-direction:column;align-items:center;}
+  .branch-group::before{display:none;}
+  .branch-connector{width:40px;transform:rotate(0);}
+  header{justify-content:center;text-align:center;}
+  .node{width:150px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+    <div class="logo"><span>FF</span> FlowForge</div>
+    <div class="workflow-name">📋 メール自動分類 &amp; 通知ワークフロー</div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-save">💾 保存</button>
+    <button class="btn btn-run">▶ 実行</button>
+  </div>
+</header>
+
+<div class="main-container">
+
+  <!-- CANVAS -->
+  <div class="canvas">
+    <div class="workflow">
+
+      <!-- Node 1: Trigger -->
+      <div class="node-group">
+        <div class="node node-trigger">
+          <div class="node-header"><span class="icon">📨</span> トリガー</div>
+          <div class="node-body">メール受信<div class="node-status"></div></div>
+        </div>
+        <div class="node-label">#1</div>
+      </div>
+
+      <div class="arrow-container arrow-blue"><div class="arrow-line"></div></div>
+
+      <!-- Node 2: AI -->
+      <div class="node-group">
+        <div class="node node-ai" style="box-shadow:0 0 20px rgba(123,31,162,.4);">
+          <div class="node-header"><span class="icon">🤖</span> AI処理</div>
+          <div class="node-body">Claude で内容分類<div class="node-status"></div></div>
+        </div>
+        <div class="node-label">#2 — 選択中</div>
+      </div>
+
+      <div class="arrow-container arrow-purple"><div class="arrow-line"></div></div>
+
+      <!-- Node 3: Condition -->
+      <div class="node-group">
+        <div class="node node-condition">
+          <div class="node-header"><span class="icon">⚡</span> 条件分岐</div>
+          <div class="node-body">緊急度判定<div class="node-status"></div></div>
+        </div>
+        <div class="node-label">#3</div>
+      </div>
+
+      <div class="arrow-container arrow-yellow"><div class="arrow-line"></div></div>
+
+      <!-- Branch: two action nodes -->
+      <div class="branch-group">
+        <div class="branch-row">
+          <div class="branch-connector"></div>
+          <div class="node-group">
+            <div class="node node-action">
+              <div class="node-header"><span class="icon">💬</span> アクション</div>
+              <div class="node-body">Slack通知<div class="node-status"></div></div>
+            </div>
+            <div class="node-label">#4 — 緊急</div>
+          </div>
+        </div>
+        <div class="branch-row">
+          <div class="branch-connector"></div>
+          <div class="node-group">
+            <div class="node node-action">
+              <div class="node-header"><span class="icon">📊</span> アクション</div>
+              <div class="node-body">スプレッドシート記録<div class="node-status"></div></div>
+            </div>
+            <div class="node-label">#5 — 通常</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="side-panel">
+    <div class="panel-header">
+      <div class="dot"></div>
+      <h3>Claude で内容分類</h3>
+    </div>
+
+    <div class="panel-section">
+      <h4>基本設定</h4>
+      <div class="field">
+        <label>モデル</label>
+        <select>
+          <option>claude-sonnet-4-20250514</option>
+          <option selected>claude-opus-4-20250514</option>
+          <option>claude-haiku-4-20250514</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>最大トークン数</label>
+        <input type="number" value="1024">
+      </div>
+      <div class="field">
+        <label>Temperature</label>
+        <input type="number" value="0.2" step="0.1" min="0" max="1">
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h4>プロンプトテンプレート</h4>
+      <div class="field">
+        <textarea>以下のメール本文を読み、次のカテゴリに分類してください:
+
+- 緊急対応（クレーム・障害報告）
+- 見積依頼
+- 一般問い合わせ
+- 社内連絡
+
+メール本文: {{input.body}}</textarea>
+      </div>
+      <div class="field">
+        <label>入力変数</label>
+        <div>
+          <span class="tag">{{input.subject}}</span>
+          <span class="tag">{{input.body}}</span>
+          <span class="tag">{{input.from}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h4>出力形式</h4>
+      <div class="field">
+        <label>フォーマット</label>
+        <select>
+          <option selected>JSON</option>
+          <option>テキスト</option>
+          <option>配列</option>
+        </select>
+      </div>
+      <div class="output-preview">
+{<br>
+&nbsp;&nbsp;"category": "緊急対応",<br>
+&nbsp;&nbsp;"confidence": 0.95,<br>
+&nbsp;&nbsp;"summary": "サーバー障害の報告",<br>
+&nbsp;&nbsp;"urgency": "high"<br>
+}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LOG PANEL -->
+<div class="log-panel">
+  <h4>実行ログ — 最終実行: 成功</h4>
+  <div class="log-row">
+    <span class="log-time">14:32:01</span>
+    <span class="log-step">#1 メール受信</span>
+    <span class="log-status success">✓ 完了</span>
+    <span class="log-dur">12ms</span>
+  </div>
+  <div class="log-row">
+    <span class="log-time">14:32:01</span>
+    <span class="log-step">#2 Claude で内容分類</span>
+    <span class="log-status success">✓ 完了</span>
+    <span class="log-dur">1,847ms</span>
+  </div>
+  <div class="log-row">
+    <span class="log-time">14:32:03</span>
+    <span class="log-step">#3 緊急度判定</span>
+    <span class="log-status success">✓ 完了</span>
+    <span class="log-dur">3ms</span>
+  </div>
+  <div class="log-row">
+    <span class="log-time">14:32:03</span>
+    <span class="log-step">#4 Slack通知</span>
+    <span class="log-status success">✓ 完了</span>
+    <span class="log-dur">234ms</span>
+  </div>
+  <div class="log-row">
+    <span class="log-time">14:32:03</span>
+    <span class="log-step">#5 スプレッドシート記録</span>
+    <span class="log-status success">✓ 完了</span>
+    <span class="log-dur">189ms</span>
+  </div>
+</div>
+
+</body>
+</html>

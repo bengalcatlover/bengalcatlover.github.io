@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocScan AI - AI OCR 文書処理システム</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: #f4f6f9;
+  color: #2d3748;
+  line-height: 1.6;
+}
+header {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: -0.5px;
+}
+.logo span { color: #64748b; font-weight: 400; font-size: 13px; margin-left: 12px; }
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; }
+
+/* KPI Cards */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.kpi-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+.kpi-label { font-size: 13px; color: #64748b; margin-bottom: 4px; }
+.kpi-value { font-size: 32px; font-weight: 700; color: #1e293b; }
+.kpi-value small { font-size: 14px; font-weight: 400; color: #94a3b8; margin-left: 4px; }
+.kpi-sub { font-size: 12px; color: #22c55e; margin-top: 4px; }
+
+/* Main two-column */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-icon {
+  width: 28px; height: 28px;
+  background: #eff6ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #2563eb;
+}
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 16px;
+}
+.upload-zone:hover {
+  border-color: #2563eb;
+  background: #f8fafc;
+}
+.upload-icon {
+  font-size: 40px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+.upload-text { font-size: 15px; color: #475569; margin-bottom: 4px; }
+.upload-sub { font-size: 12px; color: #94a3b8; }
+.formats {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0 20px;
+  flex-wrap: wrap;
+}
+.format-tag {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  width: 100%;
+}
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+.btn-secondary:hover { background: #e2e8f0; }
+
+/* Result area */
+.result-section { margin-bottom: 20px; }
+.result-section:last-child { margin-bottom: 0; }
+.result-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+}
+.result-row:last-child { border-bottom: none; }
+.result-key { color: #64748b; }
+.result-val { color: #1e293b; font-weight: 600; }
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 8px 0;
+}
+.item-table th {
+  text-align: left;
+  padding: 8px 10px;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid #e2e8f0;
+}
+.item-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+.item-table td:last-child { text-align: right; font-weight: 600; }
+.item-table th:last-child { text-align: right; }
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  border-top: 2px solid #e2e8f0;
+  margin-top: 4px;
+}
+
+.confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.confidence-bar {
+  width: 60px; height: 6px;
+  background: #dcfce7;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.confidence-fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 3px;
+  width: 98.7%;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* History table */
+.history-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.history-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+.history-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-done { background: #dcfce7; color: #16a34a; }
+.badge-progress { background: #fef3c7; color: #d97706; }
+.badge-type {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header { padding: 0 16px; }
+  .container { padding: 16px; }
+  .kpi-row { grid-template-columns: 1fr; gap: 12px; }
+  .main-grid { grid-template-columns: 1fr; }
+  .result-actions { flex-direction: column; }
+  .btn-secondary { width: 100%; text-align: center; }
+  .history-table { font-size: 12px; }
+  .history-table th, .history-table td { padding: 8px 6px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DocScan AI<span>AI OCR 文書処理システム</span></div>
+  <div class="header-status"><span class="status-dot"></span>システム稼働中</div>
+</header>
+
+<div class="container">
+
+  <!-- KPI Cards -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">処理済み文書</div>
+      <div class="kpi-value">4,521<small>件</small></div>
+      <div class="kpi-sub">+127 件（今月）</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">平均精度</div>
+      <div class="kpi-value">97.3<small>%</small></div>
+      <div class="kpi-sub">+0.4% 前月比</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">処理時間</div>
+      <div class="kpi-value">2.1<small>秒</small></div>
+      <div class="kpi-sub">-0.3秒 前月比</div>
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+
+    <!-- Left: Upload -->
+    <div class="panel">
+      <div class="panel-title"><div class="panel-icon">&#8593;</div>文書アップロード</div>
+      <div class="upload-zone">
+        <div class="upload-icon">&#9901;</div>
+        <div class="upload-text">ファイルをドラッグ＆ドロップ</div>
+        <div class="upload-sub">またはクリックしてファイルを選択</div>
+      </div>
+      <div class="formats">
+        <span class="format-tag">PDF</span>
+        <span class="format-tag">JPEG / PNG</span>
+        <span class="format-tag">スキャンデータ</span>
+        <span class="format-tag">TIFF</span>
+      </div>
+      <button class="btn btn-primary">処理開始</button>
+    </div>
+
+    <!-- Right: Result -->
+    <div class="panel">
+      <div class="panel-title"><div class="panel-icon">&#9635;</div>抽出結果プレビュー</div>
+
+      <div class="result-section">
+        <div class="result-label">基本情報</div>
+        <div class="result-row"><span class="result-key">請求書番号</span><span class="result-val">INV-2026-0847</span></div>
+        <div class="result-row"><span class="result-key">発行日</span><span class="result-val">2026年8月15日</span></div>
+        <div class="result-row"><span class="result-key">請求先</span><span class="result-val">株式会社テックブリッジ</span></div>
+      </div>
+
+      <div class="result-section">
+        <div class="result-label">品目明細</div>
+        <table class="item-table">
+          <thead><tr><th>品目</th><th>数量</th><th>単価</th><th>金額</th></tr></thead>
+          <tbody>
+            <tr><td>コンサルティング費用</td><td>1</td><td>¥500,000</td><td>¥500,000</td></tr>
+            <tr><td>システム開発費</td><td>1</td><td>¥900,000</td><td>¥900,000</td></tr>
+            <tr><td>保守費用</td><td>1</td><td>¥100,000</td><td>¥100,000</td></tr>
+          </tbody>
+        </table>
+        <div class="total-row"><span>合計金額（税込）</span><span>¥1,650,000</span></div>
+      </div>
+
+      <div class="result-section">
+        <div class="confidence">
+          <span>信頼度スコア: 98.7%</span>
+          <div class="confidence-bar"><div class="confidence-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-secondary">CSV エクスポート</button>
+        <button class="btn btn-secondary">会計ソフト連携</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- History -->
+  <div class="history-panel">
+    <div class="panel-title"><div class="panel-icon">&#9776;</div>処理履歴</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>ファイル名</th>
+          <th>種別</th>
+          <th>処理日時</th>
+          <th>ステータス</th>
+          <th>抽出項目数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>invoice_2026_0847.pdf</td>
+          <td><span class="badge-type">請求書</span></td>
+          <td>2026/08/27 14:32</td>
+          <td><span class="badge badge-done">完了</span></td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>receipt_store_0823.jpg</td>
+          <td><span class="badge-type">領収書</span></td>
+          <td>2026/08/27 13:15</td>
+          <td><span class="badge badge-done">完了</span></td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>contract_renewal.pdf</td>
+          <td><span class="badge-type">契約書</span></td>
+          <td>2026/08/27 11:48</td>
+          <td><span class="badge badge-done">完了</span></td>
+          <td>24</td>
+        </tr>
+        <tr>
+          <td>delivery_note_0826.pdf</td>
+          <td><span class="badge-type">納品書</span></td>
+          <td>2026/08/26 17:02</td>
+          <td><span class="badge badge-done">完了</span></td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>scan_meeting_notes.tiff</td>
+          <td><span class="badge-type">議事録</span></td>
+          <td>2026/08/26 10:30</td>
+          <td><span class="badge badge-progress">処理中</span></td>
+          <td>--</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

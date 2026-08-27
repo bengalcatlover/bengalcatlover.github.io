@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAKURA COFFEE | 桜と珈琲のある暮らし</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif; color: #333; background: #f5f0eb; line-height: 1.8; }
+  a { color: #b5584e; text-decoration: none; transition: color .2s; }
+  a:hover { color: #8a3a32; }
+
+  /* ===== Header ===== */
+  .site-header { background: #fff; border-bottom: 3px solid #d4a5a0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .site-logo { font-size: 1.5rem; font-weight: 700; color: #b5584e; letter-spacing: .08em; }
+  .site-logo span { font-size: .75rem; display: block; color: #999; font-weight: 400; letter-spacing: .15em; }
+  .nav-toggle { display: none; background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #b5584e; }
+  .main-nav ul { list-style: none; display: flex; gap: 28px; }
+  .main-nav a { font-size: .9rem; font-weight: 500; color: #555; padding: 4px 0; border-bottom: 2px solid transparent; transition: border-color .2s, color .2s; }
+  .main-nav a:hover, .main-nav a.current { color: #b5584e; border-bottom-color: #b5584e; }
+
+  /* ===== Hero ===== */
+  .hero { background: linear-gradient(135deg, #f7cac9 0%, #d4a5a0 40%, #92685a 100%); color: #fff; text-align: center; padding: 100px 20px 90px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,.08); }
+  .hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.06); }
+  .hero h1 { font-size: 2.6rem; letter-spacing: .12em; margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  .hero p { font-size: 1.1rem; opacity: .92; letter-spacing: .08em; }
+
+  /* ===== Content Area ===== */
+  .content-wrap { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; }
+
+  /* ===== Blog Posts ===== */
+  .posts { display: flex; flex-direction: column; gap: 32px; }
+  .post-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); transition: box-shadow .25s; }
+  .post-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  .post-thumb { height: 200px; display: flex; align-items: flex-end; padding: 20px; position: relative; }
+  .post-thumb .category-badge { position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,.9); color: #b5584e; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: .06em; }
+  .thumb-1 { background: linear-gradient(160deg, #fce4ec, #f8bbd0 60%, #e1a0a0); }
+  .thumb-2 { background: linear-gradient(160deg, #e8d5b7, #c9a96e 60%, #92685a); }
+  .thumb-3 { background: linear-gradient(160deg, #d7e8d4, #a5c9a0 60%, #6d9b68); }
+  .post-body { padding: 24px 28px 28px; }
+  .post-meta { font-size: .78rem; color: #999; margin-bottom: 8px; display: flex; gap: 16px; }
+  .post-body h2 { font-size: 1.25rem; margin-bottom: 10px; line-height: 1.5; }
+  .post-body h2 a { color: #333; }
+  .post-body h2 a:hover { color: #b5584e; }
+  .post-excerpt { font-size: .92rem; color: #666; margin-bottom: 18px; }
+  .read-more { display: inline-block; font-size: .85rem; font-weight: 600; color: #b5584e; border: 1px solid #d4a5a0; padding: 7px 22px; border-radius: 4px; transition: background .2s, color .2s; }
+  .read-more:hover { background: #b5584e; color: #fff; }
+
+  /* ===== Pagination ===== */
+  .pagination { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+  .pagination span, .pagination a { display: inline-block; width: 38px; height: 38px; line-height: 38px; text-align: center; border-radius: 4px; font-size: .88rem; }
+  .pagination .current-page { background: #b5584e; color: #fff; font-weight: 700; }
+  .pagination a { background: #fff; color: #666; border: 1px solid #ddd; }
+  .pagination a:hover { border-color: #b5584e; color: #b5584e; }
+
+  /* ===== Sidebar ===== */
+  .sidebar { display: flex; flex-direction: column; gap: 28px; }
+  .widget { background: #fff; border-radius: 6px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+  .widget-title { font-size: 1rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #d4a5a0; color: #444; }
+
+  .profile-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #f7cac9, #d4a5a0); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; }
+  .profile-name { text-align: center; font-weight: 700; margin-bottom: 8px; }
+  .profile-desc { font-size: .84rem; color: #777; text-align: center; line-height: 1.7; }
+
+  .widget ul { list-style: none; }
+  .widget li { padding: 8px 0; border-bottom: 1px dotted #e0d8d0; font-size: .88rem; display: flex; justify-content: space-between; }
+  .widget li:last-child { border-bottom: none; }
+  .widget li .count { color: #aaa; font-size: .8rem; }
+
+  .recent-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px dotted #e0d8d0; }
+  .recent-item:last-child { border-bottom: none; }
+  .recent-thumb { width: 56px; height: 56px; border-radius: 4px; flex-shrink: 0; }
+  .recent-info { font-size: .82rem; }
+  .recent-info a { color: #444; font-weight: 500; line-height: 1.4; display: block; margin-bottom: 2px; }
+  .recent-info a:hover { color: #b5584e; }
+  .recent-date { color: #aaa; font-size: .75rem; }
+
+  /* ===== Footer ===== */
+  .site-footer { background: #3b2c24; color: #ccc; margin-top: 60px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; padding: 48px 20px 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .footer-col h3 { font-size: .95rem; color: #f7cac9; margin-bottom: 14px; letter-spacing: .06em; }
+  .footer-col p, .footer-col li { font-size: .84rem; line-height: 1.9; }
+  .footer-col ul { list-style: none; }
+  .footer-col a { color: #d4a5a0; }
+  .footer-col a:hover { color: #f7cac9; }
+  .footer-bottom { text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,.08); font-size: .76rem; color: #888; margin-top: 32px; }
+  .footer-bottom span { color: #d4a5a0; }
+
+  /* ===== Breadcrumb ===== */
+  .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 14px 20px; font-size: .78rem; color: #aaa; }
+  .breadcrumb a { color: #999; }
+  .breadcrumb a:hover { color: #b5584e; }
+
+  /* ===== WP Admin Bar (decorative) ===== */
+  .wp-bar { background: #23282d; height: 32px; display: flex; align-items: center; padding: 0 16px; font-size: .75rem; color: #aaa; gap: 18px; }
+  .wp-bar a { color: #ccc; font-size: .75rem; }
+  .wp-bar a:hover { color: #00b9eb; }
+  .wp-bar .dashicon { margin-right: 4px; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 860px) {
+    .content-wrap { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    .hero h1 { font-size: 1.8rem; }
+    .hero { padding: 64px 20px 56px; }
+    .nav-toggle { display: block; }
+    .main-nav { position: absolute; top: 70px; left: 0; right: 0; background: #fff; border-bottom: 2px solid #d4a5a0; display: none; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+    .main-nav.open { display: block; }
+    .main-nav ul { flex-direction: column; padding: 12px 20px; gap: 0; }
+    .main-nav li { border-bottom: 1px solid #f0e8e0; }
+    .main-nav a { display: block; padding: 12px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- WordPress Admin Bar (decorative) -->
+<div class="wp-bar">
+  <a href="#">W WordPress</a>
+  <a href="#">SAKURA COFFEE</a>
+  <a href="#">+ 新規</a>
+  <a href="#" style="margin-left:auto;">こんにちは、管理者さん</a>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-logo">
+      SAKURA COFFEE
+      <span>- 桜と珈琲のある暮らし -</span>
+    </div>
+    <button class="nav-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')" aria-label="メニュー">&#9776;</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="current">ホーム</a></li>
+        <li><a href="#">メニュー</a></li>
+        <li><a href="#">ブログ</a></li>
+        <li><a href="#">アクセス</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>桜と珈琲のある暮らし</h1>
+  <p>一杯のコーヒーが、あなたの一日をやさしく彩ります</p>
+</section>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="#">ホーム</a> &rsaquo; ブログ一覧
+</div>
+
+<!-- Main Content -->
+<div class="content-wrap">
+
+  <!-- Blog Posts -->
+  <main class="posts">
+
+    <!-- Post 1 -->
+    <article class="post-card">
+      <div class="post-thumb thumb-1">
+        <span class="category-badge">コーヒー豆</span>
+      </div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span>2026年8月25日</span>
+          <span>by スタッフ</span>
+        </div>
+        <h2><a href="#">エチオピア・イルガチェフェの魅力 ― フルーティーな一杯を求めて</a></h2>
+        <p class="post-excerpt">当店に新しく入荷したエチオピア・イルガチェフェ。ベリー系の華やかな香りとレモンのような爽やかな酸味が特徴です。浅煎りで仕上げたこの豆の魅力と、ご自宅でも楽しめるおすすめの淹れ方をご紹介します。</p>
+        <a href="#" class="read-more">続きを読む &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Post 2 -->
+    <article class="post-card">
+      <div class="post-thumb thumb-2">
+        <span class="category-badge">お知らせ</span>
+      </div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span>2026年8月18日</span>
+          <span>by オーナー</span>
+        </div>
+        <h2><a href="#">9月の限定メニュー「秋桜ラテ」のお知らせ</a></h2>
+        <p class="post-excerpt">秋の訪れとともに、毎年ご好評いただいている季節限定ドリンクが今年も登場します。京都産の和三盆と自家製キャラメルソースを使った「秋桜ラテ」。ほんのり甘く、どこか懐かしい味わいをお届けします。</p>
+        <a href="#" class="read-more">続きを読む &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Post 3 -->
+    <article class="post-card">
+      <div class="post-thumb thumb-3">
+        <span class="category-badge">カフェ日記</span>
+      </div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span>2026年8月10日</span>
+          <span>by スタッフ</span>
+        </div>
+        <h2><a href="#">観葉植物と過ごすカフェ時間 ― 店内グリーンのこだわり</a></h2>
+        <p class="post-excerpt">SAKURA COFFEEの店内に並ぶ観葉植物たち。実はひとつひとつ、スタッフが愛情を込めて育てています。モンステラやウンベラータなど、コーヒーとの相性も抜群な植物たちの紹介と、お手入れのコツをお伝えします。</p>
+        <a href="#" class="read-more">続きを読む &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span class="current-page">1</span>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">&raquo;</a>
+    </div>
+
+  </main>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <!-- Profile Widget -->
+    <div class="widget">
+      <h3 class="widget-title">プロフィール</h3>
+      <div class="profile-icon">&#9749;</div>
+      <p class="profile-name">SAKURA COFFEE</p>
+      <p class="profile-desc">2018年オープン。桜並木の通り沿いにある小さなカフェです。自家焙煎のスペシャルティコーヒーと手作りスイーツをご用意してお待ちしております。</p>
+    </div>
+
+    <!-- Category Widget -->
+    <div class="widget">
+      <h3 class="widget-title">カテゴリー</h3>
+      <ul>
+        <li><a href="#">コーヒー豆</a> <span class="count">(12)</span></li>
+        <li><a href="#">お知らせ</a> <span class="count">(8)</span></li>
+        <li><a href="#">カフェ日記</a> <span class="count">(15)</span></li>
+        <li><a href="#">レシピ</a> <span class="count">(6)</span></li>
+        <li><a href="#">イベント</a> <span class="count">(4)</span></li>
+      </ul>
+    </div>
+
+    <!-- Recent Posts Widget -->
+    <div class="widget">
+      <h3 class="widget-title">最新の記事</h3>
+      <div class="recent-item">
+        <div class="recent-thumb" style="background: linear-gradient(135deg, #fce4ec, #e1a0a0);"></div>
+        <div class="recent-info">
+          <a href="#">エチオピア・イルガチェフェの魅力</a>
+          <span class="recent-date">2026.08.25</span>
+        </div>
+      </div>
+      <div class="recent-item">
+        <div class="recent-thumb" style="background: linear-gradient(135deg, #e8d5b7, #92685a);"></div>
+        <div class="recent-info">
+          <a href="#">9月の限定メニュー「秋桜ラテ」</a>
+          <span class="recent-date">2026.08.18</span>
+        </div>
+      </div>
+      <div class="recent-item">
+        <div class="recent-thumb" style="background: linear-gradient(135deg, #d7e8d4, #6d9b68);"></div>
+        <div class="recent-info">
+          <a href="#">観葉植物と過ごすカフェ時間</a>
+          <span class="recent-date">2026.08.10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Archive Widget -->
+    <div class="widget">
+      <h3 class="widget-title">アーカイブ</h3>
+      <ul>
+        <li><a href="#">2026年8月</a> <span class="count">(3)</span></li>
+        <li><a href="#">2026年7月</a> <span class="count">(5)</span></li>
+        <li><a href="#">2026年6月</a> <span class="count">(4)</span></li>
+        <li><a href="#">2026年5月</a> <span class="count">(6)</span></li>
+        <li><a href="#">2026年4月</a> <span class="count">(3)</span></li>
+      </ul>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h3>営業時間</h3>
+      <p>
+        平日: 8:00 - 19:00<br>
+        土日祝: 9:00 - 18:00<br>
+        定休日: 毎週水曜日
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>アクセス</h3>
+      <p>
+        〒150-0001<br>
+        東京都渋谷区桜丘町 1-2-3<br>
+        桜ビル 1F<br>
+        TEL: 03-1234-5678
+      </p>
+    </div>
+    <div class="footer-col">
+      <h3>SNS</h3>
+      <ul>
+        <li><a href="#">Instagram: @sakura_coffee</a></li>
+        <li><a href="#">Twitter: @sakura_coffee</a></li>
+        <li><a href="#">Facebook: SAKURA COFFEE</a></li>
+        <li><a href="#">LINE: @sakuracoffee</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 <span>SAKURA COFFEE</span> All Rights Reserved. | Powered by <span>WordPress</span>
+  </div>
+</footer>
+
+</body>
+</html>
