@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Insights, guides and tips for international residents and investors in Kanagawa, Japan. Expert advice on renting, buying and living in Yokohama, Kamakura, Shonan and beyond.">
+  <meta name="keywords" content="Kanagawa real estate blog, Japan property guide, expat living Yokohama, buying property Japan, renting in Japan tips">
+  <title>Insights &amp; Guides | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--color-bg);
+      z-index: 1000;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .header__logo-accent {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    .header__nav-list {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .header__nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: color 0.2s;
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+
+    .header__nav-link:hover,
+    .header__nav-link--active {
+      color: var(--color-accent);
+    }
+
+    .header__nav-link--active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header__lang-toggle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: 1px solid var(--color-primary);
+      border-radius: 4px;
+      color: var(--color-primary);
+      background: transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .header__lang-toggle:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites {
+      position: relative;
+      font-size: 1.25rem;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .header__favorites:hover {
+      color: var(--color-accent);
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__cta {
+      display: none;
+      padding: 8px 20px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .header__cta:hover {
+      background: #b8933e;
+    }
+
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .header__hamburger-line {
+      width: 24px;
+      height: 2px;
+      background: var(--color-primary);
+      transition: all 0.3s;
+    }
+
+    /* Mobile drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--color-primary);
+      z-index: 2000;
+      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 80px 40px 40px;
+    }
+
+    .mobile-nav--open {
+      right: 0;
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .mobile-nav__list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .mobile-nav__link {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      color: #fff;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav__link:hover,
+    .mobile-nav__link--active {
+      color: var(--color-accent);
+    }
+
+    .mobile-nav__cta {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--color-primary);
+      padding: 100px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(11,31,58,0.97) 0%, rgba(28,58,94,0.92) 100%);
+      z-index: 1;
+    }
+
+    .page-header__content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .page-header__title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 16px auto 0;
+    }
+
+    .page-header__breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page-header__breadcrumb a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+
+    .page-header__breadcrumb a:hover {
+      color: var(--color-accent);
+    }
+
+    .page-header__breadcrumb-sep {
+      color: var(--color-accent);
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog {
+      padding: 60px 0 80px;
+    }
+
+    .blog__filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      justify-content: center;
+    }
+
+    .blog__filter-btn {
+      padding: 8px 20px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      color: var(--color-text-light);
+      background: transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .blog__filter-btn:hover,
+    .blog__filter-btn--active {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: rgba(201, 164, 92, 0.06);
+    }
+
+    .blog__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    /* Blog Card */
+    .blog-card {
+      background: var(--color-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .blog-card__image-wrapper {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+
+    .blog-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-card__image {
+      transform: scale(1.05);
+    }
+
+    .blog-card__category {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 4px 14px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .blog-card__body {
+      padding: 24px;
+    }
+
+    .blog-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .blog-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .blog-card__meta-icon {
+      font-size: 0.875rem;
+    }
+
+    .blog-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.3;
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+
+    .blog-card:hover .blog-card__title {
+      color: var(--color-accent);
+    }
+
+    .blog-card__excerpt {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .blog-card__read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      transition: gap 0.2s;
+    }
+
+    .blog-card__read-more:hover {
+      gap: 10px;
+    }
+
+    .blog-card__read-more-arrow {
+      transition: transform 0.2s;
+    }
+
+    .blog-card:hover .blog-card__read-more-arrow {
+      transform: translateX(3px);
+    }
+
+    /* Pagination */
+    .blog__pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 50px;
+    }
+
+    .blog__pagination-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: all 0.2s;
+    }
+
+    .blog__pagination-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .blog__pagination-btn--active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+
+    .blog__pagination-btn--disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter {
+      background: var(--color-primary);
+      padding: 60px 0;
+    }
+
+    .newsletter__inner {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .newsletter__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .newsletter__text {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .newsletter__form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .newsletter__input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 0.9375rem;
+      font-family: var(--font-body);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter__input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .newsletter__input:focus {
+      border-color: var(--color-accent);
+    }
+
+    .newsletter__btn {
+      padding: 14px 28px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .newsletter__btn:hover {
+      background: #b8933e;
+    }
+
+    .newsletter__success {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 20px;
+      background: rgba(201, 164, 92, 0.15);
+      border: 1px solid var(--color-accent);
+      border-radius: 4px;
+      color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .newsletter__success--visible {
+      display: block;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+
+    .footer__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer__brand-name span {
+      color: var(--color-accent);
+    }
+
+    .footer__brand-text {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .footer__social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8125rem;
+      margin-bottom: 12px;
+    }
+
+    .footer__contact-icon {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer__copyright {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer__legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__legal-link {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+
+    .footer__legal-link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 480px) {
+      .newsletter__form {
+        flex-direction: row;
+      }
+
+      .newsletter__input {
+        flex: 1;
+      }
+
+      .newsletter__btn {
+        white-space: nowrap;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .page-header {
+        padding: 120px 0 60px;
+      }
+
+      .page-header__title {
+        font-size: 3rem;
+      }
+
+      .blog__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .header__nav {
+        display: block;
+      }
+
+      .header__hamburger {
+        display: none;
+      }
+
+      .header__cta {
+        display: inline-block;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .blog__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer__grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+
+      .page-header__title {
+        font-size: 3.25rem;
+      }
+
+      .blog-card__title {
+        font-size: 1.5rem;
+      }
+
+      .newsletter__title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span class="header__logo-accent">Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main Navigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a></li>
+          <li><a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a></li>
+          <li><a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a></li>
+          <li><a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a></li>
+          <li><a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a></li>
+          <li><a href="blog.html" class="header__nav-link header__nav-link--active" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" aria-label="Toggle Language" data-i18n="lang_toggle">EN / JP</button>
+        <button class="header__favorites" id="favoritesBtn" aria-label="Favorites">
+          ♡
+          <span class="header__favorites-badge" id="favoritesBadge">0</span>
+        </button>
+        <a href="contact.html" class="header__cta" data-i18n="contact_us">Contact Us</a>
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Open Menu">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE NAV DRAWER ===== -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+    <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close Menu">✕</button>
+    <ul class="mobile-nav__list">
+      <li><a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a></li>
+      <li><a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a></li>
+      <li><a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a></li>
+      <li><a href="services.html" class="mobile-nav__link" data-i18n="nav_services">Services</a></li>
+      <li><a href="about.html" class="mobile-nav__link" data-i18n="nav_about">About</a></li>
+      <li><a href="team.html" class="mobile-nav__link" data-i18n="nav_team">Team</a></li>
+      <li><a href="blog.html" class="mobile-nav__link mobile-nav__link--active" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a></li>
+    </ul>
+    <a href="contact.html" class="mobile-nav__cta" data-i18n="contact_us">Contact Us</a>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container page-header__content">
+        <h1 class="page-header__title" data-i18n="blog_title">Insights &amp; Guides</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a>
+          <span class="page-header__breadcrumb-sep">›</span>
+          <span data-i18n="nav_blog">Blog</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog">
+      <div class="container">
+
+        <!-- Category Filter Tabs -->
+        <div class="blog__filter" role="tablist" aria-label="Blog category filter">
+          <button class="blog__filter-btn blog__filter-btn--active" role="tab" aria-selected="true" data-filter="all" data-i18n="filter_all">All</button>
+          <button class="blog__filter-btn" role="tab" aria-selected="false" data-filter="living" data-i18n="filter_living">Living</button>
+          <button class="blog__filter-btn" role="tab" aria-selected="false" data-filter="buying" data-i18n="filter_buying">Buying</button>
+          <button class="blog__filter-btn" role="tab" aria-selected="false" data-filter="area-guide" data-i18n="filter_area_guide">Area Guide</button>
+        </div>
+
+        <!-- Blog Cards Grid -->
+        <div class="blog__grid" id="blogGrid">
+
+          <!-- Blog Card 1 -->
+          <article class="blog-card" data-category="living">
+            <a href="#" class="blog-card__image-wrapper" aria-label="Read: Guide to Renting in Japan Without a Guarantor">
+              <span class="blog-card__category" data-i18n="category_living">Living</span>
+              <img
+                src="https://placehold.co/800x500/1C3A5E/C9A45C?text=Renting+Guide"
+                alt="A modern apartment interior in Japan representing rental guidance for foreign residents"
+                class="blog-card__image"
+                width="800"
+                height="500"
+                loading="lazy"
+              >
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">📅</span>
+                  <time datetime="2025-05-20">May 20, 2025</time>
+                </span>
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">⏱</span>
+                  8 min read
+                </span>
+              </div>
+              <h2 class="blog-card__title">
+                <a href="#" data-i18n="blog1_title">Guide to Renting in Japan Without a Guarantor</a>
+              </h2>
+              <p class="blog-card__excerpt" data-i18n="blog1_excerpt">
+                Securing a rental home in Japan traditionally requires a guarantor — but options for foreign residents are expanding. This guide explains guarantor alternatives, guarantor companies, employer sponsorship and foreign-friendly properties available across Kanagawa.
+              </p>
+              <a href="#" class="blog-card__read-more" data-i18n="read_more">
+                Read More <span class="blog-card__read-more-arrow">→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Blog Card 2 -->
+          <article class="blog-card" data-category="area-guide">
+            <a href="#" class="blog-card__image-wrapper" aria-label="Read: Best International Schools in Yokohama">
+              <span class="blog-card__category" data-i18n="category_area_guide">Area Guide</span>
+              <img
+                src="https://placehold.co/800x500/0B1F3A/C9A45C?text=International+Schools"
+                alt="Children in an international school setting in Yokohama"
+                class="blog-card__image"
+                width="800"
+                height="500"
+                loading="lazy"
+              >
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">📅</span>
+                  <time datetime="2025-05-12">May 12, 2025</time>
+                </span>
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">⏱</span>
+                  10 min read
+                </span>
+              </div>
+              <h2 class="blog-card__title">
+                <a href="#" data-i18n="blog2_title">Best International Schools in Yokohama</a>
+              </h2>
+              <p class="blog-card__excerpt" data-i18n="blog2_excerpt">
+                From the Yokohama International School in Yamate to newer bilingual programmes along the bay, Yokohama offers a strong selection of English-language education. We compare curricula, admission processes, fees and the residential areas most popular with international families.
+              </p>
+              <a href="#" class="blog-card__read-more" data-i18n="read_more">
+                Read More <span class="blog-card__read-more-arrow">→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Blog Card 3 -->
+          <article class="blog-card" data-category="buying">
+            <a href="#" class="blog-card__image-wrapper" aria-label="Read: Buying Property in Japan as a Foreigner">
+              <span class="blog-card__category" data-i18n="category_buying">Buying</span>
+              <img
+                src="https://placehold.co/800x500/1A1A2E/C9A45C?text=Buying+Property"
+                alt="A luxury residence in Japan with documents symbolizing a real estate purchase"
+                class="blog-card__image"
+                width="800"
+                height="500"
+                loading="lazy"
+              >
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">📅</span>
+                  <time datetime="2025-04-28">Apr 28, 2025</time>
+                </span>
+                <span class="blog-card__meta-item">
+                  <span class="blog-card__meta-icon">⏱</span>
+                  12 min read
+                </span>
+              </div>
+              <h2 class="blog-card__title">
+                <a href="#" data-i18n="blog3_title">Buying Property in Japan as a Foreigner: A Complete Guide</a>
+              </h2>
+              <p class="blog-card__excerpt" data-i18n="blog3_excerpt">
+                Japan places virtually no restrictions on foreign property ownership — but the process involves unfamiliar documentation, taxes and customs. This comprehensive guide walks you through every step, from initial search and financing to registration and ongoing costs.
+              </p>
+              <a href="#" class="blog-card__read-more" data-i18n="read_more">
+                Read More <span class="blog-card__read-more-arrow">→</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Pagination (Demo) -->
+        <nav class="blog__pagination" aria-label="Blog pagination">
+          <button class="blog__pagination-btn blog__pagination-btn--disabled" aria-label="Previous page" disabled>‹</button>
+          <button class="blog__pagination-btn blog__pagination-btn--active" aria-current="page">1</button>
+          <button class="blog__pagination-btn">2</button>
+          <button class="blog__pagination-btn">3</button>
+          <button class="blog__pagination-btn" aria-label="Next page">›</button>
+        </nav>
+
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <div class="container">
+        <div class="newsletter__inner">
+          <h2 class="newsletter__title" data-i18n="newsletter_title">Stay Informed</h2>
+          <p class="newsletter__text" data-i18n="newsletter_text">
+            Receive the latest property insights, area guides and market updates directly to your inbox.
+          </p>
+          <form class="newsletter__form" id="newsletterForm" aria-label="Newsletter signup">
+            <label for="newsletterEmail" class="sr-only">Email Address</label>
+            <input
+              type="email"
+              id="newsletterEmail"
+              class="newsletter__input"
+              placeholder="Enter your email address"
+              required
+              aria-label="Email address"
+              data-i18n-placeholder="newsletter_placeholder"
+            >
+            <button type="submit" class="newsletter__btn" data-i18n="newsletter_btn">Subscribe</button>
+          </form>
+          <div class="newsletter__success" id="newsletterSuccess" role="alert" data-i18n="newsletter_success">
+            ✓ Thank you for subscribing! You'll receive our next update soon.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand Column -->
+        <div class="footer__col">
+          <div class="footer__brand-name">Kanagawa <span>Premier</span> Realty</div>
+          <p class="footer__brand-text" data-i18n="footer_about">
+            Exceptional homes and bilingual real estate guidance for international families, investors and global professionals in Kanagawa, Japan.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">ig</a>
+            <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer__col">
+          <h3 class="footer__heading" data-i18n="footer_quick_links">Quick Links</h3>
+          <ul class="footer__list">
+            <li><a href="properties.html" class="footer__link" data-i18n="nav_properties">Properties</a></li>
+            <li><a href="services.html" class="footer__link" data-i18n="nav_services">Services</a></li>
+            <li><a href="about.html" class="footer__link" data-i18n="nav_about">About Us</a></li>
+            <li><a href="team.html" class="footer__link" data-i18n="nav_team">Our Team</a></li>
+            <li><a href="blog.html" class="footer__link" data-i18n="nav_blog">Blog</a></li>
+            <li><a href="faq.html" class="footer__link" data-i18n="nav_faq">FAQ</a></li>
+            <li><a href="contact.html" class="footer__link" data-i18n="contact_us">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Area Links -->
+        <div class="footer__col">
+          <h3 class="footer__heading" data-i18n="footer_areas">Areas</h3>
+          <ul class="footer__list">
+            <li><a href="areas.html#yokohama" class="footer__link">Yokohama</a></li>
+            <li><a href="areas.html#kamakura" class="footer__link">Kamakura</a></li>
+            <li><a href="areas.html#hayama" class="footer__link">Hayama</a></li>
+            <li><a href="areas.html#shonan" class="footer__link">Shonan</a></li>
+            <li><a href="areas.html#zushi" class="footer__link">Zushi</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer__col">
+          <h3 class="footer__heading" data-i18n="footer_contact">Contact</h3>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">📍</span>
+            <span data-i18n="footer_address">Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012, Japan</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">📞</span>
+            <a href="tel:+81455550188" class="footer__link">+81 (0)45-555-0188</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">✉</span>
+            <a href="mailto:concierge@kanagawapremier.jp" class="footer__link">concierge@kanagawapremier.jp</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">🕐</span>
+            <span data-i18n="footer_hours">Mon – Sat: 9:00 – 18:00</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2025 Kanagawa Premier Realty. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="terms.html" class="footer__legal-link" data-i18n="footer_terms">Terms of Use</a>
+          <a href="terms.html#privacy" class="footer__legal-link" data-i18n="footer_privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Screen-reader only utility -->
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+
+  <script src="main.js"></script>
+  <script>
+    // Header scroll shadow
+    (function() {
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          header.classList.add('header--scrolled');
+        } else {
+          header.classList.remove('header--scrolled');
+        }
+      });
+    })();
+
+    // Mobile nav drawer
+    (function() {
+      const hamburger = document.getElementById('hamburgerBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      const closeBtn = document.getElementById('mobileNavClose');
+
+      if (hamburger && mobileNav && closeBtn) {
+        hamburger.addEventListener('click', function() {
+          mobileNav.classList.add('mobile-nav--open');
+          document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', function() {
+          mobileNav.classList.remove('mobile-nav--open');
+          document.body.style.overflow = '';
+        });
+
+        mobileNav.addEventListener('click', function(e) {
+          if (e.target === mobileNav) {
+            mobileNav.classList.remove('mobile-nav--open');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    })();
+
+    // Blog category filter
+    (function() {
+      const filterBtns = document.querySelectorAll('.blog__filter-btn');
+      const blogCards = document.querySelectorAll('.blog-card');
+
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) {
+            b.classList.remove('blog__filter-btn--active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('blog__filter-btn--active');
+          btn.setAttribute('aria-selected', 'true');
+
+          const filter = btn.getAttribute('data-filter');
+
+          blogCards.forEach(function(card) {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+
+    // Newsletter form demo
+    (function() {
+      const form = document.getElementById('newsletterForm');
+      const success = document.getElementById('newsletterSuccess');
+
+      if (form && success) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var emailInput = document.getElementById('newsletterEmail');
+          if (emailInput && emailInput.value) {
+            form.style.display = 'none';
+            success.classList.add('newsletter__success--visible');
+          }
+        });
+      }
+    })();
+
+    // Favorites badge from localStorage
+    (function() {
+      var badge = document.getElementById('favoritesBadge');
+      if (badge) {
+        try {
+          var favs = JSON.parse(localStorage.getItem('favorites')) || [];
+          badge.textContent = favs.length;
+        } catch(e) {
+          badge.textContent = '0';
+        }
+      }
+    })();
+
+    // Language toggle demo
+    (function() {
+      var toggle = document.getElementById('langToggle');
+      if (toggle) {
+        var currentLang = localStorage.getItem('lang') || 'en';
+
+        toggle.addEventListener('click', function() {
+          currentLang = currentLang === 'en' ? 'ja' : 'en';
+          localStorage.setItem('lang', currentLang);
+          toggle.textContent = currentLang === 'en' ? 'EN / JP' : 'JP / EN';
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

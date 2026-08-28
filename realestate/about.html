@@ -1,0 +1,811 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Kanagawa Premier Realty — bilingual real estate advisory specializing in luxury homes in Yokohama, Kamakura, Hayama, Shonan and Zushi for international clients.">
+  <meta name="keywords" content="Kanagawa luxury real estate, Yokohama property, about us, bilingual real estate, expat housing Japan">
+  <title>About Us | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1A1A2E;
+      background: #FFFFFF;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color 0.3s; }
+    ul, ol { list-style: none; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.25; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: #FFFFFF; transition: box-shadow 0.3s;
+    }
+    .header--scrolled { box-shadow: 0 2px 20px rgba(11,31,58,0.1); }
+    .header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 72px;
+    }
+    .header__logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: #0B1F3A; letter-spacing: 0.5px; }
+    .header__logo span { color: #C9A45C; }
+    .header__nav { display: none; }
+    @media (min-width: 1024px) {
+      .header__nav { display: flex; gap: 28px; align-items: center; }
+    }
+    .header__nav-link {
+      font-size: 0.875rem; font-weight: 500; color: #1A1A2E; position: relative;
+      padding: 4px 0; transition: color 0.3s; letter-spacing: 0.3px;
+    }
+    .header__nav-link:hover, .header__nav-link--active { color: #C9A45C; }
+    .header__nav-link--active::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; width: 100%;
+      height: 2px; background: #C9A45C;
+    }
+    .header__actions { display: flex; align-items: center; gap: 12px; }
+    .header__lang-toggle {
+      font-size: 0.75rem; font-weight: 600; background: #F7F5F0;
+      border: 1px solid #e0dcd4; border-radius: 20px; padding: 5px 12px;
+      cursor: pointer; color: #0B1F3A; transition: all 0.3s;
+    }
+    .header__lang-toggle:hover { background: #0B1F3A; color: #C9A45C; border-color: #0B1F3A; }
+    .header__favorites {
+      position: relative; background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: #0B1F3A; padding: 4px;
+    }
+    .header__favorites-badge {
+      position: absolute; top: -4px; right: -6px; background: #C9A45C;
+      color: #fff; font-size: 0.6rem; font-weight: 700; width: 16px; height: 16px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .header__contact-btn {
+      display: none; background: #C9A45C; color: #FFFFFF; font-size: 0.8rem;
+      font-weight: 600; padding: 8px 20px; border-radius: 4px; border: none;
+      cursor: pointer; transition: background 0.3s; letter-spacing: 0.5px;
+    }
+    .header__contact-btn:hover { background: #b8933e; }
+    @media (min-width: 1024px) { .header__contact-btn { display: inline-block; } }
+    .header__hamburger {
+      display: flex; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px; z-index: 1100;
+    }
+    .header__hamburger span {
+      width: 24px; height: 2px; background: #0B1F3A; transition: all 0.3s; border-radius: 2px;
+    }
+    .header__hamburger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .header__hamburger--open span:nth-child(2) { opacity: 0; }
+    .header__hamburger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (min-width: 1024px) { .header__hamburger { display: none; } }
+
+    /* Mobile Drawer */
+    .mobile-nav {
+      position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
+      background: #0B1F3A; z-index: 1050; transition: right 0.4s ease;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .mobile-nav--open { right: 0; }
+    .mobile-nav__link {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #FFFFFF;
+      padding: 12px 0; transition: color 0.3s; display: block;
+    }
+    .mobile-nav__link:hover { color: #C9A45C; }
+    .mobile-nav__link--active { color: #C9A45C; }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: linear-gradient(rgba(11,31,58,0.85), rgba(11,31,58,0.85)),
+        url('https://placehold.co/1600x400/0B1F3A/1C3A5E?text=Yokohama+Office+District') center/cover no-repeat;
+      padding: 120px 0 60px; text-align: center;
+    }
+    .page-header__title {
+      color: #FFFFFF; font-size: 2.8rem; font-weight: 600; margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .page-header__title::after {
+      content: ''; display: block; width: 60px; height: 3px; background: #C9A45C;
+      margin: 16px auto 0;
+    }
+    .page-header__breadcrumb {
+      color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 14px;
+    }
+    .page-header__breadcrumb a { color: rgba(255,255,255,0.8); }
+    .page-header__breadcrumb a:hover { color: #C9A45C; }
+    .page-header__breadcrumb span { color: #C9A45C; }
+
+    /* ===== MISSION SECTION ===== */
+    .mission {
+      padding: 80px 0 60px;
+    }
+    .mission__inner {
+      display: grid; grid-template-columns: 1fr; gap: 48px;
+    }
+    @media (min-width: 768px) {
+      .mission__inner { grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    }
+    .mission__content {}
+    .mission__label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: #C9A45C; margin-bottom: 12px;
+    }
+    .mission__heading {
+      font-size: 2rem; color: #0B1F3A; margin-bottom: 20px; line-height: 1.3;
+    }
+    @media (min-width: 768px) { .mission__heading { font-size: 2.4rem; } }
+    .mission__statement {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic;
+      color: #1C3A5E; border-left: 3px solid #C9A45C; padding-left: 20px;
+      margin-bottom: 24px; line-height: 1.6;
+    }
+    .mission__text {
+      color: #6E7A8A; font-size: 0.95rem; line-height: 1.85; margin-bottom: 16px;
+    }
+    .mission__image-wrapper {
+      position: relative;
+    }
+    .mission__image {
+      border-radius: 6px; width: 100%; object-fit: cover;
+      box-shadow: 0 20px 50px rgba(11,31,58,0.12);
+    }
+    .mission__image-accent {
+      position: absolute; top: -12px; left: -12px; width: 80px; height: 80px;
+      border: 3px solid #C9A45C; border-radius: 4px; z-index: -1;
+    }
+
+    /* ===== VALUES SECTION ===== */
+    .values {
+      padding: 60px 0 80px; background: #F7F5F0;
+    }
+    .values__heading {
+      text-align: center; font-size: 2rem; color: #0B1F3A; margin-bottom: 12px;
+    }
+    .values__subtitle {
+      text-align: center; color: #6E7A8A; font-size: 0.95rem; margin-bottom: 48px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .values__grid {
+      display: grid; grid-template-columns: 1fr; gap: 24px;
+    }
+    @media (min-width: 600px) { .values__grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .values__grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .values__card {
+      background: #FFFFFF; padding: 32px 28px; border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(11,31,58,0.06); border-top: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .values__card:hover { border-top-color: #C9A45C; transform: translateY(-4px); }
+    .values__card-icon {
+      width: 48px; height: 48px; background: rgba(201,164,92,0.12);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 1.3rem; color: #C9A45C;
+    }
+    .values__card-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+      color: #0B1F3A; margin-bottom: 10px; font-weight: 600;
+    }
+    .values__card-text { color: #6E7A8A; font-size: 0.88rem; line-height: 1.7; }
+
+    /* ===== STATS SECTION ===== */
+    .stats {
+      padding: 70px 0; background: #0B1F3A; text-align: center;
+    }
+    .stats__heading {
+      color: #FFFFFF; font-size: 2rem; margin-bottom: 48px;
+    }
+    .stats__heading span { color: #C9A45C; }
+    .stats__grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px;
+    }
+    @media (min-width: 768px) { .stats__grid { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+    .stats__item {}
+    .stats__number {
+      font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700;
+      color: #C9A45C; line-height: 1;
+    }
+    @media (min-width: 768px) { .stats__number { font-size: 3.4rem; } }
+    .stats__label {
+      color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 8px;
+      font-weight: 500; letter-spacing: 0.5px;
+    }
+    .stats__divider {
+      display: none;
+    }
+
+    /* ===== COMPANY PROFILE TABLE ===== */
+    .company-profile {
+      padding: 80px 0;
+    }
+    .company-profile__heading {
+      font-size: 2rem; color: #0B1F3A; text-align: center; margin-bottom: 12px;
+    }
+    .company-profile__heading::after {
+      content: ''; display: block; width: 50px; height: 3px; background: #C9A45C;
+      margin: 14px auto 0;
+    }
+    .company-profile__subtitle {
+      text-align: center; color: #6E7A8A; font-size: 0.9rem; margin-bottom: 40px;
+    }
+    .company-profile__table-wrapper {
+      max-width: 800px; margin: 0 auto;
+      background: #FFFFFF; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(11,31,58,0.08);
+    }
+    .company-profile__table {
+      width: 100%; border-collapse: collapse;
+    }
+    .company-profile__table tr {
+      border-bottom: 1px solid #f0ede8;
+    }
+    .company-profile__table tr:last-child { border-bottom: none; }
+    .company-profile__table th {
+      background: #F7F5F0; padding: 16px 24px; text-align: left;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+      font-weight: 600; color: #0B1F3A; width: 35%; vertical-align: top;
+      border-right: 1px solid #ece8e0;
+    }
+    .company-profile__table td {
+      padding: 16px 24px; font-size: 0.9rem; color: #1A1A2E; line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .company-profile__table th,
+      .company-profile__table td {
+        display: block; width: 100%; padding: 12px 20px;
+      }
+      .company-profile__table th {
+        border-right: none; border-bottom: none; padding-bottom: 4px;
+      }
+      .company-profile__table td { padding-top: 4px; }
+    }
+
+    /* ===== REPRESENTATIVE MESSAGE ===== */
+    .representative {
+      padding: 60px 0 80px; background: #F7F5F0;
+    }
+    .representative__inner {
+      display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .representative__inner { grid-template-columns: 240px 1fr; gap: 48px; }
+    }
+    .representative__photo-wrapper { text-align: center; }
+    .representative__photo {
+      width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+      border: 4px solid #C9A45C; margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(11,31,58,0.1);
+    }
+    .representative__name {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+      color: #0B1F3A; margin-top: 14px; text-align: center; font-weight: 600;
+    }
+    .representative__role {
+      color: #C9A45C; font-size: 0.8rem; font-weight: 500; text-align: center;
+      letter-spacing: 0.5px; margin-top: 4px;
+    }
+    .representative__content {}
+    .representative__label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: #C9A45C; margin-bottom: 10px;
+    }
+    .representative__heading {
+      font-size: 1.8rem; color: #0B1F3A; margin-bottom: 20px;
+    }
+    .representative__text {
+      color: #6E7A8A; font-size: 0.92rem; line-height: 1.85; margin-bottom: 14px;
+    }
+    .representative__signature {
+      margin-top: 20px;
+    }
+    .representative__signature img {
+      height: 40px; opacity: 0.7;
+    }
+    .representative__signature-text {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.1rem; color: #0B1F3A; margin-top: 8px;
+    }
+
+    /* ===== MAP SECTION ===== */
+    .office-map {
+      padding: 80px 0;
+    }
+    .office-map__heading {
+      font-size: 2rem; color: #0B1F3A; text-align: center; margin-bottom: 12px;
+    }
+    .office-map__heading::after {
+      content: ''; display: block; width: 50px; height: 3px; background: #C9A45C;
+      margin: 14px auto 0;
+    }
+    .office-map__subtitle {
+      text-align: center; color: #6E7A8A; font-size: 0.9rem; margin-bottom: 40px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .office-map__wrapper {
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+      max-width: 1000px; margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .office-map__wrapper { grid-template-columns: 1fr 360px; }
+    }
+    .office-map__iframe-container {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      border-radius: 8px; box-shadow: 0 4px 20px rgba(11,31,58,0.1);
+      min-height: 300px;
+    }
+    .office-map__iframe-container iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .office-map__info {
+      background: #F7F5F0; border-radius: 8px; padding: 28px; display: flex;
+      flex-direction: column; gap: 20px;
+    }
+    .office-map__info-item { display: flex; gap: 14px; align-items: flex-start; }
+    .office-map__info-icon {
+      width: 40px; height: 40px; background: #0B1F3A; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #C9A45C; font-size: 1rem; flex-shrink: 0;
+    }
+    .office-map__info-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #C9A45C; margin-bottom: 2px;
+    }
+    .office-map__info-text { color: #1A1A2E; font-size: 0.88rem; line-height: 1.6; }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      padding: 60px 0; background: #0B1F3A; text-align: center;
+    }
+    .cta-band__heading {
+      color: #FFFFFF; font-size: 2rem; margin-bottom: 8px;
+    }
+    .cta-band__text {
+      color: rgba(255,255,255,0.65); font-size: 0.95rem; margin-bottom: 28px;
+      max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+    .cta-band__btn {
+      display: inline-block; background: #C9A45C; color: #FFFFFF; padding: 14px 36px;
+      font-size: 0.9rem; font-weight: 600; border-radius: 4px; border: none;
+      cursor: pointer; transition: background 0.3s; letter-spacing: 0.5px;
+    }
+    .cta-band__btn:hover { background: #b8933e; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0B1F3A; padding: 64px 0 0; color: rgba(255,255,255,0.7);
+    }
+    .footer__grid {
+      display: grid; grid-template-columns: 1fr; gap: 36px;
+    }
+    @media (min-width: 768px) { .footer__grid { grid-template-columns: 2fr 1fr 1fr 1.3fr; gap: 32px; } }
+    .footer__brand-text { font-size: 0.85rem; line-height: 1.7; margin-top: 14px; }
+    .footer__logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+      font-weight: 700; color: #FFFFFF;
+    }
+    .footer__logo span { color: #C9A45C; }
+    .footer__heading {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+      color: #FFFFFF; margin-bottom: 18px; font-weight: 600;
+    }
+    .footer__link {
+      display: block; font-size: 0.85rem; padding: 4px 0; color: rgba(255,255,255,0.6);
+      transition: color 0.3s;
+    }
+    .footer__link:hover { color: #C9A45C; }
+    .footer__contact-item {
+      display: flex; gap: 10px; font-size: 0.85rem; margin-bottom: 10px; align-items: flex-start;
+    }
+    .footer__contact-icon { color: #C9A45C; flex-shrink: 0; width: 16px; text-align: center; }
+    .footer__social {
+      display: flex; gap: 12px; margin-top: 16px;
+    }
+    .footer__social-link {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: all 0.3s;
+    }
+    .footer__social-link:hover { border-color: #C9A45C; color: #C9A45C; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1); margin-top: 48px;
+      padding: 20px 0; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer__copyright { font-size: 0.78rem; }
+    .footer__legal { display: flex; gap: 20px; }
+    .footer__legal-link { font-size: 0.78rem; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .footer__legal-link:hover { color: #C9A45C; }
+
+    /* ===== UTILITIES ===== */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); border: 0;
+    }
+    @media (max-width: 767px) {
+      .page-header__title { font-size: 2rem; }
+      .mission__heading { font-size: 1.7rem; }
+      .stats__number { font-size: 2.4rem; }
+      .values__heading { font-size: 1.6rem; }
+      .company-profile__heading { font-size: 1.6rem; }
+      .office-map__heading { font-size: 1.6rem; }
+      .representative__heading { font-size: 1.5rem; }
+      .cta-band__heading { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" aria-label="Kanagawa Premier Realty Home">
+        Kanagawa <span>Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main Navigation">
+        <a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a>
+        <a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a>
+        <a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a>
+        <a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a>
+        <a href="about.html" class="header__nav-link header__nav-link--active" data-i18n="nav_about">About</a>
+        <a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a>
+        <a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a>
+        <a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" aria-label="Toggle Language" data-lang="en">EN / JP</button>
+        <button class="header__favorites" id="favoritesBtn" aria-label="View Favorites">
+          ♡
+          <span class="header__favorites-badge" id="favBadge">0</span>
+        </button>
+        <a href="contact.html" class="header__contact-btn" data-i18n="nav_contact">Contact Us</a>
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Open Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a>
+    <a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a>
+    <a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a>
+    <a href="services.html" class="mobile-nav__link" data-i18n="nav_services">Services</a>
+    <a href="about.html" class="mobile-nav__link mobile-nav__link--active" data-i18n="nav_about">About</a>
+    <a href="team.html" class="mobile-nav__link" data-i18n="nav_team">Team</a>
+    <a href="blog.html" class="mobile-nav__link" data-i18n="nav_blog">Blog</a>
+    <a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html" class="mobile-nav__link" data-i18n="nav_contact" style="color:#C9A45C;">Contact Us</a>
+  </nav>
+
+  <main>
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-header__title" data-i18n="about_title" data-en="About Us" data-ja="会社概要">About Us</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav_home" data-en="Home" data-ja="ホーム">Home</a>
+          &nbsp;›&nbsp;
+          <span data-i18n="about_title" data-en="About Us" data-ja="会社概要">About Us</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ===== MISSION & INTRODUCTION ===== -->
+    <section class="mission" id="mission">
+      <div class="container">
+        <div class="mission__inner">
+          <div class="mission__content">
+            <p class="mission__label" data-i18n="about_our_story_label" data-en="Our Story" data-ja="私たちについて">Our Story</p>
+            <h2 class="mission__heading" data-i18n="about_mission_heading" data-en="Bridging Japan's Real Estate to the World" data-ja="日本の不動産を世界へ">Bridging Japan's Real Estate to the World</h2>
+            <blockquote class="mission__statement" data-i18n="about_mission_statement" data-en="Bridging Japan's real estate to the world through trusted advice, cultural fluency and an unwavering commitment to our clients." data-ja="信頼されるアドバイス、文化的理解、そしてお客様への揺るぎない献身を通じて、日本の不動産を世界へ。">
+              Bridging Japan's real estate to the world through trusted advice, cultural fluency and an unwavering commitment to our clients.
+            </blockquote>
+            <p class="mission__text" data-i18n="about_desc_1" data-en="Kanagawa Premier Realty is a bilingual residential advisory specializing in exceptional homes throughout Yokohama and coastal Kanagawa. Since 2010, we have represented international families, executives and private investors with discretion, local intelligence and an exacting standard of service." data-ja="カナガワ・プレミア・リアルティは、横浜および神奈川の沿岸部において、上質な住まいを専門とするバイリンガル不動産コンサルティング企業です。2010年の創業以来、外国人ご家庭、エグゼクティブ、個人投資家の皆様に、慎重かつ地域に精通した高品質なサービスを提供してまいりました。">
+              Kanagawa Premier Realty is a bilingual residential advisory specializing in exceptional homes throughout Yokohama and coastal Kanagawa. Since 2010, we have represented international families, executives and private investors with discretion, local intelligence and an exacting standard of service.
+            </p>
+            <p class="mission__text" data-i18n="about_desc_2" data-en="Our support extends beyond the transaction to relocation, documentation, property management and the practical details of establishing a life in Japan." data-ja="私たちのサポートは取引にとどまらず、転居支援、書類作成、物件管理、そして日本での生活を始めるための実務的な詳細にまで及びます。">
+              Our support extends beyond the transaction to relocation, documentation, property management and the practical details of establishing a life in Japan.
+            </p>
+          </div>
+          <div class="mission__image-wrapper">
+            <div class="mission__image-accent" aria-hidden="true"></div>
+            <img src="https://placehold.co/600x500/1C3A5E/C9A45C?text=Yokohama+Waterfront+Office"
+                 alt="Kanagawa Premier Realty office building in Yokohama"
+                 class="mission__image"
+                 loading="lazy"
+                 width="600" height="500">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALUES ===== -->
+    <section class="values" id="values">
+      <div class="container">
+        <h2 class="values__heading" data-i18n="about_values_heading" data-en="Our Values" data-ja="私たちの価値観">Our Values</h2>
+        <p class="values__subtitle" data-i18n="about_values_subtitle" data-en="The principles that guide every relationship and recommendation." data-ja="すべての関係と提案を導く原則">The principles that guide every relationship and recommendation.</p>
+
+        <div class="values__grid">
+          <!-- Discretion -->
+          <article class="values__card">
+            <div class="values__card-icon" aria-hidden="true">🛡</div>
+            <h3 class="values__card-title" data-i18n="value_discretion_title" data-en="Discretion" data-ja="信頼と守秘">Discretion</h3>
+            <p class="values__card-text" data-i18n="value_discretion_text" data-en="We protect our clients' privacy and interests at every stage." data-ja="あらゆる段階でお客様のプライバシーと利益を守ります。">We protect our clients' privacy and interests at every stage.</p>
+          </article>
+
+          <!-- Clarity -->
+          <article class="values__card">
+            <div class="values__card-icon" aria-hidden="true">✦</div>
+            <h3 class="values__card-title" data-i18n="value_clarity_title" data-en="Clarity" data-ja="明瞭さ">Clarity</h3>
+            <p class="values__card-text" data-i18n="value_clarity_text" data-en="We explain Japan's property market, contracts and costs in precise, accessible English." data-ja="日本の不動産市場、契約、コストを正確で分かりやすい英語で説明します。">We explain Japan's property market, contracts and costs in precise, accessible English.</p>
+          </article>
+
+          <!-- Local Intelligence -->
+          <article class="values__card">
+            <div class="values__card-icon" aria-hidden="true">📍</div>
+            <h3 class="values__card-title" data-i18n="value_local_title" data-en="Local Intelligence" data-ja="地域密着">Local Intelligence</h3>
+            <p class="values__card-text" data-i18n="value_local_text" data-en="We pair neighborhood-level knowledge with a global understanding of quality and value." data-ja="地域レベルの知識とグローバルな品質・価値の理解を兼ね備えています。">We pair neighborhood-level knowledge with a global understanding of quality and value.</p>
+          </article>
+
+          <!-- Long-Term Partnership -->
+          <article class="values__card">
+            <div class="values__card-icon" aria-hidden="true">🤝</div>
+            <h3 class="values__card-title" data-i18n="value_partnership_title" data-en="Long-Term Partnership" data-ja="長期的パートナーシップ">Long-Term Partnership</h3>
+            <p class="values__card-text" data-i18n="value_partnership_text" data-en="Our relationship continues well beyond the keys and contract." data-ja="私たちの関係は鍵のお渡しや契約の後も続きます。">Our relationship continues well beyond the keys and contract.</p>
+          </article>
+
+          <!-- Integrity -->
+          <article class="values__card">
+            <div class="values__card-icon" aria-hidden="true">⚖</div>
+            <h3 class="values__card-title" data-i18n="value_integrity_title" data-en="Integrity" data-ja="誠実さ">Integrity</h3>
+            <p class="values__card-text" data-i18n="value_integrity_text" data-en="We offer measured, evidence-led advice without pressure or compromise." data-ja="プレッシャーや妥協のない、根拠に基づいた的確なアドバイスを提供します。">We offer measured, evidence-led advice without pressure or compromise.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS COUNTER ===== -->
+    <section class="stats" id="stats">
+      <div class="container">
+        <h2 class="stats__heading" data-i18n="about_stats_heading" data-en="Our <span>Track Record</span>" data-ja="私たちの<span>実績</span>">Our <span>Track Record</span></h2>
+        <div class="stats__grid">
+          <div class="stats__item">
+            <div class="stats__number" data-count="500" data-suffix="+">0</div>
+            <div class="stats__label" data-i18n="stat_properties" data-en="Properties Handled" data-ja="取扱物件数">Properties Handled</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number" data-count="1200" data-suffix="+">0</div>
+            <div class="stats__label" data-i18n="stat_expats" data-en="Expat Clients Served" data-ja="外国人サポート実績">Expat Clients Served</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number" data-count="3" data-suffix="">0</div>
+            <div class="stats__label" data-i18n="stat_languages" data-en="Languages Supported" data-ja="対応言語数">Languages Supported</div>
+          </div>
+          <div class="stats__item">
+            <div class="stats__number" data-count="2010" data-suffix="" data-is-year="true">0</div>
+            <div class="stats__label" data-i18n="stat_since" data-en="Year Established" data-ja="創業年">Year Established</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REPRESENTATIVE MESSAGE ===== -->
+    <section class="representative" id="representative">
+      <div class="container">
+        <div class="representative__inner">
+          <div class="representative__photo-wrapper">
+            <img src="https://placehold.co/300x300/0B1F3A/C9A45C?text=Aiko+Tanaka-Williams"
+                 alt="Aiko Tanaka-Williams, Managing Director"
+                 class="representative__photo"
+                 loading="lazy"
+                 width="300" height="300">
+            <p class="representative__name">Aiko Tanaka-Williams</p>
+            <p class="representative__role" data-i18n="about_rep_role" data-en="Managing Director" data-ja="代表取締役">Managing Director</p>
+          </div>
+          <div class="representative__content">
+            <p class="representative__label" data-i18n="about_message_label" data-en="Message from Our Director" data-ja="代表メッセージ">Message from Our Director</p>
+            <h2 class="representative__heading" data-i18n="about_message_heading" data-en="Making Japan Feel Like Home" data-ja="日本を「わが家」に">Making Japan Feel Like Home</h2>
+            <p class="representative__text" data-i18n="about_message_1" data-en="Having grown up between Yokohama and London, I know first-hand that finding a home in a new country is about far more than floor plans and lease terms. It is about confidence — knowing that someone experienced, candid and culturally fluent is looking after your interests." data-ja="横浜とロンドンの両方で育った私は、新しい国で住まいを見つけることが、間取りや契約条件だけではないことを身をもって知っています。それは安心感です — 経験豊富で率直、そして文化に精通した人があなたの利益を守っていると知ること。">
+              Having grown up between Yokohama and London, I know first-hand that finding a home in a new country is about far more than floor plans and lease terms. It is about confidence — knowing that someone experienced, candid and culturally fluent is looking after your interests.
+            </p>
+            <p class="representative__text" data-i18n="about_message_2" data-en="At Kanagawa Premier Realty, we combine deep local expertise with genuine international perspective. Whether you are relocating to Japan, investing from overseas or searching for the perfect coastal retreat, our team is here to make every step clear, considered and personal." data-ja="カナガワ・プレミア・リアルティでは、深い地域の専門知識と真の国際的視点を融合しています。日本への転居、海外からの投資、あるいは理想の海辺の住まい探しなど、すべてのステップを明確に、丁寧に、そして個人的にサポートいたします。">
+              At Kanagawa Premier Realty, we combine deep local expertise with genuine international perspective. Whether you are relocating to Japan, investing from overseas or searching for the perfect coastal retreat, our team is here to make every step clear, considered and personal.
+            </p>
+            <div class="representative__signature">
+              <p class="representative__signature-text">— Aiko Tanaka-Williams</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPANY PROFILE TABLE ===== -->
+    <section class="company-profile" id="company-profile">
+      <div class="container">
+        <h2 class="company-profile__heading" data-i18n="about_profile_heading" data-en="Company Profile" data-ja="会社概要">Company Profile</h2>
+        <p class="company-profile__subtitle" data-i18n="about_profile_subtitle" data-en="Corporate details and regulatory information" data-ja="企業情報と法定表記">Corporate details and regulatory information</p>
+
+        <div class="company-profile__table-wrapper">
+          <table class="company-profile__table">
+            <tbody>
+              <tr>
+                <th data-i18n="profile_company_name" data-en="Company Name" data-ja="会社名">Company Name</th>
+                <td>Kanagawa Premier Realty Co., Ltd.<br><span style="color:#6E7A8A; font-size:0.82rem;">株式会社カナガワプレミアリアルティ</span></td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_established" data-en="Established" data-ja="設立">Established</th>
+                <td data-i18n="profile_established_val" data-en="April 2010" data-ja="2010年4月">April 2010</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_representative" data-en="Representative" data-ja="代表者">Representative</th>
+                <td>Aiko Tanaka-Williams</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_address" data-en="Head Office" data-ja="所在地">Head Office</th>
+                <td data-i18n="profile_address_val" data-en="Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012, Japan" data-ja="〒220-0012 神奈川県横浜市西区みなとみらい2-3-5 ハーバービュータワー8F">Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012, Japan</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_license" data-en="Real Estate License" data-ja="宅建業免許">Real Estate License</th>
+                <td data-i18n="profile_license_val" data-en="Kanagawa Prefecture Governor License (3) No. 28456" data-ja="神奈川県知事（3）第28456号">Kanagawa Prefecture Governor License (3) No. 28456</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_business" data-en="Business Activities" data-ja="事業内容">Business Activities</th>
+                <td data-i18n="profile_business_val" data-en="Residential sales and rental brokerage, property management, investment advisory, relocation support, contract documentation assistance" data-ja="住宅売買・賃貸仲介、不動産管理、投資コンサルティング、転居支援、契約書類サポート">Residential sales and rental brokerage, property management, investment advisory, relocation support, contract documentation assistance</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_memberships" data-en="Memberships" data-ja="加盟団体">Memberships</th>
+                <td data-i18n="profile_memberships_val" data-en="All Japan Real Estate Association, Real Estate Fair Trade Council" data-ja="公益社団法人 全日本不動産協会、不動産公正取引協議会">All Japan Real Estate Association, Real Estate Fair Trade Council</td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_phone" data-en="Phone" data-ja="電話番号">Phone</th>
+                <td><a href="tel:+81455550188" style="color:#1C3A5E;">+81 (0)45-555-0188</a></td>
+              </tr>
+              <tr>
+                <th data-i18n="profile_email" data-en="Email" data-ja="メール">Email</th>
+                <td><a href="mailto:concierge@kanagawapremier.jp" style="color:#1C3A5E;">concierge@kanagawapremier.jp</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== OFFICE MAP ===== -->
+    <section class="office-map" id="office-map">
+      <div class="container">
+        <h2 class="office-map__heading" data-i18n="about_map_heading" data-en="Our Office" data-ja="オフィスのご案内">Our Office</h2>
+        <p class="office-map__subtitle" data-i18n="about_map_subtitle" data-en="Conveniently located in the heart of Minatomirai, Yokohama" data-ja="横浜みなとみらいの中心に位置しています">Conveniently located in the heart of Minatomirai, Yokohama</p>
+
+        <div class="office-map__wrapper">
+          <div class="office-map__iframe-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.2!2d139.6328!3d35.4579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDI3JzI4LjQiTiAxMznCsDM3JzU4LjEiRQ!5e0!3m2!1sen!2sjp!4v1700000000000"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Kanagawa Premier Realty Office Location"
+            ></iframe>
+          </div>
+          <div class="office-map__info">
+            <div class="office-map__info-item">
+              <div class="office-map__info-icon" aria-hidden="true">📍</div>
+              <div>
+                <div class="office-map__info-label" data-i18n="map_address_label" data-en="Address" data-ja="住所">Address</div>
+                <div class="office-map__info-text" data-i18n="map_address_val" data-en="Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012" data-ja="〒220-0012 横浜市西区みなとみらい2-3-5 ハーバービュータワー8F">Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012</div>
+              </div>
+            </div>
+            <div class="office-map__info-item">
+              <div class="office-map__info-icon" aria-hidden="true">🚃</div>
+              <div>
+                <div class="office-map__info-label" data-i18n="map_access_label" data-en="Access" data-ja="アクセス">Access</div>
+                <div class="office-map__info-text" data-i18n="map_access_val" data-en="3-minute walk from Minatomirai Station (Minatomirai Line). 10-minute walk from Sakuragicho Station (JR / Yokohama Municipal Subway)." data-ja="みなとみらい線 みなとみらい駅より徒歩3分。JR・横浜市営地下鉄 桜木町駅より徒歩10分。">3-minute walk from Minatomirai Station (Minatomirai Line). 10-minute walk from Sakuragicho Station (JR / Yokohama Municipal Subway).</div>
+              </div>
+            </div>
+            <div class="office-map__info-item">
+              <div class="office-map__info-icon" aria-hidden="true">🕒</div>
+              <div>
+                <div class="office-map__info-label" data-i18n="map_hours_label" data-en="Business Hours" data-ja="営業時間">Business Hours</div>
+                <div class="office-map__info-text" data-i18n="map_hours_val" data-en="Monday – Saturday: 9:00 – 18:00. Sunday & Holidays: By appointment." data-ja="月〜土：9:00〜18:00。日曜・祝日：完全予約制。">Monday – Saturday: 9:00 – 18:00. Sunday &amp; Holidays: By appointment.</div>
+              </div>
+            </div>
+            <div class="office-map__info-item">
+              <div class="office-map__info-icon" aria-hidden="true">📞</div>
+              <div>
+                <div class="office-map__info-label" data-i18n="map_phone_label" data-en="Phone" data-ja="電話">Phone</div>
+                <div class="office-map__info-text"><a href="tel:+81455550188" style="color:#1C3A5E;">+81 (0)45-555-0188</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <section class="cta-band">
+      <div class="container">
+        <h2 class="cta-band__heading" data-i18n="about_cta_heading" data-en="Ready to Find Your New Home?" data-ja="理想の住まいをお探しですか？">Ready to Find Your New Home?</h2>
+        <p class="cta-band__text" data-i18n="about_cta_text" data-en="Speak with our bilingual advisors — we're here to help at every step." data-ja="バイリンガルアドバイザーにご相談ください。すべてのステップでサポートいたします。">Speak with our bilingual advisors — we're here to help at every step.</p>
+        <a href="contact.html" class="cta-band__btn" data-i18n="nav_contact" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div class="footer__col">
+          <div class="footer__logo">Kanagawa <span>Premier</span> Realty</div>
+          <p class="footer__brand-text" data-i18n="footer_brand_text" data-en="Exceptional homes, bilingual expertise and discreet guidance for international clients in Yokohama and coastal Kanagawa." data-ja="横浜および神奈川沿岸部で、外国人のお客様へ上質な住まいとバイリンガル対応をご提供します。">
+            Exceptional homes, bilingual expertise and discreet guidance for international clients in Yokohama and coastal Kanagawa.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">ig</a>
+            <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer__col">
+          <h4 class="footer__heading" data-i18n="footer_quick_links" data-en="Quick Links" data-ja="クイックリンク">Quick Links</h4>
+          <a href="properties.html" class="footer__link" data-i18n="nav_properties" data-en="Properties" data-ja="物件検索">Properties</a>
+          <a href="areas.html" class="footer__link" data-i18n="nav_areas" data-en="Area Guide" data-ja="エリアガイド">Area Guide</a>
+          <a href="services.html" class="footer__link" data-i18n="nav_services" data-en="Services" data-ja="サービス">Services</a>
+          <a href="about.html" class="footer__link" data-i18n="nav_about" data-en="About Us" data-ja="会社概要">About Us</a>
+          <a href="team.html" class="footer__link" data-i18n="nav_team" data-en="Team" data-ja="チーム">Team</a>
+          <a href="blog.html" class="footer__link" data-i18n="nav_blog" data-en="Blog" data-ja="ブログ">Blog</a>
+          <a href="faq.html" class="footer__link" data-i18n="nav_faq" data-en="FAQ" data-ja="よくあるご質問">FAQ</a>
+        </div>
+
+        <!-- Areas -->
+        <div class="footer__col">
+          <h4 class="footer__heading" data-i18n="footer_areas" data-en="Areas" data-ja="エリア">Areas</h4>
+          <a href="areas.html#yokohama" class="footer__link">Yokohama</a>
+          <a href="areas.html#kamakura" class="footer__link">Kamakura</a>
+          <a href="areas.html#hayama" class="footer__link">Hayama</a>
+          <a href="areas.html#shonan" class="footer__link">Shonan</a>
+          <a href="areas.html#zushi" class="footer__link">Zushi</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer__col">
+          <h4 class="footer__heading" data-i18n="footer_contact" data-en="Contact" data-ja="お問い合わせ">Contact</h4>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">📍</span>
+            <span data-i18n="footer_address" data-en="Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama" data-ja="横浜市西区みなとみらい2-3-5 ハーバービュータワー8F">Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">📞</span>
+            <a href="tel:+81455550188">+81 (0)45-555-0188</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">✉</span>
+            <a href="mailto:concierge@kanagawapremier.jp">concierge@kanagawapremier.jp</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">🕒</span>
+            <span data-i18n="footer_hours" data-en="Mon–Sat 9:00–18:00" data-ja="月〜土 9:00〜18:00">Mon–Sat 9:00–18:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2024 Kanagawa Premier Realty Co., Ltd. All rights reserved.</p>
+        <div class="footer__legal">
+          

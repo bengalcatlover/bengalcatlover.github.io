@@ -1,0 +1,950 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Terms of Use and Privacy Policy for Kanagawa Premier Realty. Information regarding our legal terms, privacy practices and real estate license.">
+  <meta name="keywords" content="terms of use, privacy policy, Kanagawa Premier Realty, real estate license, Japan property">
+  <title>Terms &amp; Privacy | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Page-specific styles for terms.html — ideally move to style.css */
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--color-bg);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+
+    .header__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .header__logo-accent {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    .header__nav-list {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    .header__nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .header__nav-link:hover,
+    .header__nav-link--active {
+      color: var(--color-accent);
+    }
+
+    .header__nav-link--active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header__lang-toggle {
+      display: flex;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      font-size: 0.75rem;
+    }
+
+    .header__lang-btn {
+      padding: 4px 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: var(--font-body);
+      color: var(--color-text-light);
+      transition: all 0.3s ease;
+    }
+
+    .header__lang-btn--active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__contact-btn {
+      display: none;
+      padding: 8px 20px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background 0.3s ease;
+    }
+
+    .header__contact-btn:hover {
+      background: #b8933e;
+    }
+
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .header__hamburger-line {
+      width: 24px;
+      height: 2px;
+      background: var(--color-primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-primary);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .mobile-nav--open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .mobile-nav__list {
+      list-style: none;
+      text-align: center;
+    }
+
+    .mobile-nav__item {
+      margin: 12px 0;
+    }
+
+    .mobile-nav__link {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-nav__link:hover,
+    .mobile-nav__link--active {
+      color: var(--color-accent);
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--color-primary);
+      padding: 120px 24px 60px;
+      text-align: center;
+    }
+
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .page-header__title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 16px auto 0;
+    }
+
+    .page-header__breadcrumb {
+      margin-top: 16px;
+    }
+
+    .page-header__breadcrumb-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+    }
+
+    .page-header__breadcrumb-item {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page-header__breadcrumb-item a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s ease;
+    }
+
+    .page-header__breadcrumb-item a:hover {
+      color: var(--color-accent);
+    }
+
+    .page-header__breadcrumb-separator {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .page-header__breadcrumb-item--active {
+      color: var(--color-accent);
+    }
+
+    /* ===== TERMS CONTENT ===== */
+    .terms {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .terms__last-updated {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e8e6e0;
+    }
+
+    /* Table of Contents */
+    .terms__toc {
+      background: var(--color-bg-alt);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .terms__toc-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+    }
+
+    .terms__toc-list {
+      list-style: none;
+      counter-reset: toc-counter;
+    }
+
+    .terms__toc-item {
+      counter-increment: toc-counter;
+      margin: 8px 0;
+    }
+
+    .terms__toc-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-secondary);
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .terms__toc-link::before {
+      content: counter(toc-counter) ".";
+      font-weight: 700;
+      color: var(--color-accent);
+      min-width: 24px;
+    }
+
+    .terms__toc-link:hover {
+      color: var(--color-accent);
+    }
+
+    /* Sections */
+    .terms__section {
+      margin-bottom: 48px;
+      scroll-margin-top: 100px;
+    }
+
+    .terms__section-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .terms__subsection-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      margin: 28px 0 12px;
+    }
+
+    .terms__text {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .terms__list {
+      margin: 12px 0 20px 24px;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--color-text);
+    }
+
+    .terms__list li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .terms__list li::marker {
+      color: var(--color-accent);
+    }
+
+    .terms__highlight-box {
+      background: var(--color-bg-alt);
+      border-left: 4px solid var(--color-accent);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .terms__highlight-box p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .terms__highlight-box strong {
+      color: var(--color-primary);
+    }
+
+    .terms__table-wrapper {
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+
+    .terms__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .terms__table th,
+    .terms__table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e8e6e0;
+    }
+
+    .terms__table th {
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 600;
+      width: 35%;
+      white-space: nowrap;
+    }
+
+    .terms__table td {
+      color: var(--color-text);
+    }
+
+    .terms__table tr:nth-child(even) td {
+      background: var(--color-bg-alt);
+    }
+
+    .terms__back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      margin-top: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .terms__back-to-top:hover {
+      color: var(--color-primary);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,0.8);
+      padding: 60px 24px 0;
+    }
+
+    .footer__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+
+    .footer__brand-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-top: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .footer__logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .footer__logo-accent {
+      color: var(--color-accent);
+    }
+
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer__list {
+      list-style: none;
+    }
+
+    .footer__list li {
+      margin-bottom: 8px;
+    }
+
+    .footer__list a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s ease;
+    }
+
+    .footer__list a:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .footer__contact-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer__social-link:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 24px;
+      text-align: center;
+    }
+
+    .footer__bottom-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .footer__copyright {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer__legal-links {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer__legal-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s ease;
+    }
+
+    .footer__legal-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 768px) {
+      .header__nav {
+        display: block;
+      }
+
+      .header__contact-btn {
+        display: inline-block;
+      }
+
+      .header__hamburger {
+        display: none;
+      }
+
+      .page-header {
+        padding: 140px 24px 70px;
+      }
+
+      .page-header__title {
+        font-size: 3rem;
+      }
+
+      .terms {
+        padding: 80px 24px 100px;
+      }
+
+      .footer__inner {
+        grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      }
+
+      .footer__bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .header__inner {
+        padding: 0 48px;
+      }
+
+      .terms {
+        padding: 100px 24px 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span class="header__logo-accent">Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a></li>
+          <li><a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a></li>
+          <li><a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a></li>
+          <li><a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a></li>
+          <li><a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a></li>
+          <li><a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <div class="header__lang-toggle">
+          <button class="header__lang-btn header__lang-btn--active" data-lang="en" aria-label="English">EN</button>
+          <button class="header__lang-btn" data-lang="ja" aria-label="Japanese">JP</button>
+        </div>
+
+        <button class="header__favorites-btn" aria-label="Favorites" id="favoritesBtn">
+          ♡
+          <span class="header__favorites-badge" id="favoritesBadge">0</span>
+        </button>
+
+        <a href="contact.html" class="header__contact-btn" data-i18n="contact_us">Contact Us</a>
+
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">✕</button>
+    <ul class="mobile-nav__list">
+      <li class="mobile-nav__item"><a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a></li>
+      <li class="mobile-nav__item"><a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a></li>
+      <li class="mobile-nav__item"><a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a></li>
+      <li class="mobile-nav__item"><a href="services.html" class="mobile-nav__link" data-i18n="nav_services">Services</a></li>
+      <li class="mobile-nav__item"><a href="about.html" class="mobile-nav__link" data-i18n="nav_about">About</a></li>
+      <li class="mobile-nav__item"><a href="team.html" class="mobile-nav__link" data-i18n="nav_team">Team</a></li>
+      <li class="mobile-nav__item"><a href="blog.html" class="mobile-nav__link" data-i18n="nav_blog">Blog</a></li>
+      <li class="mobile-nav__item"><a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a></li>
+      <li class="mobile-nav__item"><a href="contact.html" class="mobile-nav__link" data-i18n="contact_us">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-header">
+    <h1 class="page-header__title" data-i18n="terms_title" data-en="Terms of Use &amp; Privacy Policy" data-ja="利用規約・プライバシーポリシー">Terms of Use &amp; Privacy Policy</h1>
+    <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+      <ol class="page-header__breadcrumb-list">
+        <li class="page-header__breadcrumb-item"><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li class="page-header__breadcrumb-separator" aria-hidden="true">›</li>
+        <li class="page-header__breadcrumb-item page-header__breadcrumb-item--active" data-i18n="terms_breadcrumb" data-en="Terms &amp; Privacy" data-ja="利用規約">Terms &amp; Privacy</li>
+      </ol>
+    </nav>
+  </section>
+
+  <!-- ===== TERMS CONTENT ===== -->
+  <main class="terms" id="terms-top">
+
+    <!-- Last Updated -->
+    <p class="terms__last-updated" data-i18n="terms_last_updated" data-en="Last Updated: January 15, 2025" data-ja="最終更新日：2025年1月15日">Last Updated: January 15, 2025</p>
+
+    <!-- Table of Contents -->
+    <div class="terms__toc">
+      <h2 class="terms__toc-title" data-i18n="terms_toc_title" data-en="Table of Contents" data-ja="目次">Table of Contents</h2>
+      <ol class="terms__toc-list">
+        <li class="terms__toc-item">
+          <a href="#terms-of-use" class="terms__toc-link" data-i18n="toc_terms" data-en="Terms of Use" data-ja="利用規約">Terms of Use</a>
+        </li>
+        <li class="terms__toc-item">
+          <a href="#privacy-policy" class="terms__toc-link" data-i18n="toc_privacy" data-en="Privacy Policy" data-ja="プライバシーポリシー">Privacy Policy</a>
+        </li>
+        <li class="terms__toc-item">
+          <a href="#license-info" class="terms__toc-link" data-i18n="toc_license" data-en="Real Estate License Information" data-ja="宅地建物取引業免許情報">Real Estate License Information</a>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ===== SECTION 1: TERMS OF USE ===== -->
+    <section class="terms__section" id="terms-of-use">
+      <h2 class="terms__section-title" data-i18n="terms_s1_title" data-en="Terms of Use" data-ja="利用規約">Terms of Use</h2>
+
+      <p class="terms__text" data-i18n="terms_s1_intro" data-en="Welcome to the website of Kanagawa Premier Realty (hereinafter referred to as &quot;the Company,&quot; &quot;we,&quot; &quot;us&quot; or &quot;our&quot;). By accessing or using this website (the &quot;Site&quot;), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the Site." data-ja="神奈川プレミアリアルティ（以下「当社」）のウェブサイトへようこそ。本ウェブサイト（以下「本サイト」）にアクセスまたはご利用いただくことにより、本利用規約に同意したものとみなされます。本規約のいずれかの部分に同意いただけない場合は、本サイトのご利用をお控えください。">
+        Welcome to the website of Kanagawa Premier Realty (hereinafter referred to as "the Company," "we," "us" or "our"). By accessing or using this website (the "Site"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please do not use the Site.
+      </p>
+
+      <!-- 1.1 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_1_title" data-en="1.1 General Use" data-ja="1.1 一般的な利用">1.1 General Use</h3>
+      <p class="terms__text" data-i18n="terms_s1_1_text" data-en="The Site is provided for informational purposes only. While we strive to keep the content accurate and up to date, we make no warranties or representations regarding the completeness, accuracy, reliability or suitability of any information, property listings, photographs, floor plans, maps or related materials displayed on the Site." data-ja="本サイトは情報提供のみを目的として提供されます。コンテンツの正確性と最新性の維持に努めておりますが、本サイトに掲載される情報、物件一覧、写真、間取り図、地図その他の関連資料の完全性、正確性、信頼性または適合性について、いかなる保証または表明も行いません。">
+        The Site is provided for informational purposes only. While we strive to keep the content accurate and up to date, we make no warranties or representations regarding the completeness, accuracy, reliability or suitability of any information, property listings, photographs, floor plans, maps or related materials displayed on the Site.
+      </p>
+
+      <!-- 1.2 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_2_title" data-en="1.2 Property Information Disclaimer" data-ja="1.2 物件情報に関する免責事項">1.2 Property Information Disclaimer</h3>
+      <p class="terms__text" data-i18n="terms_s1_2_text" data-en="All property listings, prices, availability and related details displayed on the Site are subject to change without prior notice. Published prices, yields and financial estimates are indicative only and do not constitute a formal offer, valuation or financial advice. Prospective buyers and tenants should independently verify all information before making any decisions." data-ja="本サイトに掲載されるすべての物件情報、価格、空室状況その他の関連詳細は、予告なく変更される場合があります。掲載される価格、利回りおよび財務上の見積もりは参考情報に過ぎず、正式な申込み、評価額または財務アドバイスを構成するものではありません。購入・賃貸をご検討の方は、判断を行う前にすべての情報をご自身で確認してください。">
+        All property listings, prices, availability and related details displayed on the Site are subject to change without prior notice. Published prices, yields and financial estimates are indicative only and do not constitute a formal offer, valuation or financial advice. Prospective buyers and tenants should independently verify all information before making any decisions.
+      </p>
+
+      <div class="terms__highlight-box">
+        <p data-i18n="terms_s1_2_highlight" data-en="<strong>Important:</strong> The statutory explanation of important matters (重要事項説明) required under Japan's Building Lots and Buildings Transaction Business Act is delivered separately by a licensed Real Estate Transaction Specialist before any binding agreement is executed." data-ja="<strong>重要：</strong> 宅地建物取引業法に基づく重要事項説明は、拘束力のある契約の締結前に、宅地建物取引士が別途行います。">
+          <strong>Important:</strong> The statutory explanation of important matters (重要事項説明) required under Japan's Building Lots and Buildings Transaction Business Act is delivered separately by a licensed Real Estate Transaction Specialist before any binding agreement is executed.
+        </p>
+      </div>
+
+      <!-- 1.3 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_3_title" data-en="1.3 Intellectual Property" data-ja="1.3 知的財産">1.3 Intellectual Property</h3>
+      <p class="terms__text" data-i18n="terms_s1_3_text" data-en="All content on the Site — including text, graphics, logos, images, photographs, video, software and design — is the property of Kanagawa Premier Realty or its content suppliers and is protected by Japanese and international copyright, trademark and intellectual property laws. You may not reproduce, distribute, modify, create derivative works of, publicly display, or exploit any content without prior written permission." data-ja="本サイト上のすべてのコンテンツ（テキスト、グラフィック、ロゴ、画像、写真、動画、ソフトウェアおよびデザインを含む）は、神奈川プレミアリアルティまたはそのコンテンツ提供者の財産であり、日本および国際的な著作権法、商標法および知的財産法によって保護されています。事前の書面による許可なく、いかなるコンテンツの複製、配布、改変、二次的著作物の作成、公開展示または利用を行うことはできません。">
+        All content on the Site — including text, graphics, logos, images, photographs, video, software and design — is the property of Kanagawa Premier Realty or its content suppliers and is protected by Japanese and international copyright, trademark and intellectual property laws. You may not reproduce, distribute, modify, create derivative works of, publicly display, or exploit any content without prior written permission.
+      </p>
+
+      <!-- 1.4 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_4_title" data-en="1.4 Prohibited Conduct" data-ja="1.4 禁止事項">1.4 Prohibited Conduct</h3>
+      <p class="terms__text" data-i18n="terms_s1_4_intro" data-en="When using the Site, you agree not to:" data-ja="本サイトのご利用にあたり、以下の行為を行わないことに同意するものとします：">
+        When using the Site, you agree not to:
+      </p>
+      <ul class="terms__list">
+        <li data-i18n="terms_s1_4_li1" data-en="Use the Site for any unlawful purpose or in violation of any applicable laws or regulations" data-ja="違法な目的または適用される法令に違反して本サイトを使用すること">Use the Site for any unlawful purpose or in violation of any applicable laws or regulations</li>
+        <li data-i18n="terms_s1_4_li2" data-en="Scrape, harvest or collect data from the Site using automated tools without prior authorization" data-ja="事前の承認なく、自動化ツールを使用して本サイトからデータをスクレイピング、収集すること">Scrape, harvest or collect data from the Site using automated tools without prior authorization</li>
+        <li data-i18n="terms_s1_4_li3" data-en="Attempt to gain unauthorized access to any part of the Site, server or connected systems" data-ja="本サイト、サーバーまたは接続されたシステムのいずれかの部分への不正アクセスを試みること">Attempt to gain unauthorized access to any part of the Site, server or connected systems</li>
+        <li data-i18n="terms_s1_4_li4" data-en="Transmit viruses, malware or any code of a destructive nature" data-ja="ウイルス、マルウェアまたは破壊的な性質のコードを送信すること">Transmit viruses, malware or any code of a destructive nature</li>
+        <li data-i18n="terms_s1_4_li5" data-en="Misrepresent your identity or affiliation with any person or entity" data-ja="自身の身元またはいかなる人物・団体との関係について虚偽の表示を行うこと">Misrepresent your identity or affiliation with any person or entity</li>
+        <li data-i18n="terms_s1_4_li6" data-en="Use information obtained from the Site to contact property owners or tenants directly, bypassing our services" data-ja="当社のサービスを介さず、本サイトから取得した情報を使用して物件所有者またはテナントに直接連絡すること">Use information obtained from the Site to contact property owners or tenants directly, bypassing our services</li>
+      </ul>
+
+      <!-- 1.5 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_5_title" data-en="1.5 Third-Party Links" data-ja="1.5 第三者リンク">1.5 Third-Party Links</h3>
+      <p class="terms__text" data-i18n="terms_s1_5_text" data-en="The Site may contain links to external websites or services operated by third parties. We do not control or endorse these external sites and accept no responsibility for their content, privacy practices or availability. Access to any third-party site is at your own risk." data-ja="本サイトには、第三者が運営する外部ウェブサイトまたはサービスへのリンクが含まれる場合があります。当社はこれらの外部サイトを管理または推奨するものではなく、そのコンテンツ、プライバシー慣行または可用性について一切の責任を負いません。第三者サイトへのアクセスはご自身の責任で行ってください。">
+        The Site may contain links to external websites or services operated by third parties. We do not control or endorse these external sites and accept no responsibility for their content, privacy practices or availability. Access to any third-party site is at your own risk.
+      </p>
+
+      <!-- 1.6 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_6_title" data-en="1.6 Limitation of Liability" data-ja="1.6 責任の制限">1.6 Limitation of Liability</h3>
+      <p class="terms__text" data-i18n="terms_s1_6_text" data-en="To the maximum extent permitted by applicable law, Kanagawa Premier Realty shall not be liable for any direct, indirect, incidental, consequential, special or exemplary damages arising out of or in connection with your use of the Site, including but not limited to loss of profits, data, goodwill or other intangible losses, even if we have been advised of the possibility of such damages." data-ja="適用法令が許容する最大限の範囲において、神奈川プレミアリアルティは、お客様の本サイトのご利用に起因または関連して生じるいかなる直接的、間接的、偶発的、結果的、特別または懲罰的損害（利益、データ、信用またはその他の無形損失を含みますがこれに限りません）についても、かかる損害の可能性について通知を受けていた場合であっても、責任を負わないものとします。">
+        To the maximum extent permitted by applicable law, Kanagawa Premier Realty shall not be liable for any direct, indirect, incidental, consequential, special or exemplary damages arising out of or in connection with your use of the Site, including but not limited to loss of profits, data, goodwill or other intangible losses, even if we have been advised of the possibility of such damages.
+      </p>
+
+      <!-- 1.7 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_7_title" data-en="1.7 Governing Law and Jurisdiction" data-ja="1.7 準拠法および管轄裁判所">1.7 Governing Law and Jurisdiction</h3>
+      <p class="terms__text" data-i18n="terms_s1_7_text" data-en="These Terms of Use are governed by and construed in accordance with the laws of Japan. Any dispute arising out of or relating to these terms shall be subject to the exclusive jurisdiction of the Yokohama District Court." data-ja="本利用規約は日本法に準拠し、日本法に従って解釈されます。本規約に起因または関連するいかなる紛争も、横浜地方裁判所の専属管轄に服するものとします。">
+        These Terms of Use are governed by and construed in accordance with the laws of Japan. Any dispute arising out of or relating to these terms shall be subject to the exclusive jurisdiction of the Yokohama District Court.
+      </p>
+
+      <!-- 1.8 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s1_8_title" data-en="1.8 Modifications to Terms" data-ja="1.8 規約の変更">1.8 Modifications to Terms</h3>
+      <p class="terms__text" data-i18n="terms_s1_8_text" data-en="We reserve the right to update or modify these Terms of Use at any time without prior notice. Changes will be effective immediately upon posting to the Site. Your continued use of the Site following any changes constitutes your acceptance of the revised terms. We encourage you to review this page periodically." data-ja="当社は、事前の通知なく、いつでも本利用規約を更新または変更する権利を留保します。変更は本サイトへの掲載をもって直ちに効力を生じます。変更後に本サイトを引き続きご利用いただくことにより、改訂された規約に同意したものとみなされます。本ページを定期的にご確認いただくことをお勧めします。">
+        We reserve the right to update or modify these Terms of Use at any time without prior notice. Changes will be effective immediately upon posting to the Site. Your continued use of the Site following any changes constitutes your acceptance of the revised terms. We encourage you to review this page periodically.
+      </p>
+
+      <a href="#terms-top" class="terms__back-to-top">↑ Back to top</a>
+    </section>
+
+    <!-- ===== SECTION 2: PRIVACY POLICY ===== -->
+    <section class="terms__section" id="privacy-policy">
+      <h2 class="terms__section-title" data-i18n="terms_s2_title" data-en="Privacy Policy" data-ja="プライバシーポリシー">Privacy Policy</h2>
+
+      <p class="terms__text" data-i18n="terms_s2_intro" data-en="Kanagawa Premier Realty (the &quot;Company&quot;) is committed to protecting your privacy and handling your personal information responsibly. This Privacy Policy explains how we collect, use, store and disclose personal data in connection with our website and services." data-ja="神奈川プレミアリアルティ（以下「当社」）は、お客様のプライバシーを保護し、個人情報を責任を持って取り扱うことに尽力しています。本プライバシーポリシーは、当社のウェブサイトおよびサービスに関連して個人データを収集、使用、保管および開示する方法について説明します。">
+        Kanagawa Premier Realty (the "Company") is committed to protecting your privacy and handling your personal information responsibly. This Privacy Policy explains how we collect, use, store and disclose personal data in connection with our website and services.
+      </p>
+
+      <!-- 2.1 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_1_title" data-en="2.1 Information We Collect" data-ja="2.1 収集する情報">2.1 Information We Collect</h3>
+      <p class="terms__text" data-i18n="terms_s2_1_text" data-en="We may collect the following categories of personal information:" data-ja="当社は以下のカテゴリの個人情報を収集する場合があります：">
+        We may collect the following categories of personal information:
+      </p>
+      <ul class="terms__list">
+        <li data-i18n="terms_s2_1_li1" data-en="<strong>Contact Information:</strong> full name, email address, telephone number, postal address and nationality" data-ja="<strong>連絡先情報：</strong>氏名、メールアドレス、電話番号、郵便住所および国籍"><strong>Contact Information:</strong> full name, email address, telephone number, postal address and nationality</li>
+        <li data-i18n="terms_s2_1_li2" data-en="<strong>Inquiry Details:</strong> inquiry type, property preferences, budget, preferred areas and messages submitted via our contact form" data-ja="<strong>お問い合わせ内容：</strong>お問い合わせ種別、物件の希望条件、予算、希望エリアおよびお問い合わせフォームから送信されたメッセージ"><strong>Inquiry Details:</strong> inquiry type, property preferences, budget, preferred areas and messages submitted via our contact form</li>
+        <li data-i18n="terms_s2_1_li3" data-en="<strong>Usage Data:</strong> IP address, browser type, operating system, referring URL, pages visited, time spent on pages and other analytical data collected automatically through cookies and similar technologies" data-ja="<strong>利用データ：</strong>IPアドレス、ブラウザの種類、オペレーティングシステム、参照元URL、閲覧ページ、ページの滞在時間その他Cookieおよび類似技術により自動的に収集される分析データ"><strong>Usage Data:</strong> IP address, browser type, operating system, referring URL, pages visited, time spent on pages and other analytical data collected automatically through cookies and similar technologies</li>
+        <li data-i18n="terms_s2_1_li4" data-en="<strong>Transaction-Related Information:</strong> documentation and identity verification data provided during property transactions, where applicable" data-ja="<strong>取引関連情報：</strong>該当する場合、不動産取引中に提供される書類および本人確認データ"><strong>Transaction-Related Information:</strong> documentation and identity verification data provided during property transactions, where applicable</li>
+      </ul>
+
+      <!-- 2.2 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_2_title" data-en="2.2 How We Use Your Information" data-ja="2.2 情報の利用方法">2.2 How We Use Your Information</h3>
+      <p class="terms__text" data-i18n="terms_s2_2_text" data-en="We use collected personal information for the following purposes:" data-ja="当社は収集した個人情報を以下の目的で使用します：">
+        We use collected personal information for the following purposes:
+      </p>
+      <ul class="terms__list">
+        <li data-i18n="terms_s2_2_li1" data-en="To respond to inquiries and provide requested services" data-ja="お問い合わせへの対応およびご要望されたサービスの提供">To respond to inquiries and provide requested services</li>
+        <li data-i18n="terms_s2_2_li2" data-en="To recommend suitable properties based on stated preferences" data-ja="お客様のご希望条件に基づく適切な物件のご提案">To recommend suitable properties based on stated preferences</li>
+        <li data-i18n="terms_s2_2_li3" data-en="To facilitate property viewings, negotiations and transactions" data-ja="物件内覧、交渉および取引の促進">To facilitate property viewings, negotiations and transactions</li>
+        <li data-i18n="terms_s2_2_li4" data-en="To send newsletters, market updates and promotional materials (with consent)" data-ja="ニュースレター、市場動向および販促資料の送付（同意がある場合）">To send newsletters, market updates and promotional materials (with consent)</li>
+        <li data-i18n="terms_s2_2_li5" data-en="To improve our website, services and user experience" data-ja="当社ウェブサイト、サービスおよびユーザー体験の改善">To improve our website, services and user experience</li>
+        <li data-i18n="terms_s2_2_li6" data-en="To comply with legal obligations, including those under the Building Lots and Buildings Transaction Business Act" data-ja="宅地建物取引業法を含む法的義務の遵守">To comply with legal obligations, including those under the Building Lots and Buildings Transaction Business Act</li>
+      </ul>
+
+      <!-- 2.3 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_3_title" data-en="2.3 Cookies and Local Storage" data-ja="2.3 Cookieおよびローカルストレージ">2.3 Cookies and Local Storage</h3>
+      <p class="terms__text" data-i18n="terms_s2_3_text" data-en="The Site uses cookies and browser local storage to enhance your browsing experience. This includes remembering language preferences, maintaining your favorites list and gathering anonymous usage statistics. You can manage cookie preferences through your browser settings. Disabling cookies may limit certain features of the Site." data-ja="本サイトでは、ブラウジング体験を向上させるためにCookieおよびブラウザのローカルストレージを使用しています。これには、言語設定の記憶、お気に入りリストの維持および匿名の利用統計の収集が含まれます。Cookieの設定はブラウザの設定から管理できます。Cookieを無効にすると、本サイトの一部の機能が制限される場合があります。">
+        The Site uses cookies and browser local storage to enhance your browsing experience. This includes remembering language preferences, maintaining your favorites list and gathering anonymous usage statistics. You can manage cookie preferences through your browser settings. Disabling cookies may limit certain features of the Site.
+      </p>
+
+      <!-- 2.4 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_4_title" data-en="2.4 Information Sharing and Disclosure" data-ja="2.4 情報の共有および開示">2.4 Information Sharing and Disclosure</h3>
+      <p class="terms__text" data-i18n="terms_s2_4_text" data-en="We do not sell, trade or rent your personal information to third parties. We may share your information in the following limited circumstances:" data-ja="当社はお客様の個人情報を第三者に販売、交換または貸与いたしません。以下の限定的な状況においてお客様の情報を共有する場合があります：">
+        We do not sell, trade or rent your personal information to third parties. We may share your information in the following limited circumstances:
+      </p>
+      <ul class="terms__list">
+        <li data-i18n="terms_s2_4_li1" data-en="With property owners, landlords or their agents as necessary to facilitate a specific transaction you have requested" data-ja="お客様がご依頼された特定の取引を促進するために必要な場合、物件所有者、貸主またはその代理人と共有">With property owners, landlords or their agents as necessary to facilitate a specific transaction you have requested</li>
+        <li data-i18n="terms_s2_4_li2" data-en="With professional service providers (judicial scriveners, tax accountants, immigration professionals) when coordinating services on your behalf, with your knowledge" data-ja="お客様の了解のもと、お客様に代わってサービスを調整する際に、専門サービス提供者（司法書士、税理士、入管手続き専門家）と共有">With professional service providers (judicial scriveners, tax accountants, immigration professionals) when coordinating services on your behalf, with your knowledge</li>
+        <li data-i18n="terms_s2_4_li3" data-en="When required by law, regulation, legal process or government request" data-ja="法令、規則、法的手続きまたは政府の要請により求められる場合">When required by law, regulation, legal process or government request</li>
+        <li data-i18n="terms_s2_4_li4" data-en="With analytics providers for anonymized and aggregated data analysis" data-ja="匿名化および集計されたデータ分析のために分析プロバイダーと共有">With analytics providers for anonymized and aggregated data analysis</li>
+      </ul>
+
+      <!-- 2.5 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_5_title" data-en="2.5 Data Security" data-ja="2.5 データセキュリティ">2.5 Data Security</h3>
+      <p class="terms__text" data-i18n="terms_s2_5_text" data-en="We implement reasonable technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure or destruction. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security." data-ja="当社は、お客様の個人情報を不正アクセス、改ざん、開示または破壊から保護するために合理的な技術的および組織的対策を講じています。ただし、インターネット上の伝送方法や電子的保存方法は完全に安全ではなく、絶対的なセキュリティを保証することはできません。">
+        We implement reasonable technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure or destruction. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security.
+      </p>
+
+      <!-- 2.6 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_6_title" data-en="2.6 Data Retention" data-ja="2.6 データの保持">2.6 Data Retention</h3>
+      <p class="terms__text" data-i18n="terms_s2_6_text" data-en="We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, comply with legal obligations and resolve disputes. Transaction-related records are retained in accordance with the record-keeping requirements of the Building Lots and Buildings Transaction Business Act and other applicable regulations." data-ja="当社は、収集目的の達成、法的義務の遵守および紛争の解決に必要な期間に限り個人情報を保持します。取引関連の記録は、宅地建物取引業法およびその他の適用法令の記録保持要件に従って保持されます。">
+        We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, comply with legal obligations and resolve disputes. Transaction-related records are retained in accordance with the record-keeping requirements of the Building Lots and Buildings Transaction Business Act and other applicable regulations.
+      </p>
+
+      <!-- 2.7 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_7_title" data-en="2.7 Your Rights" data-ja="2.7 お客様の権利">2.7 Your Rights</h3>
+      <p class="terms__text" data-i18n="terms_s2_7_text" data-en="Under Japan's Act on the Protection of Personal Information (APPI) and applicable data protection laws, you have the right to:" data-ja="日本の個人情報保護法（APPI）および適用されるデータ保護法に基づき、お客様は以下の権利を有します：">
+        Under Japan's Act on the Protection of Personal Information (APPI) and applicable data protection laws, you have the right to:
+      </p>
+      <ul class="terms__list">
+        <li data-i18n="terms_s2_7_li1" data-en="Request disclosure of personal information we hold about you" data-ja="当社が保有するお客様に関する個人情報の開示を請求すること">Request disclosure of personal information we hold about you</li>
+        <li data-i18n="terms_s2_7_li2" data-en="Request correction, addition or deletion of inaccurate personal information" data-ja="不正確な個人情報の訂正、追加または削除を請求すること">Request correction, addition or deletion of inaccurate personal information</li>
+        <li data-i18n="terms_s2_7_li3" data-en="Request cessation of use or deletion of personal information" data-ja="個人情報の利用停止または削除を請求すること">Request cessation of use or deletion of personal information</li>
+        <li data-i18n="terms_s2_7_li4" data-en="Withdraw consent for marketing communications at any time" data-ja="いつでもマーケティングコミュニケーションに対する同意を撤回すること">Withdraw consent for marketing communications at any time</li>
+      </ul>
+      <p class="terms__text" data-i18n="terms_s2_7_contact" data-en="To exercise any of these rights, please contact us at <a href='mailto:concierge@kanagawapremier.jp' style='color: #C9A45C;'>concierge@kanagawapremier.jp</a>." data-ja="これらの権利を行使するには、<a href='mailto:concierge@kanagawapremier.jp' style='color: #C9A45C;'>concierge@kanagawapremier.jp</a> までご連絡ください。">
+        To exercise any of these rights, please contact us at <a href="mailto:concierge@kanagawapremier.jp" style="color: #C9A45C;">concierge@kanagawapremier.jp</a>.
+      </p>
+
+      <!-- 2.8 -->
+      <h3 class="terms__subsection-title" data-i18n="terms_s2_8_title" data-en="2.8 Changes to This Privacy Policy" data-ja="2.8 本プライバシーポリシーの変更">2.8 Changes to This Privacy Policy</h3>
+      <p class="terms__text" data-i18n="terms_s2_8_text" data-en="We may revise this Privacy Policy from time to time. Any material changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically to stay informed about how we are protecting your information." data-ja="当社は本プライバシーポリシーを随時改訂する場合があります。重要な変更がある場合は、更新日とともに本ページに掲載いたします。お客様の情報がどのように保護されているかについて、定期的に本ポリシーをご確認いただくことをお勧めします。">
+        We may revise this Privacy Policy from time to time. Any material changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically to stay informed about how we are protecting your information.
+      </p>
+
+      <a href="#terms-top" class="terms__back-to-top">↑ Back to top</a>
+    </section>
+
+    <!-- ===== SECTION 3: LICENSE INFO ===== -->
+    <section class="terms__section" id="license-info">
+      <h2 class="terms__section-title" data-i18n="terms_s3_title" data-en="Real Estate License Information" data-ja="宅地建物取引業免許情報">Real Estate License Information</h2>
+
+      <p class="terms__text" data-i18n="terms_s3_intro" data-en="As required under Japan's Building Lots and Buildings Transaction Business Act (宅地建物取引業法), the following information is disclosed:" data-ja="日本の宅地建物取引業法に基づき、以下の情報を開示いたします：">
+        As required under Japan's Building Lots and Buildings Transaction Business Act (宅地建物取引業法), the following information

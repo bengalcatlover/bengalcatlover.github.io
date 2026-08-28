@@ -1,0 +1,1335 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive real estate services for international clients in Kanagawa, Japan. Rental brokerage, property purchase, investment advisory, relocation support and bilingual documentation.">
+  <meta name="keywords" content="Kanagawa real estate services, bilingual real estate Japan, expat relocation Yokohama, property management Kanagawa, investment advisory Japan">
+  <title>Services | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--color-bg);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(11, 31, 58, 0.08);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .header__logo span {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    .header__nav-list {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .header__nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      letter-spacing: 0.03em;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .header__nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .header__nav-link:hover::after,
+    .header__nav-link--active::after {
+      width: 100%;
+    }
+
+    .header__nav-link:hover {
+      color: var(--color-accent);
+    }
+
+    .header__nav-link--active {
+      color: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header__lang-toggle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--color-text-light);
+      background: var(--color-bg-alt);
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .header__lang-toggle:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites {
+      position: relative;
+      font-size: 1.2rem;
+      color: var(--color-text);
+      transition: color 0.3s;
+    }
+
+    .header__favorites:hover {
+      color: var(--color-accent);
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__cta {
+      display: none;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-accent);
+      padding: 10px 24px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: background 0.3s ease;
+    }
+
+    .header__cta:hover {
+      background: #b8933f;
+    }
+
+    .header__burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      padding: 4px 0;
+    }
+
+    .header__burger-line {
+      width: 100%;
+      height: 2px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-primary);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-nav--open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .mobile-nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .mobile-nav__link {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: #fff;
+      opacity: 0.85;
+      transition: opacity 0.3s, color 0.3s;
+    }
+
+    .mobile-nav__link:hover,
+    .mobile-nav__link--active {
+      opacity: 1;
+      color: var(--color-accent);
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--color-primary);
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,31,58,0.95) 0%, rgba(28,58,94,0.9) 100%);
+      z-index: 1;
+    }
+
+    .page-header__content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .page-header__title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 16px auto 0;
+    }
+
+    .page-header__breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page-header__breadcrumb a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s;
+    }
+
+    .page-header__breadcrumb a:hover {
+      color: var(--color-accent);
+    }
+
+    .page-header__breadcrumb-sep {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .page-header__lead {
+      max-width: 680px;
+      margin: 24px auto 0;
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section--alt {
+      background: var(--color-bg-alt);
+    }
+
+    .section--navy {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .section__heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+
+    .section__heading::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 12px auto 0;
+    }
+
+    .section--navy .section__heading {
+      color: #fff;
+    }
+
+    .section__subtext {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+      color: var(--color-text-light);
+      font-size: 0.9375rem;
+      line-height: 1.8;
+    }
+
+    .section--navy .section__subtext {
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ===== SERVICE CARDS ===== */
+    .service-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--color-bg);
+      border: 1px solid #e8e6e1;
+      border-radius: 8px;
+      padding: 40px 32px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: transparent;
+      transition: background 0.4s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 12px 40px rgba(11,31,58,0.08);
+      transform: translateY(-4px);
+    }
+
+    .service-card:hover::before {
+      background: var(--color-accent);
+    }
+
+    .service-card__icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      background: var(--color-bg-alt);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: var(--color-accent);
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover .service-card__icon {
+      background: var(--color-primary);
+      transform: scale(1.05);
+    }
+
+    .service-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+    }
+
+    .service-card__text {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      line-height: 1.75;
+    }
+
+    .service-card__target {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      padding: 4px 12px;
+      border: 1px solid rgba(201,164,92,0.3);
+      border-radius: 20px;
+    }
+
+    /* ===== PROCESS / TIMELINE ===== */
+    .process {
+      padding: 80px 0;
+      background: var(--color-bg-alt);
+    }
+
+    .process__heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+    }
+
+    .process__heading::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 12px auto 0;
+    }
+
+    .process__subtext {
+      text-align: center;
+      color: var(--color-text-light);
+      font-size: 0.9375rem;
+      max-width: 560px;
+      margin: 0 auto 56px;
+      line-height: 1.8;
+    }
+
+    .process__steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      position: relative;
+    }
+
+    .process__step {
+      text-align: center;
+      position: relative;
+    }
+
+    .process__step-number {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 16px rgba(11,31,58,0.15);
+    }
+
+    .process__step-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 10px;
+    }
+
+    .process__step-text {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .process__step-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    /* Connector line (vertical on mobile) */
+    .process__connector {
+      display: none;
+    }
+
+    /* ===== EXPAT SUPPORT FEATURES ===== */
+    .expat-support {
+      background: var(--color-primary);
+      padding: 80px 0;
+    }
+
+    .expat-support__heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .expat-support__heading::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 12px auto 0;
+    }
+
+    .expat-support__subtext {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9375rem;
+      max-width: 560px;
+      margin: 0 auto 48px;
+      line-height: 1.8;
+    }
+
+    .expat-support__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .expat-support__card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .expat-support__card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+    }
+
+    .expat-support__card-icon {
+      font-size: 2.25rem;
+      color: var(--color-accent);
+      margin-bottom: 20px;
+    }
+
+    .expat-support__card-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .expat-support__card-text {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .cta-band__heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .cta-band__text {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .cta-band__btn {
+      display: inline-block;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 16px 40px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(201,164,92,0.3);
+    }
+
+    .cta-band__btn:hover {
+      background: #b8933f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(201,164,92,0.4);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer__brand-name span {
+      color: var(--color-accent);
+    }
+
+    .footer__brand-text {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer__col-title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .footer__col-title::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--color-accent);
+      margin-top: 8px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.3s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer__contact-icon {
+      color: var(--color-accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s;
+    }
+
+    .footer__social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: rgba(201,164,92,0.1);
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .footer__copyright {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer__legal {
+      display: flex;
+      gap: 20px;
+      font-size: 0.75rem;
+    }
+
+    .footer__legal a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.3s;
+    }
+
+    .footer__legal a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 768px) {
+      .header__nav {
+        display: block;
+      }
+
+      .header__cta {
+        display: inline-block;
+      }
+
+      .header__burger {
+        display: none;
+      }
+
+      .page-header {
+        padding: 140px 0 80px;
+      }
+
+      .page-header__title {
+        font-size: 3rem;
+      }
+
+      .service-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process__steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .expat-support__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .service-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .process__steps {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+
+      .process__step {
+        padding: 0 20px;
+      }
+
+      .process__connector {
+        display: block;
+        position: absolute;
+        top: 28px;
+        left: calc(50% + 28px);
+        width: calc(100% - 56px);
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-accent) 0%, rgba(201,164,92,0.2) 100%);
+      }
+
+      .process__step:last-child .process__connector {
+        display: none;
+      }
+
+      .footer__grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+
+      .cta-band__heading {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span>Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main Navigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a></li>
+          <li><a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a></li>
+          <li><a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a></li>
+          <li><a href="services.html" class="header__nav-link header__nav-link--active" data-i18n="nav_services">Services</a></li>
+          <li><a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a></li>
+          <li><a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" aria-label="Toggle Language">EN / JP</button>
+
+        <button class="header__favorites" id="favoritesBtn" aria-label="Favorites">
+          ♡
+          <span class="header__favorites-badge" id="favoritesBadge">0</span>
+        </button>
+
+        <a href="contact.html" class="header__cta" data-i18n="nav_contact">Contact Us</a>
+
+        <button class="header__burger" id="burgerBtn" aria-label="Open Menu">
+          <span class="header__burger-line"></span>
+          <span class="header__burger-line"></span>
+          <span class="header__burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+    <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close Menu">✕</button>
+    <ul class="mobile-nav__list">
+      <li><a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a></li>
+      <li><a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a></li>
+      <li><a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a></li>
+      <li><a href="services.html" class="mobile-nav__link mobile-nav__link--active" data-i18n="nav_services">Services</a></li>
+      <li><a href="about.html" class="mobile-nav__link" data-i18n="nav_about">About</a></li>
+      <li><a href="team.html" class="mobile-nav__link" data-i18n="nav_team">Team</a></li>
+      <li><a href="blog.html" class="mobile-nav__link" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="contact.html" class="mobile-nav__link" data-i18n="nav_contact">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+      <div class="page-header__content container">
+        <h1 class="page-header__title" data-i18n="services_title">Our Services</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a>
+          <span class="page-header__breadcrumb-sep">›</span>
+          <span data-i18n="nav_services">Services</span>
+        </nav>
+        <p class="page-header__lead" data-i18n="services_lead">
+          Comprehensive, bilingual real estate services designed for international families, global professionals and overseas investors seeking exceptional homes in Kanagawa.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== SERVICE CARDS ===== -->
+    <section class="section" id="serviceCards">
+      <div class="container">
+        <h2 class="section__heading" data-i18n="services_what_we_offer">What We Offer</h2>
+        <p class="section__subtext" data-i18n="services_what_subtext">
+          From your first enquiry to settled living, our advisors guide every stage with clarity, local expertise and an unwavering commitment to your interests.
+        </p>
+
+        <div class="service-cards">
+          <!-- Card 1: Rental Brokerage -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_rental_title">Rental Brokerage</h3>
+            <p class="service-card__text" data-i18n="service_rental_text">
+              A curated search for high-quality apartments and houses, including foreign-resident-friendly options. We coordinate viewings, negotiate terms and explain deposits, guarantor requirements and lease documentation in English.
+            </p>
+            <span class="service-card__target" data-i18n="service_rental_target">Expats &amp; Families</span>
+          </article>
+
+          <!-- Card 2: Property Purchase -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_purchase_title">Property Purchase</h3>
+            <p class="service-card__text" data-i18n="service_purchase_text">
+              Independent guidance for acquiring a primary residence, second home or legacy property in Japan. Our advisors oversee market analysis, due diligence, negotiations, bilingual document review and completion.
+            </p>
+            <span class="service-card__target" data-i18n="service_purchase_target">Buyers &amp; Investors</span>
+          </article>
+
+          <!-- Card 3: Investment Advisory -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_investment_title">Investment Advisory</h3>
+            <p class="service-card__text" data-i18n="service_investment_text">
+              Research-led advice for international buyers seeking income, capital preservation or long-term exposure to Japanese real estate. We assess location, yield, operating costs, liquidity and exit strategy.
+            </p>
+            <span class="service-card__target" data-i18n="service_investment_target">Overseas Investors</span>
+          </article>
+
+          <!-- Card 4: Relocation Support -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_relocation_title">Relocation Support</h3>
+            <p class="service-card__text" data-i18n="service_relocation_text">
+              Practical assistance for a seamless arrival, from neighborhood orientation and school guidance to utilities, banking introductions, internet setup and move-in coordination.
+            </p>
+            <span class="service-card__target" data-i18n="service_relocation_target">New Arrivals</span>
+          </article>
+
+          <!-- Card 5: Property Management -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_management_title">Property Management</h3>
+            <p class="service-card__text" data-i18n="service_management_text">
+              Attentive management for overseas and domestic owners, including tenant liaison, rent administration, inspections, maintenance coordination and bilingual reporting.
+            </p>
+            <span class="service-card__target" data-i18n="service_management_target">Property Owners</span>
+          </article>
+
+          <!-- Card 6: Contract & Documentation -->
+          <article class="service-card">
+            <div class="service-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="service-card__title" data-i18n="service_contract_title">Contract &amp; Documentation Support</h3>
+            <p class="service-card__text" data-i18n="service_contract_text">
+              Clear English-language support for applications, leases, purchase agreements and related procedures. Where specialist advice is required, we coordinate with qualified judicial scriveners, tax accountants and immigration professionals.
+            </p>
+            <span class="service-card__target" data-i18n="service_contract_target">All Clients</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS / HOW IT WORKS ===== -->
+    <section class="process" id="process">
+      <div class="container">
+        <h2 class="process__heading" data-i18n="process_title">How It Works</h2>
+        <p class="process__subtext" data-i18n="process_subtext">
+          A clear, four-step journey from your first enquiry to comfortable settlement in your new Kanagawa home.
+        </p>
+
+        <div class="process__steps">
+          <!-- Step 1 -->
+          <div class="process__step">
+            <div class="process__connector" aria-hidden="true"></div>
+            <div class="process__step-number">01</div>
+            <div class="process__step-icon" aria-hidden="true">📩</div>
+            <h3 class="process__step-title" data-i18n="process_step1_title">Inquiry</h3>
+            <p class="process__step-text" data-i18n="process_step1_text">
+              Reach out via our contact form, phone, email or WhatsApp. Share your requirements, timeline and any questions — in English or Japanese.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process__step">
+            <div class="process__connector" aria-hidden="true"></div>
+            <div class="process__step-number">02</div>
+            <div class="process__step-icon" aria-hidden="true">💬</div>
+            <h3 class="process__step-title" data-i18n="process_step2_title">Consultation</h3>
+            <p class="process__step-text" data-i18n="process_step2_text">
+              A bilingual advisor conducts a personal consultation to understand your lifestyle, budget, preferred areas and any special considerations.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process__step">
+            <div class="process__connector" aria-hidden="true"></div>
+            <div class="process__step-number">03</div>
+            <div class="process__step-icon" aria-hidden="true">🏠</div>
+            <h3 class="process__step-title" data-i18n="process_step3_title">Property Viewing</h3>
+            <p class="process__step-text" data-i18n="process_step3_text">
+              We arrange curated property viewings — in person or via live video tour — and provide objective advice on each option.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process__step">
+            <div class="process__step-number">04</div>
+            <div class="process__step-icon" aria-hidden="true">🔑</div>
+            <h3 class="process__step-title" data-i18n="process_step4_title">Contract &amp; Move-in</h3>
+            <p class="process__step-text" data-i18n="process_step4_text">
+              We guide you through contracts, documentation and payments in English, then coordinate a smooth move-in with ongoing support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPAT SUPPORT FEATURES ===== -->
+    <section class="expat-support" id="expatSupport">
+      <div class="container">
+        <h2 class="expat-support__heading" data-i18n="expat_title">Expat-Focused Support</h2>
+        <p class="expat-support__subtext" data-i18n="expat_subtext">
+          We understand the unique challenges international residents face in Japan. These specialized services set us apart.
+        </p>
+
+        <div class="expat-support__grid">
+          <!-- Feature 1 -->
+          <article class="expat-support__card">
+            <div class="expat-support__card-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="expat-support__card-title" data-i18n="expat_guarantor_title">No-Guarantor Properties</h3>
+            <p class="expat-support__card-text" data-i18n="expat_guarantor_text">
+              Access to a curated selection of landlords and properties that accept guarantor companies in place of a personal Japanese guarantor — removing one of the most common barriers for foreign residents.
+            </p>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="expat-support__card">
+            <div class="expat-support__card-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3 class="expat-support__card-title" data-i18n="expat_contract_title">English Contract Support</h3>
+            <p class="expat-support__card-text" data-i18n="expat_contract_text">
+              Full bilingual explanation of lease agreements, purchase contracts and the important matters disclosure. We ensure you understand every clause, cost and obligation before you commit.
+            </p>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="expat-support__card">
+            <div class="expat-support__card-icon" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3 class="expat-support__card-title" data-i18n="expat_setup_title">Life Setup Assistance</h3>
+            <p class="expat-support__card-text" data-i18n="expat_setup_text">
+              Practical help establishing your life in Japan — bank account introductions, utility registration, internet setup, ward office procedures and school enrollment guidance, all coordinated in English.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ADDITIONAL INFO BAND ===== -->
+    <section class="section section--alt" id="serviceDetails">
+      <div class="container">
+        <h2 class="section__heading" data-i18n="service_detail_heading">Trusted by International Clients</h2>
+        <p class="section__subtext" data-i18n="service_detail_subtext">
+          Our bilingual team has supported over 1,200 expat families and overseas investors since 2010. Every service is delivered with discretion, cultural fluency and your long-term interests in mind.
+        </p>
+
+        <div class="service-cards" style="grid-template-columns: 1fr;">
+          <article class="service-card" style="max-width: 800px; margin: 0 auto; text-align: left; display: grid; grid-template-columns: 1fr; gap: 20px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+              <div style="text-align: center; flex: 1; min-width: 140px; padding: 20px;">
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-accent);">500+</div>
+                <div style="font-size: 0.8125rem; color: var(--color-text-light); margin-top: 4px;" data-i18n="stat_properties">Properties Managed</div>
+              </div>
+              <div style="text-align: center; flex: 1; min-width: 140px; padding: 20px;">
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-accent);">1,200+</div>
+                <div style="font-size: 0.8125rem; color: var(--color-text-light); margin-top: 4px;" data-i18n="stat_clients">Expat Clients Served</div>
+              </div>
+              <div style="text-align: center; flex: 1; min-width: 140px; padding: 20px;">
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-accent);">3</div>
+                <div style="font-size: 0.8125rem; color: var(--color-text-light); margin-top: 4px;" data-i18n="stat_languages">Languages Supported</div>
+              </div>
+              <div style="text-align: center; flex: 1; min-width: 140px; padding: 20px;">
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-accent);">15+</div>
+                <div style="font-size: 0.8125rem; color: var(--color-text-light); margin-top: 4px;" data-i18n="stat_years">Years of Experience</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <section class="cta-band" id="ctaBand">
+      <h2 class="cta-band__heading" data-i18n="services_cta_heading">Free Consultation in English</h2>
+      <p class="cta-band__text" data-i18n="services_cta_text">
+        Whether you're relocating to Kanagawa, searching for an investment opportunity or simply exploring your options, our bilingual advisors are here to help — with no obligation.
+      </p>
+      <a href="contact.html" class="cta-band__btn" data-i18n="services_cta_btn">Schedule a Consultation</a>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div class="footer__col">
+          <div class="footer__brand-name">Kanagawa <span>Premier</span> Realty</div>
+          <p class="footer__brand-text" data-i18n="footer_brand_text">
+            Exceptional homes and bilingual advisory for international families, investors and global professionals in Yokohama and coastal Kanagawa.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">ig</a>
+            <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer__col">
+          <h4 class="footer__col-title" data-i18n="footer_quick_links">Quick Links</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link" data-i18n="nav_home">Home</a>
+            <a href="properties.html" class="footer__link" data-i18n="nav_properties">Properties</a>
+            <a href="services.html" class="footer__link" data-i18n="nav_services">Services</a>
+            <a href="about.html" class="footer__link" data-i18n="nav_about">About Us</a>
+            <a href="team.html" class="footer__link" data-i18n="nav_team">Our Team</a>
+            <a href="blog.html" class="footer__link" data-i18n="nav_blog">Blog</a>
+            <a href="faq.html" class="footer__link" data-i18n="nav_faq">FAQ</a>
+          </div>
+        </div>
+
+        <!-- Area Links -->
+        <div class="footer__col">
+          <h4 class="footer__col-title" data-i18n="footer_areas">Areas</h4>
+          <div class="footer__links">
+            <a href="areas.html#yokohama" class="footer__link">Yokohama</a>
+            <a href="areas.html#kamakura" class="footer__link">Kamakura</a>
+            <a href="areas.html#hayama" class="footer__link">Hayama</a>
+            <a href="areas.html#shonan" class="footer__link">Shonan</a>
+            <a href="areas.html#zushi" class="footer__link">Zushi</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer__col">
+          <h4 class="footer__col-title" data-i18n="footer_contact">Contact</h4>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">📍</span>
+            <span data-i18n="footer_address">Harbor View Tower 8F, 2-3-5 Minatomirai, Nishi-ku, Yokohama, Kanagawa 220-0012, Japan</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">📞</span>
+            <a href="tel:+810455550188" class="footer__link">+81 (0)45-555-0188</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">✉️</span>
+            <a href="mailto:concierge@kanagawapremier.jp" class="footer__link">concierge@kanagawapremier.jp</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon" aria-hidden="true">🕐</span>
+            <span data-i18n="footer_hours">Mon–Sat: 9:00–18:00 JST</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2024 Kanagawa Premier Realty. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="terms.html" data-i18n="footer_terms">Terms of Use</a>
+          <a href="terms.html#privacy" data-i18n="footer_privacy">Privacy Policy</a>
+          <a href="terms.html#license" data-i18n="footer_license">License Info</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Header scroll shadow
+    (function() {
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          header.classList.add('header--scrolled');
+        } else {
+          header.classList.remove('header--scrolled');
+        }
+      });
+    })();
+
+    // Mobile nav toggle
+    (function() {
+      const burger = document.getElementById('burgerBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      const closeBtn = document.getElementById('mobileNavClose');
+
+      if (burger && mobileNav && closeBtn) {
+        burger.addEventListener('click', function() {
+          mobileNav.classList.add('mobile-nav--open');
+          document.body.style.overflow = 'hidden';
+        });
+        closeBtn.addEventListener('click', function() {
+          mobileNav.classList.remove('mobile-nav--open');
+          document.body.style.overflow = '';
+        });
+        mobileNav.addEventListener('click', function(e) {
+          if (e.target === mobileNav) {
+            mobileNav.classList.remove('mobile-nav--open');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    })();
+
+    // Language toggle demo
+    (function() {
+      const toggle = document.getElementById('langToggle');
+      if (!toggle) return;
+
+      const translations = {
+        'services_title': { en: 'Our Services', ja: '提供サービス' },
+        'services_lead': { en: 'Comprehensive, bilingual real estate services designed for international families, global professionals and overseas investors seeking exceptional homes in Kanagawa.', ja: '神奈川で上質な住まいをお探しの国際ファミリー、グローバルプロフェッショナル、海外投資家のための包括的なバイリンガル不動産サービス。' },
+        'services_what_we_offer': { en: 'What We Offer', ja: 'サービス内容' },
+        'services_what_subtext': { en: 'From your first enquiry to settled living, our advisors guide every stage with clarity, local expertise and an unwavering commitment to your interests.', ja: '初回のお問い合わせから安定した生活まで、アドバイザーが地元の専門知識と明確なご案内で全段階をサポートします。' },
+        'service_rental_title': { en: 'Rental Brokerage', ja: '賃貸仲介' },
+        'service_purchase_title': { en: 'Property Purchase', ja: '物件購入' },
+        'service_investment_title': { en: 'Investment Advisory', ja: '投資アドバイザリー' },
+        'service_relocation_title': { en: 'Relocation Support', ja: 'リロケーションサポート' },
+        'service_management_title': { en: 'Property Management', ja: '物件管理' },
+        'service_contract_title': { en: 'Contract & Documentation Support', ja: '契約・書類サポート' },
+        'process_title': { en: 'How It Works', ja: 'ご利用の流れ' },
+        'expat_title': { en: 'Expat-Focused Support', ja: '外国人向け特別サポート' },
+        'services_cta_heading': { en: 'Free Consultation in English', ja: '英語での無料相談' },
+        'services_cta_btn': { en: 'Schedule a Consultation', ja: 'ご相談を予約する' },
+        'nav_home': { en: 'Home', ja: 'ホーム' },
+        'nav_properties': { en: 'Properties', ja: '物件検索' },
+        'nav_areas': { en: 'Area Guide', ja: 'エリアガイド' },
+        'nav_services': { en: 'Services', ja: 'サービス' },
+        'nav_about': { en: 'About', ja: '会社概要' },
+        'nav_team': { en: 'Team', ja: 'チーム' },
+        'nav_blog': { en: 'Blog', ja: 'ブログ' },
+        'nav_faq': { en: 'FAQ', ja: 'よくある質問' },
+        'nav_contact': { en: 'Contact Us', ja: 'お問

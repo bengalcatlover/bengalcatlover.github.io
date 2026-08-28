@@ -1,0 +1,1368 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search luxury properties for sale and rent in Yokohama, Kamakura, Hayama, Shonan and Zushi. Filter by area, price, layout and property type.">
+  <meta name="keywords" content="Kanagawa luxury real estate, Yokohama property for sale, Kamakura luxury homes, Hayama villas, Shonan oceanfront property, Zushi real estate, Japan property for foreigners">
+  <title>Property Search | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    select, input { font-family: inherit; }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--color-bg);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .header__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .header__logo span {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .header__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+    }
+
+    .header__nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .header__nav-link:hover,
+    .header__nav-link--active {
+      color: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header__lang-toggle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: 1px solid var(--color-primary);
+      border-radius: 4px;
+      color: var(--color-primary);
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .header__lang-toggle:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.875rem;
+      color: var(--color-text);
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .header__favorites-btn:hover {
+      background: var(--color-bg-alt);
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__favorites-badge:empty,
+    .header__favorites-badge[data-count="0"] {
+      display: none;
+    }
+
+    .header__contact-btn {
+      display: none;
+      padding: 10px 24px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+
+    .header__contact-btn:hover {
+      background: #b8933f;
+    }
+
+    @media (min-width: 1024px) {
+      .header__contact-btn {
+        display: inline-block;
+      }
+    }
+
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+
+    @media (min-width: 1024px) {
+      .header__hamburger {
+        display: none;
+      }
+    }
+
+    .header__hamburger-line {
+      width: 22px;
+      height: 2px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .header__hamburger--active .header__hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .header__hamburger--active .header__hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .header__hamburger--active .header__hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-drawer--open {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer__link {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      transition: color 0.2s;
+    }
+
+    .mobile-drawer__link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--color-primary);
+      padding: 120px 24px 48px;
+      text-align: center;
+    }
+
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .page-header__title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--color-accent);
+      margin: 16px auto 0;
+    }
+
+    .page-header__breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .page-header__breadcrumb a {
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.2s;
+    }
+
+    .page-header__breadcrumb a:hover {
+      color: var(--color-accent);
+    }
+
+    .page-header__breadcrumb-sep {
+      font-size: 0.625rem;
+    }
+
+    .page-header__breadcrumb-current {
+      color: var(--color-accent);
+    }
+
+    /* ===== SEARCH / FILTER LAYOUT ===== */
+    .search-page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .search-page__layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 1024px) {
+      .search-page__layout {
+        grid-template-columns: 300px 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* ===== FILTER SIDEBAR ===== */
+    .filter-sidebar {
+      background: var(--color-bg);
+      border: 1px solid #e8e6e1;
+      border-radius: 8px;
+      padding: 24px;
+      height: fit-content;
+    }
+
+    @media (min-width: 1024px) {
+      .filter-sidebar {
+        position: sticky;
+        top: 96px;
+      }
+    }
+
+    .filter-sidebar__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e8e6e1;
+    }
+
+    .filter-sidebar__title {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .filter-sidebar__reset {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      padding: 4px 12px;
+      border: 1px solid var(--color-accent);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .filter-sidebar__reset:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .filter-sidebar__group {
+      margin-bottom: 20px;
+    }
+
+    .filter-sidebar__label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-light);
+      margin-bottom: 8px;
+    }
+
+    .filter-sidebar__select {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 0.875rem;
+      border: 1px solid #d4d1ca;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--color-text);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E7A8A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .filter-sidebar__select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .filter-sidebar__price-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .filter-sidebar__tabs {
+      display: flex;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--color-primary);
+    }
+
+    .filter-sidebar__tab {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--color-primary);
+      background: transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-sidebar__tab--active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .filter-sidebar__tab:not(.filter-sidebar__tab--active):hover {
+      background: var(--color-bg-alt);
+    }
+
+    .filter-sidebar__search-btn {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+
+    .filter-sidebar__search-btn:hover {
+      background: #b8933f;
+    }
+
+    .filter-sidebar__mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 1024px) {
+      .filter-sidebar__mobile-toggle {
+        display: none;
+      }
+    }
+
+    .filter-sidebar__body {
+      display: none;
+    }
+
+    .filter-sidebar__body--open {
+      display: block;
+    }
+
+    @media (min-width: 1024px) {
+      .filter-sidebar__body {
+        display: block !important;
+      }
+    }
+
+    /* ===== RESULTS AREA ===== */
+    .results {
+      min-height: 400px;
+    }
+
+    .results__toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e8e6e1;
+    }
+
+    .results__count {
+      font-size: 0.9375rem;
+      color: var(--color-text-light);
+    }
+
+    .results__count strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .results__sort {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .results__sort-label {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      white-space: nowrap;
+    }
+
+    .results__sort-select {
+      padding: 8px 32px 8px 12px;
+      font-size: 0.8125rem;
+      border: 1px solid #d4d1ca;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--color-text);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E7A8A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+    }
+
+    .results__sort-select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .results__view-toggle {
+      display: flex;
+      gap: 4px;
+    }
+
+    .results__view-btn {
+      padding: 8px;
+      border-radius: 4px;
+      color: var(--color-text-light);
+      transition: all 0.2s;
+    }
+
+    .results__view-btn--active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .results__view-btn:hover:not(.results__view-btn--active) {
+      background: var(--color-bg-alt);
+    }
+
+    /* ===== PROPERTY GRID ===== */
+    .property-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .property-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ===== PROPERTY CARD ===== */
+    .property-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e8e6e1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .property-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .property-card__image-wrapper {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+
+    .property-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .property-card:hover .property-card__image {
+      transform: scale(1.06);
+    }
+
+    .property-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    .property-card__badge--sale {
+      background: var(--color-primary);
+    }
+
+    .property-card__badge--rent {
+      background: var(--color-secondary);
+    }
+
+    .property-card__badge--featured {
+      background: var(--color-accent);
+    }
+
+    .property-card__favorite {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .property-card__favorite:hover {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .property-card__favorite svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--color-text-light);
+      stroke-width: 2;
+      transition: all 0.2s;
+    }
+
+    .property-card__favorite--active svg {
+      fill: #e74c3c;
+      stroke: #e74c3c;
+    }
+
+    .property-card__content {
+      padding: 20px;
+    }
+
+    .property-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .property-card__price-monthly {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      font-family: var(--font-body);
+      font-weight: 400;
+    }
+
+    .property-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .property-card__location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: 16px;
+    }
+
+    .property-card__location svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .property-card__specs {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f0eee9;
+    }
+
+    .property-card__spec {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    .property-card__spec svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-accent);
+    }
+
+    .property-card__link {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      margin-top: 16px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+
+    .property-card__link:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ===== NO RESULTS ===== */
+    .results__empty {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .results__empty--visible {
+      display: block;
+    }
+
+    .results__empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .results__empty-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .results__empty-text {
+      font-size: 0.9375rem;
+      color: var(--color-text-light);
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    .results__empty-btn {
+      padding: 12px 28px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .results__empty-btn:hover {
+      background: #b8933f;
+    }
+
+    /* ===== PAGINATION ===== */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid #e8e6e1;
+    }
+
+    .pagination__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      border: 1px solid #d4d1ca;
+      transition: all 0.2s;
+    }
+
+    .pagination__btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .pagination__btn--active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    .pagination__btn--disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .pagination__btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      background: var(--color-primary);
+      padding: 64px 24px;
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .cta-band__inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-band__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .cta-band__text {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 28px;
+    }
+
+    .cta-band__btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+
+    .cta-band__btn:hover {
+      background: #b8933f;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 64px 24px 0;
+    }
+
+    .footer__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 640px) {
+      .footer__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer__inner {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+    }
+
+    .footer__brand-logo {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer__brand-logo span {
+      color: var(--color-accent);
+    }
+
+    .footer__brand-text {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.75rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .footer__social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      margin-bottom: 12px;
+    }
+
+    .footer__contact-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__bottom {
+      max-width: 1400px;
+      margin: 48px auto 0;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .footer__copyright {
+      font-size: 0.8125rem;
+    }
+
+    .footer__legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__legal-link {
+      font-size: 0.8125rem;
+      transition: color 0.2s;
+    }
+
+    .footer__legal-link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== UTILITIES ===== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span>Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a>
+        <a href="properties.html" class="header__nav-link header__nav-link--active" data-i18n="nav_properties">Properties</a>
+        <a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a>
+        <a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a>
+        <a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a>
+        <a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a>
+        <a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a>
+        <a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" aria-label="Toggle language" data-lang="en">EN / JP</button>
+
+        <button class="header__favorites-btn" id="favoritesBtn" aria-label="View favorites">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="header__favorites-badge" id="favBadge" data-count="0">0</span>
+        </button>
+
+        <a href="contact.html" class="header__contact-btn" data-i18n="nav_contact">Contact Us</a>
+
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <a href="index.html" class="mobile-drawer__link" data-i18n="nav_home">Home</a>
+    <a href="properties.html" class="mobile-drawer__link" data-i18n="nav_properties">Properties</a>
+    <a href="areas.html" class="mobile-drawer__link" data-i18n="nav_areas">Area Guide</a>
+    <a href="services.html" class="mobile-drawer__link" data-i18n="nav_services">Services</a>
+    <a href="about.html" class="mobile-drawer__link" data-i18n="nav_about">About</a>
+    <a href="team.html" class="mobile-drawer__link" data-i18n="nav_team">Team</a>
+    <a href="blog.html" class="mobile-drawer__link" data-i18n="nav_blog">Blog</a>
+    <a href="faq.html" class="mobile-drawer__link" data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html" class="mobile-drawer__link" data-i18n="nav_contact">Contact Us</a>
+  </nav>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-header">
+    <h1 class="page-header__title" data-i18n="properties_title">Properties</h1>
+    <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <span class="page-header__breadcrumb-sep">›</span>
+      <span class="page-header__breadcrumb-current" data-i18n="nav_properties">Properties</span>
+    </nav>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="search-page" id="searchPage">
+    <div class="search-page__layout">
+
+      <!-- ===== FILTER SIDEBAR ===== -->
+      <aside class="filter-sidebar" id="filterSidebar" aria-label="Property filters">
+
+        <button class="filter-sidebar__mobile-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterBody">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          <span data-i18n="filter_toggle">Filters &amp; Search</span>
+        </button>
+
+        <div class="filter-sidebar__body" id="filterBody">
+          <div class="filter-sidebar__header">
+            <h2 class="filter-sidebar__title" data-i18n="filter_title">Filters</h2>
+            <button class="filter-sidebar__reset" id="resetFilters" data-i18n="filter_reset">Reset All</button>
+          </div>
+
+          <!-- Buy / Rent Toggle -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" data-i18n="filter_listing_type">Listing Type</label>
+            <div class="filter-sidebar__tabs" role="tablist">
+              <button class="filter-sidebar__tab filter-sidebar__tab--active" role="tab" data-listing="all" aria-selected="true" data-i18n="filter_all">All</button>
+              <button class="filter-sidebar__tab" role="tab" data-listing="buy" aria-selected="false" data-i18n="filter_buy">Buy</button>
+              <button class="filter-sidebar__tab" role="tab" data-listing="rent" aria-selected="false" data-i18n="filter_rent">Rent</button>
+            </div>
+          </div>
+
+          <!-- Area -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" for="filterArea" data-i18n="filter_area">Area</label>
+            <select class="filter-sidebar__select" id="filterArea" data-filter="area">
+              <option value="all" data-i18n="filter_all_areas">All Areas</option>
+              <option value="yokohama">Yokohama</option>
+              <option value="kamakura">Kamakura</option>
+              <option value="hayama">Hayama</option>
+              <option value="shonan">Shonan</option>
+              <option value="zushi">Zushi</option>
+            </select>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" data-i18n="filter_price_range">Price Range</label>
+            <div class="filter-sidebar__price-row">
+              <select class="filter-sidebar__select" id="filterPriceMin" data-filter="priceMin" aria-label="Minimum price">
+                <option value="0" data-i18n="filter_min">Min</option>
+                <option value="300000">$300,000</option>
+                <option value="500000">$500,000</option>
+                <option value="700000">$700,000</option>
+                <option value="1000000">$1,000,000</option>
+                <option value="1500000">$1,500,000</option>
+              </select>
+              <select class="filter-sidebar__select" id="filterPriceMax" data-filter="priceMax" aria-label="Maximum price">
+                <option value="99999999" data-i18n="filter_max">Max</option>
+                <option value="500000">$500,000</option>
+                <option value="700000">$700,000</option>
+                <option value="1000000">$1,000,000</option>
+                <option value="1500000">$1,500,000</option>
+                <option value="2000000">$2,000,000</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Layout -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" for="filterBedrooms" data-i18n="filter_bedrooms">Bedrooms</label>
+            <select class="filter-sidebar__select" id="filterBedrooms" data-filter="bedrooms">
+              <option value="all" data-i18n="filter_any">Any</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5+</option>
+            </select>
+          </div>
+
+          <!-- Property Type -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" for="filterType" data-i18n="filter_property_type">Property Type</label>
+            <select class="filter-sidebar__select" id="filterType" data-filter="type">
+              <option value="all" data-i18n="filter_all_types">All Types</option>
+              <option value="apartment" data-i18n="filter_apartment">Apartment</option>
+              <option value="house" data-i18n="filter_house">House</option>
+              <option value="penthouse" data-i18n="filter_penthouse">Penthouse</option>
+            </select>
+          </div>
+
+          <!-- Size -->
+          <div class="filter-sidebar__group">
+            <label class="filter-sidebar__label" data-i18n="filter_size">Min. Size (m²)</label>
+            <select class="filter-sidebar__select" id="filterSize" data-filter="size">
+              <option value="0" data-i18n="filter_any">Any</option>
+              <option value="50">50 m²+</option>
+              <option value="80">80 m²+</option>
+              <option value="100">100 m²+</option>
+              <option value="150">150 m²+</option>
+              <option value="200">200 m²+</option>
+            </select>
+          </div>
+
+          <button class="filter-sidebar__search-btn" id="applyFilters" data-i18n="filter_search">
+            Search Properties
+          </button>
+        </div>
+      </aside>
+
+      <!-- ===== RESULTS ===== -->
+      <section class="results" id="resultsSection" aria-label="Property search results">
+
+        <!-- Toolbar -->
+        <div class="results__toolbar">
+          <p class="results__count">
+            <span data-i18n="results_showing">Showing</span>
+            <strong id="resultsCount">10</strong>
+            <span data-i18n="results_properties">properties</span>
+          </p>
+
+          <div class="results__sort">
+            <label class="results__sort-label" for="sortSelect" data-i18n="sort_by">Sort by:</label>
+            <select class="results__sort-select" id="sortSelect">
+              <option value="featured" data-i18n="sort_featured">Featured</option>
+              <option value="price-asc" data-i18n="sort_price_asc">Price: Low to High</option>
+              <option value="price-desc" data-i18n="sort_price_desc">Price: High to Low</option>
+              <option value="size-desc" data-i18n="sort_size">Size: Largest First</option>
+              <option value="newest" data-i18n="sort_newest">Newest</option>
+            </select>
+          </div>
+
+          <div class="results__view-toggle">
+            <button class="results__view-btn results__view-btn--active" id="viewGrid" aria-label="Grid view">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </button>
+            <button class="results__view-btn" id="viewList" aria-label="List view">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Property Grid -->
+        <div class="property-grid" id="propertyGrid">
+
+          <!-- Card 1 -->
+          <article class="property-card" data-id="1" data-area="yokohama" data-type="penthouse" data-bedrooms="3" data-price="1987000" data-sqm="142" data-listing="buy">
+            <div class="property-card__image-wrapper">
+              <img class="property-card__image" src="https://placehold.co/600x450/1a1a2e/C9A45C?text=Minatomirai+Penthouse" alt="Minatomirai Grand Harbor Penthouse" loading="lazy" width="600" height="450">
+              <span class="property-card__badge property-card__badge--sale" data-i18n="badge_for_sale">For Sale</span>
+              <button class="property-card__favorite" data-property-id="1" aria-label="Save to favorites" data-i18n-aria="save_favorite">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="property-card__content">
+              <p class="property-card__price">$1,987,000 <span class="property-card__price-monthly">$10,800/mo</span></p>
+              <h3 class="property-card__title">Minatomirai Grand Harbor Penthouse</h3>
+              <p class="property-card__location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Minatomirai, Yokohama
+              </p>
+              <div class="property-card__specs">
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M2 10h20"/><path d="M7 3v4"/><path d="M12 3v4"/></svg>
+                  3 Bed
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 0 1 1 1v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v2.25"/></svg>
+                  2 Bath
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                  142 m²
+                </span>
+              </div>
+              <a href="property-detail.html?id=1" class="property-card__link" data-i18n="view_details">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="property-card" data-id="2" data-area="yokohama" data-type="house" data-bedrooms="4" data-price="1633000" data-sqm="218" data-listing="buy">
+            <div class="property-card__image-wrapper">
+              <img class="property-card__image" src="https://placehold.co/600x450/1C3A5E/C9A45C?text=Yamate+Residence" alt="The Bluff Residence, Yamate" loading="lazy" width="600" height="450">
+              <span class="property-card__badge property-card__badge--sale" data-i18n="badge_for_sale">For Sale</span>
+              <button class="property-card__favorite" data-property-id="2" aria-label="Save to favorites">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="property-card__content">
+              <p class="property-card__price">$1,633,000 <span class="property-card__price-monthly">$8,900/mo</span></p>
+              <h3 class="property-card__title">The Bluff Residence, Yamate</h3>
+              <p class="property-card__location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Yamate, Yokohama
+              </p>
+              <div class="property-card__specs">
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M2 10h20"/><path d="M7 3v4"/><path d="M12 3v4"/></svg>
+                  4 Bed
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 0 1 1 1v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v2.25"/></svg>
+                  3 Bath
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                  218 m²
+                </span>
+              </div>
+              <a href="property-detail.html?id=2" class="property-card__link" data-i18n="view_details">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="property-card" data-id="3" data-area="kamakura" data-type="house" data-bedrooms="3" data-price="1253000" data-sqm="176" data-listing="rent">
+            <div class="property-card__image-wrapper">
+              <img class="property-card__image" src="https://placehold.co/600x450/0B1F3A/C9A45C?text=Yuigahama+Villa" alt="Yuigahama Ocean Villa" loading="lazy" width="600" height="450">
+              <span class="property-card__badge property-card__badge--rent" data-i18n="badge_for_rent">For Rent</span>
+              <button class="property-card__favorite" data-property-id="3" aria-label="Save to favorites">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="property-card__content">
+              <p class="property-card__price">$1,253,000 <span class="property-card__price-monthly">$7,200/mo</span></p>
+              <h3 class="property-card__title">Yuigahama Ocean Villa</h3>
+              <p class="property-card__location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Yuigahama, Kamakura
+              </p>
+              <div class="property-card__specs">
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M2 10h20"/><path d="M7 3v4"/><path d="M12 3v4"/></svg>
+                  3 Bed
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 0 1 1 1v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v2.25"/></svg>
+                  2 Bath
+                </span>
+                <span class="property-card__spec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                  176 m²
+                </span>
+              </div>
+              <a href="property-detail.html?id=3" class="property-card__link" data-i18n="view_details">View Details</a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="property-card" data-id="4" data-area="hayama" data-type="house" data-bedrooms="4" data-price="1467000" data-sqm="231" data-listing="buy">
+            <div class="property-card__image-wrapper">
+              <img class="property-card__image" src="https://placehold.co/600x450/1C3A5E/ffffff?text=Isshiki+Sanctuary" alt="Isshiki Coastal Sanctuary" loading="lazy" width="600" height="450">
+              <span class="property-card__badge property-card__badge--sale" data-i18n="badge_for_sale">For Sale</span>
+              <button class="property-card__favorite" data-property-id="4" aria-label="Save to favorites">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="property-card__content">
+              <p class="property-card__price">$1,467,000 <span class="property-card__price-monthly">$8,100/mo</span></p>
+              <h3 class="property-card__title">Isshiki Coastal Sanctuary</h3>
+              <p class="property-card__location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 

@@ -1,0 +1,1698 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luxury 2LDK apartment in Minatomirai, Yokohama. Panoramic bay views, 24-hour concierge, pet friendly. Bilingual support for international residents.">
+  <meta name="keywords" content="Minatomirai apartment, Yokohama luxury rental, expat housing Kanagawa, bay view penthouse">
+  <title>Minatomirai Grand Harbor Penthouse | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--color-bg);
+      z-index: 1000;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .header__logo span {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header__nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+    }
+
+    .header__nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .header__nav-link:hover,
+    .header__nav-link--active {
+      color: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header__lang-toggle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: 1px solid var(--color-primary);
+      border-radius: 4px;
+      color: var(--color-primary);
+      transition: all 0.2s;
+    }
+
+    .header__lang-toggle:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites-btn {
+      position: relative;
+      font-size: 1.25rem;
+      color: var(--color-text);
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__contact-btn {
+      display: none;
+      padding: 8px 20px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .header__contact-btn:hover {
+      background: #b8933e;
+    }
+
+    @media (min-width: 768px) {
+      .header__contact-btn {
+        display: inline-block;
+      }
+    }
+
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .header__hamburger {
+        display: none;
+      }
+    }
+
+    .header__hamburger-line {
+      width: 22px;
+      height: 2px;
+      background: var(--color-text);
+      transition: all 0.3s;
+    }
+
+    /* Mobile Drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--color-primary);
+      z-index: 2000;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .mobile-nav--open {
+      right: 0;
+    }
+
+    .mobile-nav__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    .mobile-nav__link {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      color: #fff;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--color-primary);
+      padding: 100px 0 40px;
+    }
+
+    .page-header__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 12px;
+    }
+
+    .page-header__breadcrumb a {
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.2s;
+    }
+
+    .page-header__breadcrumb a:hover {
+      color: var(--color-accent);
+    }
+
+    .page-header__breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      position: relative;
+      padding-bottom: 16px;
+    }
+
+    .page-header__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      padding-top: 72px;
+    }
+
+    .gallery__main {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #eee;
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    @media (min-width: 768px) {
+      .gallery__main {
+        aspect-ratio: 16 / 9;
+        border-radius: 8px 8px 0 0;
+      }
+    }
+
+    .gallery__main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery__count-badge {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gallery__thumbnails {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .gallery__thumbnails {
+        gap: 8px;
+        margin-top: 8px;
+      }
+    }
+
+    .gallery__thumb {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+
+    .gallery__thumb--active {
+      border-color: var(--color-accent);
+    }
+
+    .gallery__thumb:hover {
+      opacity: 0.8;
+    }
+
+    .gallery__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox--open {
+      display: flex;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 2rem;
+      z-index: 10;
+      transition: color 0.2s;
+    }
+
+    .lightbox__close:hover {
+      color: var(--color-accent);
+    }
+
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 2.5rem;
+      padding: 10px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .lightbox__nav:hover {
+      color: var(--color-accent);
+    }
+
+    .lightbox__nav--prev {
+      left: 16px;
+    }
+
+    .lightbox__nav--next {
+      right: 16px;
+    }
+
+    .lightbox__counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    /* ===== PROPERTY LAYOUT ===== */
+    .property-detail {
+      padding: 24px 0 60px;
+    }
+
+    .property-detail__layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .property-detail__layout {
+        grid-template-columns: 1fr 360px;
+        gap: 40px;
+      }
+    }
+
+    /* ===== PROPERTY SUMMARY ===== */
+    .property-summary {
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 24px;
+      margin-bottom: 8px;
+    }
+
+    .property-summary__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .property-summary__badge {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .property-summary__badge--sale {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .property-summary__badge--rent {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .property-summary__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      line-height: 1.3;
+    }
+
+    @media (min-width: 768px) {
+      .property-summary__title {
+        font-size: 2.25rem;
+      }
+    }
+
+    .property-summary__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .property-summary__fav-btn,
+    .property-summary__share-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      color: var(--color-text-light);
+    }
+
+    .property-summary__fav-btn:hover {
+      border-color: #e74c3c;
+      color: #e74c3c;
+    }
+
+    .property-summary__fav-btn--saved {
+      background: #e74c3c;
+      border-color: #e74c3c;
+      color: #fff;
+    }
+
+    .property-summary__share-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .property-summary__price {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .property-summary__price-monthly {
+      font-size: 0.9375rem;
+      color: var(--color-text-light);
+      margin-bottom: 12px;
+    }
+
+    .property-summary__location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9375rem;
+      color: var(--color-text-light);
+      margin-bottom: 6px;
+    }
+
+    .property-summary__station {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+    }
+
+    /* ===== KEY SPECS ===== */
+    .key-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    @media (min-width: 480px) {
+      .key-specs {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .key-specs__item {
+      text-align: center;
+      padding: 16px 8px;
+      background: var(--color-bg-alt);
+      border-radius: 8px;
+    }
+
+    .key-specs__icon {
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      margin-bottom: 6px;
+    }
+
+    .key-specs__value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 2px;
+    }
+
+    .key-specs__label {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== DETAILS TABLE ===== */
+    .details-section {
+      padding: 32px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .details-section__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .details-section__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .details-table tr {
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .details-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .details-table th {
+      text-align: left;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      padding: 12px 16px 12px 0;
+      width: 40%;
+      vertical-align: top;
+    }
+
+    .details-table td {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text);
+      padding: 12px 0;
+    }
+
+    /* ===== AMENITIES TAGS ===== */
+    .amenities-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .amenities-tags__item {
+      padding: 6px 14px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      background: var(--color-bg-alt);
+      color: var(--color-text);
+      border-radius: 20px;
+      border: 1px solid #e8e8e8;
+    }
+
+    /* ===== DESCRIPTION ===== */
+    .description__text {
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .description__text p {
+      margin-bottom: 16px;
+    }
+
+    .description__text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .description__features {
+      margin-top: 20px;
+    }
+
+    .description__features li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 0.9375rem;
+      color: #444;
+    }
+
+    .description__features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    /* ===== VIDEO ===== */
+    .video-section {
+      padding: 32px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .video-section__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .video-section__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .video-section__wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .video-section__wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ===== MAP ===== */
+    .map-section {
+      padding: 32px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .map-section__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .map-section__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .map-section__embed {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .map-section__embed iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    @media (min-width: 768px) {
+      .map-section__embed iframe {
+        height: 400px;
+      }
+    }
+
+    .nearby-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 480px) {
+      .nearby-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .nearby-list__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--color-bg-alt);
+      border-radius: 8px;
+    }
+
+    .nearby-list__icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary);
+      color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .nearby-list__info {
+      flex: 1;
+    }
+
+    .nearby-list__name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+
+    .nearby-list__distance {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    /* ===== AGENT CARD (SIDEBAR) ===== */
+    .agent-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      padding: 24px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .agent-card__header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .agent-card__photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .agent-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 2px;
+    }
+
+    .agent-card__role {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      margin-bottom: 6px;
+    }
+
+    .agent-card__badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--color-accent);
+      color: #fff;
+      border-radius: 3px;
+    }
+
+    .agent-card__contact-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .agent-card__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .agent-card__btn--phone {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .agent-card__btn--phone:hover {
+      background: var(--color-secondary);
+    }
+
+    .agent-card__btn--email {
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .agent-card__btn--email:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .agent-card__form-title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+    }
+
+    .agent-card__form-group {
+      margin-bottom: 12px;
+    }
+
+    .agent-card__label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .agent-card__input,
+    .agent-card__textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      transition: border-color 0.2s;
+      background: var(--color-bg-alt);
+    }
+
+    .agent-card__input:focus,
+    .agent-card__textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .agent-card__textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .agent-card__submit {
+      width: 100%;
+      padding: 12px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 6px;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+
+    .agent-card__submit:hover {
+      background: #b8933e;
+    }
+
+    .agent-card__success {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: #27ae60;
+      font-weight: 600;
+    }
+
+    .agent-card__success--visible {
+      display: block;
+    }
+
+    .agent-card__input--error {
+      border-color: #e74c3c;
+    }
+
+    .agent-card__error-msg {
+      font-size: 0.6875rem;
+      color: #e74c3c;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* ===== SIMILAR PROPERTIES ===== */
+    .similar-properties {
+      padding: 60px 0;
+      background: var(--color-bg-alt);
+    }
+
+    .similar-properties__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: 8px;
+      position: relative;
+      padding-bottom: 16px;
+    }
+
+    .similar-properties__title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .similar-properties__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    @media (min-width: 480px) {
+      .similar-properties__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .similar-properties__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ===== PROPERTY CARD ===== */
+    .property-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .property-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .property-card__image-wrapper {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .property-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .property-card:hover .property-card__image {
+      transform: scale(1.05);
+    }
+
+    .property-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 3px;
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .property-card__fav {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--color-text-light);
+      transition: all 0.2s;
+    }
+
+    .property-card__fav:hover {
+      color: #e74c3c;
+    }
+
+    .property-card__fav--saved {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    .property-card__body {
+      padding: 16px;
+    }
+
+    .property-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .property-card__title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+
+    .property-card__location {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: 12px;
+    }
+
+    .property-card__specs {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .property-card__spec {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    .property-card__spec-icon {
+      color: var(--color-accent);
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      background: var(--color-primary);
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .cta-band__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .cta-band__title {
+        font-size: 2rem;
+      }
+    }
+
+    .cta-band__btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .cta-band__btn:hover {
+      background: #b8933e;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 60px 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 40px;
+    }
+
+    @media (min-width: 480px) {
+      .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .footer__grid {
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      }
+    }
+
+    .footer__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer__brand-name span {
+      color: var(--color-accent);
+    }
+
+    .footer__brand-text {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .footer__social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer__link {
+      display: block;
+      font-size: 0.875rem;
+      padding: 4px 0;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      margin-bottom: 12px;
+    }
+
+    .footer__contact-icon {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer__bottom-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer__bottom-links a {
+      transition: color 0.2s;
+    }
+
+    .footer__bottom-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== BACK TO SEARCH ===== */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      padding: 16px 0 0;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span>Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a>
+        <a href="properties.html" class="header__nav-link header__nav-link--active" data-i18n="nav_properties">Properties</a>
+        <a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a>
+        <a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a>
+        <a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a>
+        <a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a>
+        <a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a>
+        <a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>
+        <button class="header__favorites-btn" id="headerFavBtn" aria-label="View favorites">
+          ♥
+          <span class="header__favorites-badge" id="headerFavCount">0</span>
+        </button>
+        <a href="contact.html" class="header__contact-btn" data-i18n="nav_contact">Contact Us</a>
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <button class="mobile-nav__close" id="mobileNavClose" aria-label="Close menu">✕</button>
+    <a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a>
+    <a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a>
+    <a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a>
+    <a href="services.html" class="mobile-nav__link" data-i18n="nav_services">Services</a>
+    <a href="about.html" class="mobile-nav__link" data-i18n="nav_about">About</a>
+    <a href="team.html" class="mobile-nav__link" data-i18n="nav_team">Team</a>
+    <a href="blog.html" class="mobile-nav__link" data-i18n="nav_blog">Blog</a>
+    <a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html" class="mobile-nav__link" data-i18n="nav_contact">Contact Us</a>
+  </nav>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image">›</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="Property photo enlarged">
+    <div class="lightbox__counter" id="lightboxCounter"></div>
+  </div>
+
+  <main>
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery" aria-label="Property photo gallery">
+      <div class="container">
+        <a href="properties.html" class="back-link" data-i18n="back_to_search">
+          ← Back to Search
+        </a>
+      </div>
+      <div class="container" style="margin-top: 12px;">
+        <div class="gallery__main" id="galleryMain" role="button" tabindex="0" aria-label="Open photo in lightbox">
+          <img class="gallery__main-img" id="galleryMainImg"
+               src="https://placehold.co/1200x675/1a1a2e/c9a45c?text=Minatomirai+Penthouse+1"
+               alt="Luxury penthouse living room with panoramic bay views in Minatomirai, Yokohama">
+          <div class="gallery__count-badge">
+            <span>📷</span>
+            <span>1 / 5</span>
+          </div>
+        </div>
+        <div class="gallery__thumbnails" id="galleryThumbs">
+          <div class="gallery__thumb gallery__thumb--active" data-index="0">
+            <img src="https://placehold.co/400x300/1a1a2e/c9a45c?text=Living+Room"
+                 alt="Living room view">
+          </div>
+          <div class="gallery__thumb" data-index="1">
+            <img src="https://placehold.co/400x300/1c3a5e/c9a45c?text=Bay+View"
+                 alt="Bay view from terrace">
+          </div>
+          <div class="gallery__thumb" data-index="2">
+            <img src="https://placehold.co/400x300/0b1f3a/c9a45c?text=Kitchen"
+                 alt="Modern kitchen">
+          </div>
+          <div class="gallery__thumb" data-index="3">
+            <img src="https://placehold.co/400x300/2c3e50/c9a45c?text=Bedroom"
+                 alt="Master bedroom">
+          </div>
+          <div class="gallery__thumb" data-index="4">
+            <img src="https://placehold.co/400x300/34495e/c9a45c?text=Bathroom"
+                 alt="Spa-like bathroom">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROPERTY DETAIL CONTENT ===== -->
+    <section class="property-detail">
+      <div class="container">
+        <div class="property-detail__layout">
+
+          <!-- ===== MAIN CONTENT ===== -->
+          <div class="property-detail__main">
+
+            <!-- Property Summary -->
+            <div class="property-summary">
+              <div class="property-summary__top">
+                <div>
+                  <span class="property-summary__badge property-summary__badge--sale" data-i18n="badge_for_sale">For Sale</span>
+                  <span class="property-summary__badge property-summary__badge--rent" data-i18n="badge_for_rent">For Rent</span>
+                  <h1 class="property-summary__title" data-i18n="property_title">Minatomirai Grand Harbor Penthouse</h1>
+                </div>
+                <div class="property-summary__actions">
+                  <button class="property-summary__fav-btn" id="favBtn" data-property-id="1" aria-label="Save to favorites" title="Save to Favorites">
+                    ♥
+                  </button>
+                  <button class="property-summary__share-btn" id="shareBtn" aria-label="Share this property" title="Share">
+                    ↗
+                  </button>
+                </div>
+              </div>
+              <div class="property-summary__price" data-i18n="property_price">$1,987,000</div>
+              <div class="property-summary__price-monthly" data-i18n="property_price_monthly">$10,800 / month</div>
+              <div class="property-summary__location">
+                <span>📍</span>
+                <span data-i18n="property_location">Minatomirai, Yokohama, Kanagawa</span>
+              </div>
+              <div class="property-summary__station">
+                <span>🚃</span>
+                <span data-i18n="property_station">5 min walk to Minatomirai Station (Minato Mirai Line)</span>
+              </div>
+            </div>
+
+            <!-- Key Specs -->
+            <div class="key-specs">
+              <div class="key-specs__item">
+                <div class="key-specs__icon">🛏</div>
+                <div class="key-specs__value">3</div>
+                <div class="key-specs__label" data-i18n="label_bedrooms">Bedrooms</div>
+              </div>
+              <div class="key-specs__item">
+                <div class="key-specs__icon">🚿</div>
+                <div class="key-specs__value">2</div>
+                <div class="key-specs__label" data-i18n="label_bathrooms">Bathrooms</div>
+              </div>
+              <div class="key-specs__item">
+                <div class="key-specs__icon">📐</div>
+                <div class="key-specs__value">142 m²</div>
+                <div class="key-specs__label" data-i18n="label_area">Area</div>
+              </div>
+              <div class="key-specs__item">
+                <div class="key-specs__icon">🏢</div>
+                <div class="key-specs__value">2018</div>
+                <div class="key-specs__label" data-i18n="label_built">Year Built</div>
+              </div>
+            </div>
+
+            <!-- Details Table -->
+            <div class="details-section">
+              <h2 class="details-section__title" data-i18n="section_property_details">Property Details</h2>
+              <table class="details-table">
+                <tbody>
+                  <tr>
+                    <th data-i18n="detail_layout">Layout</th>
+                    <td>3LDK</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_area">Floor Area</th>
+                    <td>142.36 m²</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_floor">Floor</th>
+                    <td>32F / 38F</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_direction">Facing Direction</th>
+                    <td data-i18n="detail_direction_val">South-West (Bay Side)</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_built">Year Built</th>
+                    <td>2018</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_structure">Structure</th>
+                    <td data-i18n="detail_structure_val">Reinforced Concrete (RC)</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_management_fee">Management Fee</th>
+                    <td>¥35,000 / month</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_reserve_fund">Repair Reserve Fund</th>
+                    <td>¥18,000 / month</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_deposit">Deposit / Key Money</th>
+                    <td data-i18n="detail_deposit_val">2 months / 1 month</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_pets">Pets</th>
+                    <td data-i18n="detail_pets_val">Allowed (conditions apply)</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_parking">Parking</th>
+                    <td data-i18n="detail_parking_val">1 space included (underground)</td>
+                  </tr>
+                  <tr>
+                    <th data-i18n="detail_furnished">Furnished</th>
+                    <td data-i18n="detail_furnished_val">Partially furnished</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="amenities-tags" aria-label="Amenities and features">
+                <span class="amenities-tags__item" data-i18n="amenity_furnished">Partially Furnished</span>
+                <span class="amenities-tags__item" data-i18n="amenity_pet">Pet Friendly</span>
+                <span class="amenities-tags__item" data-i18n="amenity_gym">Fitness Suite</span>
+                <span class="amenities-tags__item" data-i18n="amenity_concierge">24h Concierge</span>
+                <span class="amenities-tags__item" data-i18n="amenity_lounge">Residents' Lounge</span>
+                <span class="amenities-tags__item" data-i18n="amenity_parking">Underground Parking</span>
+                <span class="amenities-tags__item" data-i18n="amenity_terrace">Private Terrace</span>
+                <span class="amenities-tags__item" data-i18n="amenity_floor_heating">Floor Heating</span>
+                <span class="amenities-tags__item" data-i18n="amenity_auto_bath">Auto Bath</span>
+                <span class="amenities-tags__item" data-i18n="amenity_security">24h Security</span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="details-section">
+              <h2 class="details-section__title" data-i18n="section_description">Description</h2>
+              <div class="description__text">
+                <p data-i18n="desc_p1">A rare waterfront penthouse commanding cinematic views across Yokohama Bay and the illuminated skyline. Floor-to-ceiling glass, a private corner terrace and exquisitely composed interiors create an atmosphere of quiet sophistication. Residents enjoy concierge service, a private lounge, fitness facilities and direct access to Minatomirai's dining and cultural destinations.</p>
+                <p data-i18n="desc_p2">International schools and central Tokyo are within convenient reach. The building offers 24-hour security, underground parking and meticulously maintained common areas. This is an exceptional opportunity for discerning international families and professionals seeking the finest in urban coastal living.</p>
+                <p data-i18n="desc_p3">Located in the heart of Minatomirai, residents benefit from proximity to world-class shopping at MARK IS and Landmark Tower, cultural venues including the Yokohama Museum of Art, and waterfront promenades perfect for morning and evening walks. The Minato Mirai Line provides swift connections to Yokohama Station and Shibuya.</p>
+              </div>
+              <ul class="description__features">
+                <li data-i18n="feature_1">Panoramic bay views from every room</li>
+                <li data-i18n="feature_2">Private corner terrace with outdoor seating</li>
+                <li data-i18n="feature_3">24-hour concierge and security</li>
+                <li data-i18n="feature_4">Residents' fitness suite and lounge</li>
+                <li data-i18n="feature_5">Secure underground parking included</li>
+                <li data-i18n="feature_6">Pet friendly with conditions</li>
+              </ul>
+            </div>
+
+            <!-- Video Tour -->
+            <div class="video-section">
+              <h2 class="video-section__title" data-i18n="section_video">Video Tour</h2>
+              <div class="video-section__wrapper">
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Property Video Tour - Minatomirai Grand Harbor Penthouse"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Map & Nearby -->
+            <div class="map-section">
+              <h2 class="map-section__title" data-i18n="section_location">Location</h2>
+              <div class="map-section__embed">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.5!2d139.6328!3d35.4579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185cf50560f0e7%3A0x6fc8b2e94d0b3277!2sMinatomirai%2C%20Nishi%20Ward%2C%20Yokohama%2C%20Kanagawa!5e0!3m2!1sen!2sjp!4v1700000000000!5m2!1sen!2sjp"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Property location map - Minatomirai, Yokohama">
+                </iframe>
+              </div>
+
+              <h3 style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--color-primary); margin-bottom: 16px;" data-i18n="section_nearby">Nearby Facilities</h3>
+              <div class="nearby-list">
+                <div class="nearby-list__item">
+                  <div class="nearby-list__icon">🚃</div>
+                  <div class="nearby-list__info">
+                    <div class="nearby-list__name" data-i18n="nearby_station">Minatomirai Station</div>
+                    <div class="nearby-list__distance" data-i18n="nearby_station_dist">5 min walk</div>
+                  </div>
+                </div>
+                <div class="nearby-list__item">
+                  <div class="nearby-list__icon">🛒</div>
+                  <div class="nearby-list__info">
+                    <div class="nearby-list__name" data-i18n="nearby_supermarket">MARK IS Yokohama</div>
+                    <div class="nearby-list__distance" data-i18n="nearby_supermarket_dist">3 min walk</div>
+                  </div>
+                </div>
+                <div class="nearby-list__item">
+                  <div class="nearby-list__icon">🏫</div>
+                  <div class="nearby-list__info">
+                    <div class="nearby-list__name" data-i18n="nearby_school">Yokohama International School</div>
+                    <div class="nearby-list__distance" data-i18n="nearby_school_dist">12 min by car</div>
+                  </div>
+                </div>
+                <div class="nearby-list__item">
+                  <div class="nearby-list__icon">🏥</div>
+                  <div class="nearby-list__info">
+                    <div class="nearby-list__name" data-i18n="nearby_hospital">Yokohama Minato Red Cross Hospital</div>
+                    <div class="nearby-list__distance" data-i18n="nearby_hospital_dist">8 min walk</div>
+                  </div>
+                </div>
+                <div class="nearby-list__item">
+                  <div class="nearby-list__icon">🏛</div>
+                  <div class="nearby-list__info">
+                    <div class="nearby-list__name" data-i18n="nearby_museum">Yokohama Museum of Art</div>
+                    <div class="nearby-list__distance" data-i18n="nearby_museum_dist">6 min walk</div>
+                  </div>
+                </div

@@ -1,0 +1,1586 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover luxury homes for sale and rent in Yokohama, Kamakura, Hayama, Shonan and Zushi. Bilingual real estate guidance for expats, international families and overseas investors.">
+  <meta name="keywords" content="Kanagawa luxury real estate, Yokohama property for sale, Kamakura luxury homes, Hayama villas, Shonan oceanfront property, Zushi real estate, Japan property for foreigners, English-speaking real estate agent Yokohama, expat housing Kanagawa, buy property in Japan">
+  <title>Home | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #0B1F3A;
+      --color-secondary: #1C3A5E;
+      --color-accent: #C9A45C;
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F7F5F0;
+      --color-text: #1A1A2E;
+      --color-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.97);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 72px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .header__logo-accent {
+      color: var(--color-accent);
+    }
+
+    .header__nav {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header__nav {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+      }
+    }
+
+    .header__nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .header__nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.3s;
+    }
+
+    .header__nav-link:hover::after,
+    .header__nav-link--active::after {
+      width: 100%;
+    }
+
+    .header__nav-link:hover {
+      color: var(--color-accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header__lang-toggle {
+      display: flex;
+      background: var(--color-bg-alt);
+      border-radius: 20px;
+      overflow: hidden;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .header__lang-btn {
+      padding: 6px 12px;
+      background: transparent;
+      color: var(--color-text-light);
+      transition: all 0.3s;
+    }
+
+    .header__lang-btn--active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .header__favorites {
+      position: relative;
+      background: none;
+      font-size: 1.25rem;
+      color: var(--color-text);
+    }
+
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__contact-btn {
+      display: none;
+      padding: 8px 20px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    @media (min-width: 768px) {
+      .header__contact-btn { display: inline-block; }
+    }
+
+    .header__contact-btn:hover {
+      background: #b8933e;
+    }
+
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      padding: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .header__hamburger { display: none; }
+    }
+
+    .header__hamburger-line {
+      width: 24px;
+      height: 2px;
+      background: var(--color-primary);
+      transition: all 0.3s;
+    }
+
+    /* Mobile Drawer */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--color-primary);
+      z-index: 2000;
+      transition: right 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 40px 40px;
+    }
+
+    .drawer--open {
+      right: 0;
+    }
+
+    .drawer__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    .drawer__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .drawer__nav-link {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .drawer__nav-link:hover {
+      color: var(--color-accent);
+    }
+
+    .drawer__contact-btn {
+      margin-top: 40px;
+      padding: 14px 32px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      background-size: cover;
+      background-position: center;
+      animation: kenBurns 20s ease infinite;
+    }
+
+    .hero__slide--active {
+      opacity: 1;
+    }
+
+    @keyframes kenBurns {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .hero__slide:nth-child(1) {
+      background-image: url('https://placehold.co/1920x1080/0B1F3A/C9A45C?text=Minatomirai+Night+Skyline');
+    }
+
+    .hero__slide:nth-child(2) {
+      background-image: url('https://placehold.co/1920x1080/1C3A5E/C9A45C?text=Shonan+Coast+Sunset');
+      animation-delay: 6s;
+    }
+
+    .hero__slide:nth-child(3) {
+      background-image: url('https://placehold.co/1920x1080/0B1F3A/C9A45C?text=Kamakura+Seaside');
+      animation-delay: 12s;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,31,58,0.55) 0%, rgba(11,31,58,0.75) 100%);
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 20px;
+      max-width: 860px;
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(0.9375rem, 2vw, 1.125rem);
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero__scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: scrollBounce 2s ease infinite;
+    }
+
+    .hero__scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid rgba(255,255,255,0.6);
+      border-bottom: 2px solid rgba(255,255,255,0.6);
+      transform: rotate(45deg);
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== SEARCH ===== */
+    .search {
+      background: var(--color-bg);
+      padding: 48px 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    .search__panel {
+      max-width: 1000px;
+      margin: -80px auto 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .search__tabs {
+      display: flex;
+      border-bottom: 2px solid var(--color-bg-alt);
+    }
+
+    .search__tab {
+      flex: 1;
+      padding: 16px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      background: var(--color-bg-alt);
+      color: var(--color-text-light);
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .search__tab--active {
+      background: #fff;
+      color: var(--color-primary);
+      border-bottom: 3px solid var(--color-accent);
+    }
+
+    .search__form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .search__form {
+        grid-template-columns: repeat(3, 1fr) auto;
+        align-items: end;
+      }
+    }
+
+    .search__field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .search__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-light);
+    }
+
+    .search__select {
+      padding: 12px 16px;
+      border: 1px solid #e0ddd5;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--color-text);
+      background: var(--color-bg-alt);
+      font-family: var(--font-body);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E7A8A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    .search__button {
+      padding: 12px 32px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: 6px;
+      transition: background 0.3s;
+      white-space: nowrap;
+      min-height: 48px;
+    }
+
+    .search__button:hover {
+      background: #b8933e;
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section--alt {
+      background: var(--color-bg-alt);
+    }
+
+    .section--dark {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .section--dark .section__title {
+      color: #fff;
+    }
+
+    .section__title-line {
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 0 auto 16px;
+    }
+
+    .section__subtitle {
+      font-size: 1rem;
+      color: var(--color-text-light);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .section--dark .section__subtitle {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== FEATURED PROPERTIES ===== */
+    .properties__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .properties__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .properties__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .property-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .property-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+    }
+
+    .property-card__image-wrapper {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+    }
+
+    .property-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .property-card:hover .property-card__image {
+      transform: scale(1.08);
+    }
+
+    .property-card__badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 12px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 3px;
+    }
+
+    .property-card__favorite {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .property-card__favorite--active {
+      color: #e74c3c;
+    }
+
+    .property-card__favorite:hover {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .property-card__body {
+      padding: 20px;
+    }
+
+    .property-card__price {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .property-card__title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .property-card__location {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .property-card__specs {
+      display: flex;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #f0ede6;
+    }
+
+    .property-card__spec {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    .property-card__spec-icon {
+      font-size: 0.875rem;
+    }
+
+    .properties__view-all {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .properties__view-all-link {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .properties__view-all-link:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ===== EXPLORE AREAS ===== */
+    .areas__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .areas__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .areas__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .area-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 280px;
+      cursor: pointer;
+    }
+
+    .area-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+
+    .area-card:hover .area-card__image {
+      transform: scale(1.12);
+    }
+
+    .area-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,31,58,0.1) 0%, rgba(11,31,58,0.7) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: background 0.3s;
+    }
+
+    .area-card:hover .area-card__overlay {
+      background: linear-gradient(180deg, rgba(11,31,58,0.2) 0%, rgba(11,31,58,0.8) 100%);
+    }
+
+    .area-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .area-card__count {
+      font-size: 0.8125rem;
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    /* ===== WHY CHOOSE US ===== */
+    .features__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .features__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .features__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 32px 20px;
+    }
+
+    .feature-card__icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: rgba(201,164,92,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--color-accent);
+    }
+
+    .section--dark .feature-card__icon {
+      background: rgba(201,164,92,0.2);
+    }
+
+    .feature-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .feature-card__text {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: 80px 0;
+      background: var(--color-bg-alt);
+    }
+
+    .testimonials__slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .testimonials__track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .testimonial-card {
+      min-width: 100%;
+      padding: 0 20px;
+    }
+
+    .testimonial-card__inner {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .testimonial-card__stars {
+      color: var(--color-accent);
+      font-size: 1.125rem;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+    }
+
+    .testimonial-card__text {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--color-primary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-card__avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      object-fit: cover;
+    }
+
+    .testimonial-card__name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--color-primary);
+    }
+
+    .testimonial-card__origin {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .testimonials__dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .testimonials__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d0ccc3;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    .testimonials__dot--active {
+      background: var(--color-accent);
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      padding: 72px 0;
+      background: var(--color-primary);
+      text-align: center;
+    }
+
+    .cta-band__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .cta-band__button {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    .cta-band__button:hover {
+      background: #b8933e;
+    }
+
+    /* ===== BLOG PREVIEW ===== */
+    .blog__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .blog__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .blog-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .blog-card__image {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .blog-card__body {
+      padding: 20px;
+    }
+
+    .blog-card__category {
+      display: inline-block;
+      padding: 3px 10px;
+      background: rgba(201,164,92,0.15);
+      color: var(--color-accent);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    .blog-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .blog-card__date {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      margin-bottom: 10px;
+    }
+
+    .blog-card__excerpt {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .blog-card__read-more {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      transition: color 0.3s;
+    }
+
+    .blog-card__read-more:hover {
+      color: #b8933e;
+    }
+
+    .blog__view-all {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .blog__view-all-link {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .blog__view-all-link:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-primary);
+      color: rgba(255,255,255,0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @media (min-width: 768px) {
+      .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .footer__grid {
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      }
+    }
+
+    .footer__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .footer__brand-text {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s;
+    }
+
+    .footer__social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s;
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__contact-item {
+      font-size: 0.8125rem;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .footer__contact-icon {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer__bottom {
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      font-size: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer__bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__bottom-link {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+    }
+
+    .footer__bottom-link:hover {
+      color: var(--color-accent);
+    }
+
+    /* ===== FAVORITES MODAL ===== */
+    .favorites-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .favorites-modal--open {
+      display: flex;
+    }
+
+    .favorites-modal__content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .favorites-modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .favorites-modal__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .favorites-modal__close {
+      background: none;
+      font-size: 1.5rem;
+      color: var(--color-text-light);
+    }
+
+    .favorites-modal__list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .favorites-modal__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--color-bg-alt);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .favorites-modal__remove {
+      background: none;
+      color: #e74c3c;
+      font-size: 1rem;
+    }
+
+    .favorites-modal__empty {
+      text-align: center;
+      color: var(--color-text-light);
+      padding: 32px;
+      font-size: 0.9375rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" data-i18n="site_name">
+        Kanagawa <span class="header__logo-accent">Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main Navigation">
+        <a href="index.html" class="header__nav-link header__nav-link--active" data-i18n="nav_home">Home</a>
+        <a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a>
+        <a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a>
+        <a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a>
+        <a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a>
+        <a href="team.html" class="header__nav-link" data-i18n="nav_team">Team</a>
+        <a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a>
+        <a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <div class="header__lang-toggle">
+          <button class="header__lang-btn header__lang-btn--active" data-lang="en" id="langEN">EN</button>
+          <button class="header__lang-btn" data-lang="ja" id="langJA">JP</button>
+        </div>
+
+        <button class="header__favorites" id="favoritesToggle" aria-label="View Favorites">
+          ♡
+          <span class="header__favorites-badge" id="favoritesBadge">0</span>
+        </button>
+
+        <a href="contact.html" class="header__contact-btn" data-i18n="contact_us">Contact Us</a>
+
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Open Menu">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE DRAWER ===== -->
+  <div class="drawer" id="drawer" role="dialog" aria-label="Mobile Navigation">
+    <button class="drawer__close" id="drawerClose" aria-label="Close Menu">✕</button>
+    <nav class="drawer__nav">
+      <a href="index.html" class="drawer__nav-link" data-i18n="nav_home">Home</a>
+      <a href="properties.html" class="drawer__nav-link" data-i18n="nav_properties">Properties</a>
+      <a href="areas.html" class="drawer__nav-link" data-i18n="nav_areas">Area Guide</a>
+      <a href="services.html" class="drawer__nav-link" data-i18n="nav_services">Services</a>
+      <a href="about.html" class="drawer__nav-link" data-i18n="nav_about">About</a>
+      <a href="team.html" class="drawer__nav-link" data-i18n="nav_team">Team</a>
+      <a href="blog.html" class="drawer__nav-link" data-i18n="nav_blog">Blog</a>
+      <a href="faq.html" class="drawer__nav-link" data-i18n="nav_faq">FAQ</a>
+    </nav>
+    <a href="contact.html" class="drawer__contact-btn" data-i18n="contact_us">Contact Us</a>
+  </div>
+
+  <!-- ===== FAVORITES MODAL ===== -->
+  <div class="favorites-modal" id="favoritesModal">
+    <div class="favorites-modal__content">
+      <div class="favorites-modal__header">
+        <h3 class="favorites-modal__title" data-i18n="favorites_title">Favorites</h3>
+        <button class="favorites-modal__close" id="favoritesClose" aria-label="Close">✕</button>
+      </div>
+      <div class="favorites-modal__list" id="favoritesList">
+        <p class="favorites-modal__empty" data-i18n="no_favorites">No favorites saved yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__slideshow">
+        <div class="hero__slide hero__slide--active" aria-hidden="true"></div>
+        <div class="hero__slide" aria-hidden="true"></div>
+        <div class="hero__slide" aria-hidden="true"></div>
+      </div>
+      <div class="hero__overlay"></div>
+
+      <div class="hero__content">
+        <h1 class="hero__title" data-i18n="hero_headline" data-en="Find Your Home in Kanagawa, Japan" data-ja="神奈川で、理想の住まいを。">
+          Find Your Home in Kanagawa, Japan
+        </h1>
+        <p class="hero__subtitle" data-i18n="hero_subtext" data-en="Distinctive homes, bilingual expertise and discreet guidance for international families, investors and global professionals." data-ja="横浜から湘南・鎌倉・葉山まで。外国人のお客様とご家族へ、英語対応による上質で安心な住まい探しをご提供します。">
+          Distinctive homes, bilingual expertise and discreet guidance for international families, investors and global professionals.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="properties.html" class="cta-band__button" data-i18n="cta_explore">Explore Properties</a>
+          <a href="contact.html" class="cta-band__button" style="background:transparent;border:2px solid #fff;" data-i18n="cta_speak">Speak with an Advisor</a>
+        </div>
+      </div>
+
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="hero__scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ===== SEARCH PANEL ===== -->
+    <section class="search" id="search" aria-label="Property Search">
+      <div class="container">
+        <div class="search__panel">
+          <div class="search__tabs" role="tablist">
+            <button class="search__tab search__tab--active" role="tab" aria-selected="true" data-search-type="buy" data-i18n="tab_buy">Buy</button>
+            <button class="search__tab" role="tab" aria-selected="false" data-search-type="rent" data-i18n="tab_rent">Rent</button>
+          </div>
+          <form class="search__form" action="properties.html" method="get">
+            <div class="search__field">
+              <label class="search__label" for="searchArea" data-i18n="label_area">Area</label>
+              <select class="search__select" id="searchArea" name="area">
+                <option value="">All Areas</option>
+                <option value="yokohama">Yokohama</option>
+                <option value="kawasaki">Kawasaki</option>
+                <option value="shonan">Shonan</option>
+                <option value="kamakura">Kamakura</option>
+                <option value="hayama">Hayama</option>
+                <option value="zushi">Zushi</option>
+              </select>
+            </div>
+            <div class="search__field">
+              <label class="search__label" for="searchPrice" data-i18n="label_price">Price Range</label>
+              <select class="search__select" id="searchPrice" name="price">
+                <option value="">Any Price</option>
+                <option value="0-500000">Under $500,000</option>
+                <option value="500000-1000000">$500,000 – $1,000,000</option>
+                <option value="1000000-1500000">$1,000,000 – $1,500,000</option>
+                <option value="1500000+">$1,500,000+</option>
+              </select>
+            </div>
+            <div class="search__field">
+              <label class="search__label" for="searchLayout" data-i18n="label_layout">Layout</label>
+              <select class="search__select" id="searchLayout" name="layout">
+                <option value="">Any Layout</option>
+                <option value="1K">1K</option>
+                <option value="1LDK">1LDK</option>
+                <option value="2LDK">2LDK</option>
+                <option value="3LDK">3LDK</option>
+                <option value="4LDK+">4LDK+</option>
+              </select>
+            </div>
+            <div class="search__field" style="display:flex;align-items:flex-end;">
+              <button type="submit" class="search__button" data-i18n="search_btn">
+                🔍 Search
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURED PROPERTIES ===== -->
+    <section class="section" id="featured-properties" aria-labelledby="featuredTitle">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__title-line"></div>
+          <h2 class="section__title" id="featuredTitle" data-i18n="featured_title">Featured Properties</h2>
+          <p class="section__subtitle" data-i18n="featured_subtitle">A curated selection of exceptional residences throughout Kanagawa.</p>
+        </div>
+
+        <div class="properties__grid" id="propertiesGrid">
+          <!-- Property 1 -->
+          <article class="property-card" data-property-id="1">
+            <a href="property-detail.html?id=1" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/0B1F3A/C9A45C?text=Minatomirai+Penthouse" alt="Minatomirai Grand Harbor Penthouse" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="1" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$1,987,000</div>
+              <h3 class="property-card__title">Minatomirai Grand Harbor Penthouse</h3>
+              <p class="property-card__location">📍 Minatomirai, Yokohama</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 3 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 2 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 142 m²</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 2 -->
+          <article class="property-card" data-property-id="2">
+            <a href="property-detail.html?id=2" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/1C3A5E/C9A45C?text=Yamate+Residence" alt="The Bluff Residence, Yamate" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="2" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$1,633,000</div>
+              <h3 class="property-card__title">The Bluff Residence, Yamate</h3>
+              <p class="property-card__location">📍 Yamate, Yokohama</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 4 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 3 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 218 m²</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 3 -->
+          <article class="property-card" data-property-id="3">
+            <a href="property-detail.html?id=3" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/0B1F3A/C9A45C?text=Yuigahama+Villa" alt="Yuigahama Ocean Villa" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="3" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$1,253,000</div>
+              <h3 class="property-card__title">Yuigahama Ocean Villa</h3>
+              <p class="property-card__location">📍 Yuigahama, Kamakura</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 3 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 2 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 176 m²</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 4 -->
+          <article class="property-card" data-property-id="4">
+            <a href="property-detail.html?id=4" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/1C3A5E/C9A45C?text=Hayama+Sanctuary" alt="Isshiki Coastal Sanctuary" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="4" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$1,467,000</div>
+              <h3 class="property-card__title">Isshiki Coastal Sanctuary</h3>
+              <p class="property-card__location">📍 Isshiki, Hayama</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 4 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 3 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 231 m²</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 5 -->
+          <article class="property-card" data-property-id="5">
+            <a href="property-detail.html?id=5" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/0B1F3A/C9A45C?text=Enoshima+Residence" alt="Enoshima Horizon Residence" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="5" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$853,000</div>
+              <h3 class="property-card__title">Enoshima Horizon Residence</h3>
+              <p class="property-card__location">📍 Katase Kaigan, Shonan</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 2 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 2 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 104 m²</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Property 6 -->
+          <article class="property-card" data-property-id="6">
+            <a href="property-detail.html?id=6" class="property-card__image-wrapper">
+              <img src="https://placehold.co/600x400/1C3A5E/C9A45C?text=Zushi+Estate" alt="Hiroyama Hilltop Estate" class="property-card__image" loading="lazy">
+              <span class="property-card__badge">Featured</span>
+              <button class="property-card__favorite" data-fav-id="6" aria-label="Save to Favorites">♡</button>
+            </a>
+            <div class="property-card__body">
+              <div class="property-card__price">$1,833,000</div>
+              <h3 class="property-card__title">Hiroyama Hilltop Estate</h3>
+              <p class="property-card__location">📍 Hiroyama, Zushi</p>
+              <div class="property-card__specs">
+                <span class="property-card__spec"><span class="property-card__spec-icon">🛏</span> 5 Bed</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">🚿</span> 4 Bath</span>
+                <span class="property-card__spec"><span class="property-card__spec-icon">📐</span> 286 m²</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="properties__view-all">
+          <a href="properties.html" class="properties__view-all-link" data-i18n="view_all_properties">View All Properties →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPLORE AREAS ===== -->
+    <section class="section section--alt" id="explore-areas" aria-labelledby="areasTitle">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__title-line"></div>
+          <h2 class="section__title" id="areasTitle" data-i18n="explore_areas_title">Explore Areas</h2>
+          <p class="section__subtitle" data-i18n="explore_areas_subtitle">Discover Kanagawa's most sought-after neighborhoods.</p>
+        </div>
+
+        <div class="areas__grid">
+          <a href="areas.html#yokohama" class="area-card">
+            <img src="https://placehold.co/600x400/0B1F3A/C9A45C?text=Yokohama" alt="Yokohama" class="area-card__image" loading="lazy">
+            <div class="area-card__overlay">
+              <h3 class="area-card__name">Yokohama</h3>
+              <span class="area-card__count">4 Properties</span>
+            </div>
+          </a>
+
+          <a href="areas.html#kamakura" class="area-card">
+            <img src="https://placehold.co/600x400/1C3A5E/C9A45C?text=Kamakura" alt="Kamakura" class="area-card__image" loading="lazy">
+            <div class="area-card__overlay">
+              <h3 class="area-card__name">Kamakura</h3>
+              <span class="area-card__count">2 Properties</span>
+            </div>
+          </a>
+
+          <a href="areas.html#shonan" class="area-card">
+            <img src="https://placehold.co/600x400/0B1F3A/C9A45C?text=Shonan" alt="Shonan" class="area-card__image" loading="lazy">
+            <div class="area-card__overlay">
+              <h3 class="area-card__name">Shonan</h3>
+              <span class="area-card__count">2 Properties</span>
+            </div>
+          </a>
+
+          <a href="areas.html#zushi-hayama" class="area-card">
+            <img src="https://placehold.co/600x400/1C3A5E/C9A45C?text=Hayama+%26+Zushi" alt="Hayama & Zushi" class="area-card__image" loading="lazy">
+            <div class="area-card__overlay">
+              <h3 class="area-card__name">Hayama &amp; Zushi</h3>
+              <span class="area-card__count">2 Properties</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHY CHOOSE US ===== -->
+    <section class="section section--dark" id="why-choose-us" aria-labelledby="whyTitle">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__title-line"></div>
+          <h2 class="section__title" id="whyTitle" data-i18n="why_title">Why Choose Us</h2>
+          <p class="section__subtitle" data-i18n="why_subtitle">Trusted by international clients since 2010.</p>
+        </div>
+
+        <div class="features__grid">
+          <div class="feature-card">
+            <div class="feature-card__icon">🌐

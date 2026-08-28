@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the bilingual team at Kanagawa Premier Realty. Our experienced advisors provide expert real estate guidance in English, Japanese, Mandarin and Spanish for international clients in Yokohama, Kamakura, Hayama, Shonan and Zushi.">
+  <meta name="keywords" content="Kanagawa Premier Realty team, bilingual real estate agents Yokohama, English-speaking property advisors Japan, expat real estate support Kanagawa">
+  <title>Our Team | Kanagawa Premier Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1A1A2E;
+      background: #FFFFFF;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; transition: color 0.3s; }
+    ul, ol { list-style: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ===== VARIABLES ===== */
+    :root {
+      --clr-primary: #0B1F3A;
+      --clr-secondary: #1C3A5E;
+      --clr-accent: #C9A45C;
+      --clr-bg: #FFFFFF;
+      --clr-bg-alt: #F7F5F0;
+      --clr-text: #1A1A2E;
+      --clr-text-light: #6E7A8A;
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', 'Noto Sans JP', sans-serif;
+      --max-width: 1200px;
+      --header-height: 80px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: var(--clr-bg);
+      z-index: 1000;
+      transition: box-shadow 0.3s;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .header--scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    .header__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header__logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--clr-primary);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .header__logo span {
+      color: var(--clr-accent);
+    }
+    .header__nav {
+      display: none;
+    }
+    .header__nav-list {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .header__nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--clr-text);
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.3s;
+    }
+    .header__nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--clr-accent);
+      transition: width 0.3s;
+    }
+    .header__nav-link:hover,
+    .header__nav-link--active {
+      color: var(--clr-accent);
+    }
+    .header__nav-link:hover::after,
+    .header__nav-link--active::after {
+      width: 100%;
+    }
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header__lang-toggle {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border: 1px solid var(--clr-primary);
+      border-radius: 4px;
+      color: var(--clr-primary);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .header__lang-toggle:hover {
+      background: var(--clr-primary);
+      color: #fff;
+    }
+    .header__favorites {
+      position: relative;
+      font-size: 1.25rem;
+      color: var(--clr-text);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .header__favorites:hover {
+      color: var(--clr-accent);
+    }
+    .header__favorites-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header__cta {
+      display: none;
+      padding: 10px 22px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .header__cta:hover {
+      background: #b8933e;
+      transform: translateY(-1px);
+    }
+    .header__hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    .header__hamburger-line {
+      width: 24px;
+      height: 2px;
+      background: var(--clr-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .header__hamburger--open .header__hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .header__hamburger--open .header__hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .header__hamburger--open .header__hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: var(--clr-primary);
+      z-index: 1050;
+      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+    }
+    .mobile-nav--open {
+      right: 0;
+    }
+    .mobile-nav__link {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .mobile-nav__link:hover,
+    .mobile-nav__link--active {
+      color: var(--clr-accent);
+    }
+    .mobile-nav__cta {
+      margin-top: 16px;
+      padding: 14px 36px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--clr-primary);
+      padding: 100px 24px 60px;
+      text-align: center;
+      margin-top: var(--header-height);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(11,31,58,0.97) 0%, rgba(28,58,94,0.92) 100%);
+      z-index: 1;
+    }
+    .page-header__inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .page-header__title {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .page-header__title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--clr-accent);
+      margin: 16px auto 0;
+    }
+    .page-header__breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 16px;
+    }
+    .page-header__breadcrumb a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.3s;
+    }
+    .page-header__breadcrumb a:hover {
+      color: var(--clr-accent);
+    }
+    .page-header__breadcrumb-separator {
+      color: rgba(255,255,255,0.3);
+    }
+    .page-header__lead {
+      max-width: 640px;
+      margin: 20px auto 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+    }
+
+    /* ===== TEAM SECTION ===== */
+    .team {
+      padding: 80px 24px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .team__intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 60px;
+    }
+    .team__intro-heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      margin-bottom: 8px;
+    }
+    .team__intro-heading::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: var(--clr-accent);
+      margin: 12px auto 0;
+    }
+    .team__intro-text {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: var(--clr-text-light);
+      line-height: 1.8;
+    }
+    .team__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    /* Staff Card */
+    .staff-card {
+      background: var(--clr-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.35s, box-shadow 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+    .staff-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .staff-card__image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--clr-bg-alt);
+    }
+    .staff-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .staff-card:hover .staff-card__image {
+      transform: scale(1.05);
+    }
+    .staff-card__badges {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .staff-card__lang-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .staff-card__lang-badge--en {
+      background: var(--clr-accent);
+      color: #fff;
+    }
+    .staff-card__lang-badge--jp {
+      background: var(--clr-primary);
+      color: #fff;
+    }
+    .staff-card__lang-badge--zh {
+      background: #C0392B;
+      color: #fff;
+    }
+    .staff-card__lang-badge--es {
+      background: #E67E22;
+      color: #fff;
+    }
+    .staff-card__content {
+      padding: 28px 24px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .staff-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      margin-bottom: 4px;
+    }
+    .staff-card__role {
+      font-size: 0.85rem;
+      color: var(--clr-accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .staff-card__bio {
+      font-size: 0.9rem;
+      color: var(--clr-text-light);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .staff-card__specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .staff-card__specialty-tag {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--clr-bg-alt);
+      color: var(--clr-secondary);
+      border: 1px solid rgba(28,58,94,0.12);
+      transition: all 0.3s;
+    }
+    .staff-card__specialty-tag:hover {
+      background: var(--clr-primary);
+      color: #fff;
+      border-color: var(--clr-primary);
+    }
+    .staff-card__contact-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .staff-card__email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--clr-secondary);
+      transition: color 0.3s;
+    }
+    .staff-card__email-link:hover {
+      color: var(--clr-accent);
+    }
+    .staff-card__email-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      background: var(--clr-primary);
+      padding: 72px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(201,164,92,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-band__inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-band__heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .cta-band__subtext {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .cta-band__button {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .cta-band__button:hover {
+      background: #b8933e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201,164,92,0.3);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--clr-primary);
+      color: rgba(255,255,255,0.7);
+      padding: 64px 24px 0;
+    }
+    .footer__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+    .footer__brand-col { }
+    .footer__logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .footer__logo span {
+      color: var(--clr-accent);
+    }
+    .footer__brand-text {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      max-width: 300px;
+    }
+    .footer__social {
+      display: flex;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .footer__social-link:hover {
+      background: var(--clr-accent);
+      border-color: var(--clr-accent);
+      color: #fff;
+    }
+    .footer__heading {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer__link {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.3s;
+    }
+    .footer__link:hover {
+      color: var(--clr-accent);
+    }
+    .footer__contact-item {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .footer__contact-item a {
+      color: rgba(255,255,255,0.55);
+      transition: color 0.3s;
+    }
+    .footer__contact-item a:hover {
+      color: var(--clr-accent);
+    }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 24px;
+      text-align: center;
+    }
+    .footer__bottom-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .footer__copyright {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer__legal-links {
+      display: flex;
+      gap: 16px;
+    }
+    .footer__legal-link {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.3s;
+    }
+    .footer__legal-link:hover {
+      color: var(--clr-accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 600px) {
+      .team__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .header__nav {
+        display: block;
+      }
+      .header__cta {
+        display: inline-block;
+      }
+      .header__hamburger {
+        display: none;
+      }
+      .page-header {
+        padding: 120px 24px 72px;
+      }
+      .page-header__title {
+        font-size: 3.2rem;
+      }
+      .footer__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer__bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .team__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 36px;
+      }
+      .footer__inner {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .page-header__title {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" aria-label="Kanagawa Premier Realty Home">
+        Kanagawa <span>Premier</span> Realty
+      </a>
+
+      <nav class="header__nav" aria-label="Main Navigation">
+        <ul class="header__nav-list">
+          <li><a href="index.html" class="header__nav-link" data-i18n="nav_home">Home</a></li>
+          <li><a href="properties.html" class="header__nav-link" data-i18n="nav_properties">Properties</a></li>
+          <li><a href="areas.html" class="header__nav-link" data-i18n="nav_areas">Area Guide</a></li>
+          <li><a href="services.html" class="header__nav-link" data-i18n="nav_services">Services</a></li>
+          <li><a href="about.html" class="header__nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="team.html" class="header__nav-link header__nav-link--active" data-i18n="nav_team">Team</a></li>
+          <li><a href="blog.html" class="header__nav-link" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="faq.html" class="header__nav-link" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <button class="header__lang-toggle" id="langToggle" data-i18n="lang_toggle" aria-label="Toggle language">EN / JP</button>
+        <button class="header__favorites" id="favoritesBtn" aria-label="View favorites">
+          ♡
+          <span class="header__favorites-badge" id="favoritesBadge">0</span>
+        </button>
+        <a href="contact.html" class="header__cta" data-i18n="nav_contact">Contact Us</a>
+        <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+          <span class="header__hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-nav__link" data-i18n="nav_home">Home</a>
+    <a href="properties.html" class="mobile-nav__link" data-i18n="nav_properties">Properties</a>
+    <a href="areas.html" class="mobile-nav__link" data-i18n="nav_areas">Area Guide</a>
+    <a href="services.html" class="mobile-nav__link" data-i18n="nav_services">Services</a>
+    <a href="about.html" class="mobile-nav__link" data-i18n="nav_about">About</a>
+    <a href="team.html" class="mobile-nav__link mobile-nav__link--active" data-i18n="nav_team">Team</a>
+    <a href="blog.html" class="mobile-nav__link" data-i18n="nav_blog">Blog</a>
+    <a href="faq.html" class="mobile-nav__link" data-i18n="nav_faq">FAQ</a>
+    <a href="contact.html" class="mobile-nav__cta" data-i18n="nav_contact">Contact Us</a>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="page-header__inner">
+        <h1 class="page-header__title" data-i18n="team_title">Meet Our Team</h1>
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Home</a>
+          <span class="page-header__breadcrumb-separator">›</span>
+          <span data-i18n="nav_team">Team</span>
+        </nav>
+        <p class="page-header__lead" data-i18n="team_lead">
+          Our bilingual advisors combine deep local knowledge with international perspective. Each brings a personal understanding of life in Japan and a commitment to making your property journey clear, comfortable and successful.
+        </p>
+      </div>
+    </section>
+
+    <!-- Team Grid -->
+    <section class="team" id="teamSection">
+      <div class="team__intro">
+        <h2 class="team__intro-heading" data-i18n="team_section_heading">Your Trusted Advisors</h2>
+        <p class="team__intro-text" data-i18n="team_section_text">
+          Every member of our team has navigated international relocation first-hand. We understand the questions, the practicalities and the emotions involved in finding a home in Japan — and we are here to help at every stage.
+        </p>
+      </div>
+
+      <div class="team__grid">
+
+        <!-- Staff Card 1: Aiko Tanaka-Williams -->
+        <article class="staff-card" data-staff-id="1">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/0B1F3A/C9A45C?text=Aiko+Tanaka-Williams"
+              alt="Portrait of Aiko Tanaka-Williams, Managing Director"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_1_name">Aiko Tanaka-Williams</h3>
+            <p class="staff-card__role" data-i18n="staff_1_role">Managing Director &amp; Licensed Real Estate Transaction Specialist</p>
+            <p class="staff-card__bio" data-i18n="staff_1_bio">
+              Raised between Yokohama and London, Aiko brings more than 15 years of experience advising international families and private clients. Fluent in Japanese and English, she specializes in luxury residential acquisitions, cross-cultural negotiations and discreet off-market searches.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Luxury Residential</span>
+              <span class="staff-card__specialty-tag">Investment</span>
+              <span class="staff-card__specialty-tag">Off-Market</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:aiko@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Aiko Tanaka-Williams">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                aiko@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 2: Daniel Chen -->
+        <article class="staff-card" data-staff-id="2">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/1C3A5E/C9A45C?text=Daniel+Chen"
+              alt="Portrait of Daniel Chen, Director of International Investment"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--zh">中文</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_2_name">Daniel Chen</h3>
+            <p class="staff-card__role" data-i18n="staff_2_role">Director of International Investment</p>
+            <p class="staff-card__bio" data-i18n="staff_2_bio">
+              Born in Singapore and educated in the United States and Japan, Daniel advises overseas buyers on residential investment and portfolio strategy. He works in English, Mandarin and Japanese, translating local market detail into clear, commercially grounded recommendations.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Investment</span>
+              <span class="staff-card__specialty-tag">Portfolio Strategy</span>
+              <span class="staff-card__specialty-tag">Market Analysis</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:daniel@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Daniel Chen">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                daniel@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 3: Sofia Martinez -->
+        <article class="staff-card" data-staff-id="3">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/0B1F3A/F7F5F0?text=Sofia+Martinez"
+              alt="Portrait of Sofia Martinez, Senior Relocation and Leasing Advisor"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--es">ES</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_3_name">Sofia Martinez</h3>
+            <p class="staff-card__role" data-i18n="staff_3_role">Senior Relocation &amp; Leasing Advisor</p>
+            <p class="staff-card__bio" data-i18n="staff_3_bio">
+              Originally from Spain, Sofia has made Yokohama home for more than a decade. Drawing on her own relocation experience, she guides executives and families through home searches, school selection and move-in logistics in English, Spanish and conversational Japanese.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Rental</span>
+              <span class="staff-card__specialty-tag">Relocation</span>
+              <span class="staff-card__specialty-tag">Family Services</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:sofia@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Sofia Martinez">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                sofia@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 4: Kenji Murakami -->
+        <article class="staff-card" data-staff-id="4">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/1C3A5E/F7F5F0?text=Kenji+Murakami"
+              alt="Portrait of Kenji Murakami, Senior Sales Advisor"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_4_name">Kenji Murakami</h3>
+            <p class="staff-card__role" data-i18n="staff_4_role">Senior Sales Advisor &amp; Licensed Transaction Specialist</p>
+            <p class="staff-card__bio" data-i18n="staff_4_bio">
+              A Yokohama native with over 12 years in residential brokerage, Kenji brings unmatched local knowledge of Kanagawa's neighborhoods and emerging markets. His patient, detail-oriented approach and bilingual ability make him a trusted guide for both Japanese and international clients navigating complex purchase transactions.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Property Purchase</span>
+              <span class="staff-card__specialty-tag">Local Market</span>
+              <span class="staff-card__specialty-tag">Contract Support</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:kenji@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Kenji Murakami">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                kenji@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 5: Emily Harrison -->
+        <article class="staff-card" data-staff-id="5">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/0B1F3A/C9A45C?text=Emily+Harrison"
+              alt="Portrait of Emily Harrison, Property Management Coordinator"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_5_name">Emily Harrison</h3>
+            <p class="staff-card__role" data-i18n="staff_5_role">Property Management Coordinator</p>
+            <p class="staff-card__bio" data-i18n="staff_5_bio">
+              Originally from Melbourne, Emily oversees our property management portfolio, liaising between overseas owners and tenants with warmth and professional precision. Her background in hospitality management and fluent English-Japanese communication skills ensure every property is attentively cared for.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Property Management</span>
+              <span class="staff-card__specialty-tag">Owner Relations</span>
+              <span class="staff-card__specialty-tag">Tenant Services</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:emily@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Emily Harrison">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                emily@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 6: Yuto Nakamura -->
+        <article class="staff-card" data-staff-id="6">
+          <div class="staff-card__image-wrap">
+            <img
+              src="https://placehold.co/600x750/1C3A5E/C9A45C?text=Yuto+Nakamura"
+              alt="Portrait of Yuto Nakamura, Marketing and Client Relations"
+              class="staff-card__image"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
+            <div class="staff-card__badges">
+              <span class="staff-card__lang-badge staff-card__lang-badge--jp">JP</span>
+              <span class="staff-card__lang-badge staff-card__lang-badge--en">EN</span>
+            </div>
+          </div>
+          <div class="staff-card__content">
+            <h3 class="staff-card__name" data-i18n="staff_6_name">Yuto Nakamura</h3>
+            <p class="staff-card__role" data-i18n="staff_6_role">Marketing &amp; Client Relations</p>
+            <p class="staff-card__bio" data-i18n="staff_6_bio">
+              Yuto shapes the Kanagawa Premier Realty brand and ensures every client touchpoint reflects our standard of care. With experience in digital marketing for international luxury brands and a degree from a UK university, he bridges creative storytelling with genuine client engagement in both English and Japanese.
+            </p>
+            <div class="staff-card__specialties">
+              <span class="staff-card__specialty-tag">Marketing</span>
+              <span class="staff-card__specialty-tag">Client Experience</span>
+              <span class="staff-card__specialty-tag">Digital Strategy</span>
+            </div>
+            <div class="staff-card__contact-row">
+              <a href="mailto:yuto@kanagawapremier.jp" class="staff-card__email-link" aria-label="Email Yuto Nakamura">
+                <svg class="staff-card__email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                yuto@kanagawapremier.jp
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band">
+      <div class="cta-band__inner">
+        <h2 class="cta-band__heading" data-i18n="team_cta_heading">Talk to Our Bilingual Agents</h2>
+        <p class="cta-band__subtext" data-i18n="team_cta_subtext">
+          Whether you are searching for a home, planning an investment or simply exploring life in Kanagawa, our advisors are ready to help — in your language, at your pace.
+        </p>
+        <a href="contact.html" class="cta-band__button" data-i18n="nav_contact">Contact Us</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+
+      <!-- Brand Column -->
+      <div class="footer__brand-col">
+        <div class="footer__logo">Kanagawa <span>Premier</span> Realty</div>
+        <p class="footer__brand-text" data-i18n="footer_brand_text">
+          Exceptional homes and bilingual real estate guidance throughout Yokohama and coastal Kanagawa since 2010.
+        </p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Facebook">FB</a>
+          <a href="#" class="footer__social-link" aria-label="Instagram">IG</a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn">LI</a>
+          <a href="#" class="footer__social-link" aria-label="LINE">LINE</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="footer__heading" data-i18n="footer_quick_links">Quick Links</h4>
+        <ul class="footer__links">
+          <li><a href="index.html" class="footer__link" data-i18n="nav_home">Home</a></li>
+          <li><a href="properties.html" class="footer__link" data-i18n="nav_properties">Properties</a></li>
+          <li><a href="services.html" class="footer__link" data-i18n="nav_services">Services</a></li>
+          <li><a href="about.html" class="footer__link" data-i18n="nav_about">About Us</a></li>
+          <li><a href="team.html" class="footer__link" data-i18n="nav_team">Our Team</a></li>
+          <li><a href="blog.html" class="footer__link" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="faq.html" class="footer__link" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Area Links -->
+      <div>
+        <h4 class="footer__heading" data-i18n="footer_areas">Areas</h4>
+        <ul class="footer__links">
+          <li><a href="areas.html#yokohama" class="footer__link">Yokohama</a></li>
+          <li><a href="areas.html#kamakura" class="footer__link">Kamakura</a></li>
+          <li><a href="areas.html#hayama" class="footer__link">Hayama</a></li>
+          <li><a href="areas.html#shonan" class="footer__link">Shonan</a></li>
+          <li><a href="areas.html#zushi" class="footer__link">Zushi</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="footer__heading" data-i18n="footer_contact">Contact</h4>
+        <p class="footer__contact-item">
+          Harbor View Tower 8F,<br>
+          2-3-5 Minatomirai, Nishi-ku,<br>
+          Yokohama, Kanagawa 220-0012
+        </p>
+        <p class="footer__contact-item">
+          <a href="tel:+81455550188">+81 (0)45-555-0188</a>
+        </p>
+        <p class="footer__contact-item">
+          <a href="mailto:concierge@kanagawapremier.jp">concierge@kanagawapremier.jp</a>
+        </p>
+        <p class="footer__contact-item" data-i18n="footer_hours">
+          Mon–Fri 9:00–18:00 / Sat 10:00–16:00
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2025 Kanagawa Premier Realty. All rights reserved.</p>
+        <div class="footer__legal-links">
+          <a href="terms.html" class="footer__legal-link" data-i18n="footer_terms">Terms of Use</a>
+          <a href="terms.html#privacy" class="footer__legal-link" data-i18n="footer_privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js"></script>
+  <script>
+    // Header scroll shadow
+    (function() {
+      var header = document.getElementById('header');
+      if (header) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 10) {
+            header.classList.add('header--scrolled');
+          } else {
+            header.classList.remove('header--scrolled');
+          }
+        });
+      }
+    })();
+
+    // Mobile menu toggle
+    (function() {
+      var btn = document.getElementById('hamburgerBtn');
+      var nav = document.getElementById('mobileNav');
+      if (btn && nav) {
+        btn.addEventListener('click', function() {
+          var isOpen = nav.classList.toggle('mobile-nav--open');
+          btn.classList.toggle('header__hamburger--open');
+          btn.setAttribute('aria-expanded', isOpen);
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+      }
+    })();
+
+    // Favorites badge from localStorage
+    (function() {
+      var badge = document.getElementById('favoritesBadge');
+      if (badge) {
+        try {
+          var favs = JSON.parse(localStorage.getItem('kpr_favorites') || '[]');
+          badge.textContent = favs.length;
+        } catch(e) {
+          badge.textContent = '0';
+        }
+      }
+    })();
+
+    // Language toggle demo
+    (function() {
+      var toggle = document.getElementById('langToggle');
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          var current = localStorage.getItem('kpr_lang') || 'en';
+          var next = current === 'en' ? 'ja' : 'en';
+          localStorage.setItem('kpr_lang', next);
+          toggle.textContent = next === 'en' ? 'EN / JP' : 'JP / EN';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
