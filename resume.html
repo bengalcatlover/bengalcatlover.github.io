@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>職務経歴書</title>
+<style>
+@page { margin: 15mm 18mm; size: A4; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Meiryo", sans-serif;
+  font-size: 10.5pt;
+  color: #222;
+  line-height: 1.7;
+  background: #fff;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm 18mm;
+}
+h1 {
+  font-size: 18pt;
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+.date-line {
+  text-align: right;
+  font-size: 9pt;
+  color: #666;
+  margin-bottom: 20px;
+}
+.name-line {
+  text-align: right;
+  font-size: 11pt;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 12pt;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 4px;
+  margin: 28px 0 12px 0;
+  color: #1a1a2e;
+}
+h3 {
+  font-size: 10.5pt;
+  margin: 16px 0 6px 0;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 16px 0;
+  font-size: 10pt;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: #f0f2f5;
+  font-weight: 600;
+  white-space: nowrap;
+  width: 130px;
+}
+
+ul {
+  margin: 4px 0 8px 20px;
+  font-size: 10pt;
+}
+li { margin-bottom: 3px; }
+
+.skills-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.skill-badge {
+  background: #e8edf5;
+  color: #1a1a2e;
+  padding: 3px 12px;
+  border-radius: 14px;
+  font-size: 9pt;
+  font-weight: 500;
+}
+
+.section-note {
+  font-size: 9.5pt;
+  color: #555;
+  margin-top: 4px;
+}
+
+@media print {
+  body { padding: 0; }
+  h2 { page-break-after: avoid; }
+  .portfolio-table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>職 務 経 歴 書</h1>
+<p class="date-line">2026年8月29日現在</p>
+<p class="name-line">bengalcatlover</p>
+
+<h2>職務要約</h2>
+<p>慶應義塾大学卒業後、Java SIerでのシステム開発を経て独立。2003年以降、Web制作・開発を25年以上にわたり手がけ、企業サイト・ECサイト・プロモーションサイト等を多数構築。WordPress / Movable Type / XOOPS等のCMS構築実績20年以上。東京大学大学院（学際情報学府）修士課程修了。2024年よりPythonによるAI開発を本格化し、Claude API / GPT API / Gemini APIを活用した業務自動化ツール、RAGチャットボット、ファクトチェックシステム等を開発。現在はWeb制作とAI開発を組み合わせたフルスタック案件に対応。</p>
+
+<h2>スキル</h2>
+
+<h3>プログラミング言語</h3>
+<div class="skills-flex">
+  <span class="skill-badge">Python</span>
+  <span class="skill-badge">PHP</span>
+  <span class="skill-badge">JavaScript</span>
+  <span class="skill-badge">Java</span>
+  <span class="skill-badge">C</span>
+  <span class="skill-badge">HTML/CSS</span>
+  <span class="skill-badge">SQL</span>
+</div>
+
+<h3>CMS・フレームワーク</h3>
+<div class="skills-flex">
+  <span class="skill-badge">WordPress</span>
+  <span class="skill-badge">WooCommerce</span>
+  <span class="skill-badge">Movable Type</span>
+  <span class="skill-badge">XOOPS</span>
+  <span class="skill-badge">Streamlit</span>
+  <span class="skill-badge">Gradio</span>
+</div>
+
+<h3>AI・API</h3>
+<div class="skills-flex">
+  <span class="skill-badge">Claude API (Tool Use)</span>
+  <span class="skill-badge">OpenAI GPT API</span>
+  <span class="skill-badge">Gemini API</span>
+  <span class="skill-badge">RAG / ChromaDB</span>
+  <span class="skill-badge">Make (Integromat)</span>
+  <span class="skill-badge">REST API連携</span>
+</div>
+
+<h3>その他</h3>
+<div class="skills-flex">
+  <span class="skill-badge">Git / GitHub</span>
+  <span class="skill-badge">SEO / MEO</span>
+  <span class="skill-badge">Webディレクション</span>
+  <span class="skill-badge">レスポンシブデザイン</span>
+  <span class="skill-badge">データ分析</span>
+  <span class="skill-badge">FFmpeg</span>
+</div>
+
+<h2>職務経歴</h2>
+
+<h3>個人事業（Web制作・AI開発・教育事業） ― 2003年〜現在</h3>
+<table>
+  <tr><th>期間</th><th>業務内容</th></tr>
+  <tr>
+    <td style="white-space:nowrap;">2025年〜現在</td>
+    <td>
+      <strong>AI活用開発・業務自動化</strong><br>
+      <ul>
+        <li>海外経済ニュース自動収集＋ファクトチェックシステム開発（Python / OpenAI API / Streamlit）。RSS収集→複数ソース突合→信頼度判定→記事ドラフト生成を自動化</li>
+        <li>RAGチャットボット開発（Claude API / ChromaDB）。社内文書をベクトル化し、出典付きで質問応答するシステム</li>
+        <li>AI問い合わせ対応エージェント（Claude API Tool Use / SQLite）。問い合わせの自動分類・FAQ検索・回答生成・エスカレーション判定</li>
+        <li>AI PR動画自動制作（DALL-E / VOICEVOX / FFmpeg）。テーマ入力→台本→画像→ナレーション→動画合成を全自動化</li>
+        <li>不動産AI自動対応エージェント設計（Gemini API / Make / Gmail API）。反響メール自動分類・物件提案・査定報告書を自動生成</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="white-space:nowrap;">2013年〜現在</td>
+    <td>
+      <strong>学習塾運営</strong><br>
+      <ul>
+        <li>学習塾の開業・運営（全教科対応）</li>
+        <li>教材作成、生徒管理、保護者対応を一貫して担当</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="white-space:nowrap;">2003年〜2024年</td>
+    <td>
+      <strong>Web制作・ディレクション</strong><br>
+      <ul>
+        <li>企業コーポレートサイト、ECサイト、プロモーションサイト等を多数構築</li>
+        <li>WordPress / Movable Type / XOOPSによるCMS構築・カスタマイズ</li>
+        <li>大手PCメーカーのプロモーションサイト制作・ディレクション</li>
+        <li>グループ企業のWebサイト統括管理</li>
+        <li>健康食品企業のECサイト構築（フルスクラッチ開発）</li>
+        <li>SEO対策・MEO対策・スマートフォン対応</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h3>Java SI企業（正社員） ― 2002年〜2003年</h3>
+<table>
+  <tr><th>期間</th><th>業務内容</th></tr>
+  <tr>
+    <td style="white-space:nowrap;">2002年〜2003年</td>
+    <td>
+      <strong>Javaシステム開発</strong><br>
+      <ul>
+        <li>業務システムの設計・開発に従事（Java / SQL）</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h3>在学中 ― 1999年〜2002年</h3>
+<table>
+  <tr><th>期間</th><th>業務内容</th></tr>
+  <tr>
+    <td style="white-space:nowrap;">1999年〜</td>
+    <td>
+      <strong>個人でのWeb制作開始</strong><br>
+      <ul>
+        <li>在学中に企業ECサイトを構築し、Web制作を開始</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h2>主要制作物（一部抜粋）</h2>
+<table class="portfolio-table">
+  <tr><th>制作物</th><th>概要</th><th>技術</th></tr>
+  <tr>
+    <td>海外経済ニュースAI</td>
+    <td>RSS自動収集→ファクトチェック→記事ドラフト生成。Streamlit UIで操作</td>
+    <td>Python, OpenAI API, Streamlit</td>
+  </tr>
+  <tr>
+    <td>RAGチャットボット</td>
+    <td>社内文書アップロード→ベクトル化→出典付きAI回答</td>
+    <td>Python, Claude API, ChromaDB</td>
+  </tr>
+  <tr>
+    <td>AI問い合わせエージェント</td>
+    <td>問い合わせ自動分類・FAQ検索・回答生成・エスカレーション</td>
+    <td>Python, Claude API, SQLite</td>
+  </tr>
+  <tr>
+    <td>AI PR動画制作</td>
+    <td>テーマ→台本→画像→ナレーション→動画を全自動生成</td>
+    <td>Python, DALL-E, VOICEVOX, FFmpeg</td>
+  </tr>
+  <tr>
+    <td>英語不動産検索サイト</td>
+    <td>神奈川県の高級不動産を外国人向けに紹介（全11ページ）</td>
+    <td>HTML/CSS, JavaScript, SEO</td>
+  </tr>
+  <tr>
+    <td>不動産AI自動対応</td>
+    <td>反響メール自動分類・物件提案・査定報告書生成</td>
+    <td>Gemini API, Make, Gmail API</td>
+  </tr>
+  <tr>
+    <td>ECサイト構築</td>
+    <td>WooCommerceカスタマイズ、注文フロー改修</td>
+    <td>WordPress, WooCommerce, PHP</td>
+  </tr>
+</table>
+<p class="section-note">ポートフォリオ: https://bengalcatlover.github.io</p>
+
+<h2>学歴</h2>
+<table>
+  <tr><th>年月</th><th>学歴</th></tr>
+  <tr><td>2002年3月</td><td>慶應義塾大学 総合政策学部 卒業</td></tr>
+  <tr><td>2008年3月</td><td>東京大学大学院 学際情報学府 修士課程修了</td></tr>
+</table>
+
+<h2>自己PR</h2>
+<p>Web制作25年の経験をベースに、2024年からAI開発を本格化。「手を動かして形にする」スタイルで、要件を聞いてから動くプロトタイプを出すまでが速いです。WordPress案件ではテーマ開発・プラグインカスタマイズ・WooCommerce改修まで一人で完結でき、AI案件ではAPI連携・データパイプライン・UI構築まで対応します。Claude Codeを日常的に活用し、既存コードの読解・改修を効率よく進められます。長期パートナーとして、制作だけでなく保守・改善まで継続的に関わる働き方を得意としています。</p>
+
+</body>
+</html>
