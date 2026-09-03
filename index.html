@@ -278,27 +278,28 @@ body {
   <h2>Portfolio</h2>
   <div class="portfolio-grid">
 
-    <!-- 1. RAGチャットボット -->
+    <!-- 1. RAGチャットボット（三層検索＋暗黙知キャプチャ） -->
     <div class="portfolio-card">
       <div class="card-img" id="img-rag">
         <img src="screenshots/rag_chatbot.png" alt="RAGチャットボット" onerror="this.parentElement.textContent='スクリーンショット準備中'">
       </div>
       <div class="card-body">
-        <h3>RAG チャットボット</h3>
-        <p>社内文書（PDF・テキスト）をアップロードするだけで、AIが文書内容に基づいて質問に回答するチャットボットシステム。出典表示付きで、ハルシネーション（誤情報）を防止。</p>
+        <h3>Enterprise RAG チャットボット</h3>
+        <p>社内文書をアップロードするだけでなく、現場の暗黙知まで検索できるナレッジシステム。公式規定・プロジェクト記録・ベテランの判断ノウハウを三層に分けて検索し、出典の種類ごとに色分け表示。</p>
         <div class="tech-stack">
-          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Python / FastAPI</span>
           <span class="tech-tag">Claude API</span>
           <span class="tech-tag">ChromaDB</span>
           <span class="tech-tag">Sentence Transformers</span>
-          <span class="tech-tag">Gradio</span>
+          <span class="tech-tag">SSE Streaming</span>
         </div>
         <ul class="feature-list">
-          <li>PDF / テキスト / CSV等の文書を自動チャンク分割・ベクトル化</li>
-          <li>多言語対応の埋め込みモデル（multilingual-e5-small）</li>
-          <li>意味検索で関連箇所を自動抽出し、AIが回答を生成</li>
-          <li>全回答に出典ファイル名を表示</li>
-          <li>Web UIからファイルアップロード・質問が可能</li>
+          <li>三層検索（公式／プロジェクト／暗黙知）で質問タイプに応じた最適な情報を取得</li>
+          <li>会話から「判断の種」を作成→管理者レビュー→承認後にナレッジ化する暗黙知キャプチャ機能</li>
+          <li>出典を層ごとに色分け表示（青＝公式、緑＝PJ記録、橙＝現場知）</li>
+          <li>HttpOnly Cookie認証、CSRF対策、テナント分離設計</li>
+          <li>SSEストリーミングによるリアルタイム回答生成</li>
+          <li>PDF / DOCX / CSV等の文書を自動チャンク分割・ベクトル化</li>
         </ul>
       </div>
     </div>
