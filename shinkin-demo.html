@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a365d">
+<title>営業トーク検索</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#1a365d;--pl:#2c5282;--a:#e53e3e;--bg:#f7fafc;--cb:#fff;--t:#1a202c;--tl:#718096;--bd:#e2e8f0;--ok:#38a169;--tb:#ebf8ff;--tt:#2b6cb0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;background:var(--bg);color:var(--t);min-height:100vh;-webkit-font-smoothing:antialiased}
+.hd{background:linear-gradient(135deg,var(--p),var(--pl));color:#fff;padding:16px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd h1{font-size:18px;font-weight:700;letter-spacing:.5px}.hd p{font-size:11px;opacity:.8;margin-top:2px}
+.sa{padding:16px;position:sticky;top:64px;z-index:90;background:var(--bg)}
+.sb{display:flex;gap:8px;background:var(--cb);border:2px solid var(--bd);border-radius:12px;padding:4px;transition:border-color .2s}
+.sb:focus-within{border-color:var(--p)}
+.sb input{flex:1;border:none;outline:none;font-size:16px;padding:12px;background:transparent;color:var(--t)}
+.sb button{background:var(--p);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
+.sb button:active{opacity:.8}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:12px 0 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cb{flex-shrink:0;padding:6px 14px;border-radius:20px;border:1.5px solid var(--bd);background:var(--cb);font-size:13px;color:var(--tl);cursor:pointer;transition:all .2s}
+.cb.on{background:var(--p);color:#fff;border-color:var(--p)}
+.rs{padding:0 16px 100px}
+.rc{background:var(--cb);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);border-left:4px solid var(--p)}
+.rc .m{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rc .ct{background:var(--tb);color:var(--tt);font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px}
+.rc .sc{font-size:15px;font-weight:700;margin-bottom:4px}
+.rc .cu{font-size:12px;color:var(--tl);margin-bottom:10px}
+.rc .cs{background:#fff5f5;border-left:3px solid var(--a);padding:10px 12px;border-radius:0 8px 8px 0;font-size:14px;margin-bottom:12px;color:#c53030}
+.rc .tk{background:#f0fff4;border-left:3px solid var(--ok);padding:10px 12px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.7;margin-bottom:12px;color:#22543d}
+.rc .te{font-size:13px;color:var(--p);font-weight:600;margin-bottom:6px}
+.rc .cl{font-size:13px;color:#b7791f;margin-bottom:8px}
+.rc .sr{font-size:11px;color:var(--tl);border-top:1px solid var(--bd);padding-top:8px;margin-top:4px}
+.badge{font-size:11px;background:var(--p);color:#fff;padding:2px 6px;border-radius:6px;font-weight:600}
+.cmp{margin:0 16px 12px;background:var(--cb);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.cmp-h{display:grid;grid-template-columns:1fr 1fr}
+.cmp-h div{padding:10px;font-size:13px;font-weight:700;text-align:center}
+.cmp-h .gl{background:#e2e8f0;color:var(--tl)}.cmp-h .ol{background:var(--p);color:#fff}
+.cmp-b{display:grid;grid-template-columns:1fr 1fr}
+.cmp-b>div{padding:12px;font-size:13px;line-height:1.6}
+.cmp-g{background:var(--bg);color:var(--tl);border-right:1px solid var(--bd)}
+.cmp-o{background:#f0fff4;color:#22543d}
+.es{text-align:center;padding:60px 20px;color:var(--tl)}
+.es h2{font-size:16px;margin-bottom:4px;color:var(--t)}.es p{font-size:13px}
+.ld{text-align:center;padding:40px;color:var(--tl)}
+.sp{width:32px;height:32px;border:3px solid var(--bd);border-top-color:var(--p);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ex{padding:0 16px;margin-bottom:16px}
+.ex h3{font-size:13px;color:var(--tl);margin-bottom:8px}
+.ec{display:flex;flex-wrap:wrap;gap:8px}
+.ep{background:var(--cb);border:1.5px solid var(--bd);border-radius:20px;padding:8px 14px;font-size:13px;color:var(--t);cursor:pointer;transition:all .2s}
+.ep:active{background:var(--p);color:#fff}
+</style>
+</head>
+<body>
+<div class="hd"><h1>営業トーク検索</h1><p>ベテランの引き出しを、いつでもスマホから</p></div>
+<div class="sa"><div class="sb"><input type="text" id="si" placeholder="例: 金利が高いと言われた" enterkeyhint="search" maxlength="200" autocomplete="off"><button id="btn">検索</button></div><div class="cats" id="cats"></div></div>
+<div class="ex" id="ex"><h3>よく検索されるシーン</h3><div class="ec" id="ec"></div></div>
+<div id="cmpA"></div>
+<div class="rs" id="res"><div class="es"><h2>お客様の言葉で検索してください</h2><p>「金利が高い」「赤字だけど借りたい」など<br>実際の商談シーンを想像して入力</p></div></div>
+<script>
+"use strict";
+var DATA=[{"id":"DEP-001","category":"預金","scenario":"定期預金の満期案内から継続提案","customer_type":"60代・退職金受取済み","customer_says":"満期になったけど、金利も低いしどうしようかな","talk_script":"お気持ちよく分かります。実は今、満期のタイミングで定期を分けて組み直すお客様が増えています。例えば1,000万円を3本に分けて、半年・1年・2年と満期をずらすんです。こうすると半年ごとに見直しのタイミングが来るので、金利が上がった時にすぐ乗り換えられます。全額を1本で縛るよりずっと柔軟です。ちょっとシミュレーション出してみましょうか。","key_technique":"ラダリング（期間分散）提案で金利不満を解消しつつ預金流出を防ぐ","source":"山田支店長 2024/06/20 本店営業会議","closing_point":"「シミュレーション出してみましょうか」で次のアクションに繋げる"},{"id":"DEP-002","category":"預金","scenario":"普通預金に大口が滞留している顧客への声かけ","customer_type":"50代・自営業","customer_says":"いつ使うか分からないから普通に入れてるんだよ","talk_script":"なるほど、急な仕入れとかもありますもんね。であれば、全額でなくて大丈夫です。例えば半分だけでも短期の定期にしておくと、普通預金の10倍くらいの金利がつきます。中途解約しても元本割れはしないので、保険みたいなものです。運転資金は普通預金に残しておいて、動かさない分だけ働かせるイメージです。","key_technique":"「全額でなくていい」で心理的ハードルを下げる。中途解約でも元本保証を強調","source":"佐藤副支店長 2024/09/12 若手勉強会","closing_point":"「保険みたいなもの」という比喩で安心感を与える"},{"id":"DEP-003","category":"預金","scenario":"積立定期の新規提案","customer_type":"30代・会社員・子育て世帯","customer_says":"貯金したいんだけど、なかなか貯まらなくて","talk_script":"それ、意志の問題じゃないんですよ。仕組みの問題なんです。毎月の給料日に自動で1万円だけ別口座に移す設定をしておくと、手をつけないお金が勝手に貯まります。1年で12万、5年で60万。お子さんの入学資金にちょうどいい金額になります。給振口座がうちにあるので、窓口で5分で設定できますよ。","key_technique":"「意志ではなく仕組み」で責めない。具体的な金額と用途で将来をイメージさせる","source":"鈴木次長 2024/04/15 新人研修","closing_point":"「5分で設定できる」で即決を促す"},{"id":"HL-001","category":"住宅ローン","scenario":"金利が高いと言われたときの切り返し","customer_type":"30代・共働き夫婦","customer_says":"ネット銀行のほうが金利安いんですよね","talk_script":"おっしゃる通り、表面の金利だけ見ればネット銀行のほうが低いです。ただ、住宅ローンって35年のお付き合いなんですよね。例えばお子さんの教育費で一時的に返済がきつくなった時、ネット銀行だとコールセンターに電話して、また別の書類を出して、審査して…となります。うちなら私に電話一本で、返済額の見直しや一時的な減額の相談がすぐできます。月々の差額は2,000円くらいですが、35年間の安心料としてどうですか。","key_technique":"金利差を「月々の差額」に変換して小さく見せる。長期の安心感で勝負する","source":"山田支店長 2024/08/15 A社案件後の振り返り","closing_point":"「月2,000円の安心料」で価格競争から価値競争に転換する"},{"id":"HL-002","category":"住宅ローン","scenario":"変動か固定かで迷っている顧客","customer_type":"30代・初めての住宅購入","customer_says":"変動と固定、どっちがいいんでしょう？","talk_script":"正直に言うと、将来の金利は誰にも分かりません。だからこそ、お客様の家計の余裕度で決めるんです。毎月の返済額が2〜3万円上がっても生活に影響がなければ、変動で低い金利のメリットを取る。もしカツカツであれば、固定で確定させて安心を取る。あとは、ミックスという方法もあって、半分変動・半分固定にすると、どちらに転んでも中間に落ち着きます。ご家庭の家計を少し聞かせていただければ、一番合うプランを出せますよ。","key_technique":"「正解はない」と正直に言うことで信頼を得る。判断基準を金利予測から家計余裕度に切り替える","source":"佐藤副支店長 2024/11/03 住宅ローン相談会","closing_point":"「家計を聞かせてください」で相談の深掘りに持ち込む"},{"id":"HL-003","category":"住宅ローン","scenario":"借換えの提案","customer_type":"40代・10年前に他行で借入","customer_says":"借換えって手数料かかるんでしょ？面倒くさそう","talk_script":"確かに手数料はかかります。ただ、今の残高と金利差で試算すると、手数料を払っても総返済額が150万円くらい減るケースがけっこうあるんです。面倒な手続きは全部こちらでやります。お客様にしていただくのは、書類に何か所かサインするだけです。まず試算だけやってみませんか。得にならなければやめればいいので。","key_technique":"具体的な節約金額を先に出す。手続きの負担を「こちらがやる」で消す","source":"鈴木次長 2024/07/22 借換えキャンペーン時","closing_point":"「得にならなければやめればいい」でリスクゼロを強調"},{"id":"BL-001","category":"事業融資","scenario":"決算が赤字の事業者への対応","customer_type":"50代・製造業社長","customer_says":"赤字なんだけど、運転資金を借りたい","talk_script":"決算書は拝見しました。確かに最終利益は赤字ですが、本業の営業利益は黒字ですよね。赤字の原因は設備の減価償却と特別損失ですから、キャッシュフローで見れば十分回っています。稟議にはこのキャッシュフロー計算書を添付して、本業の収益力を説明する形で書きます。あと、今後の受注見込みの資料があれば、返済原資の裏付けになるのでいただけますか。","key_technique":"赤字の中身を分解して、本業の収益力に焦点を当てる。経営者の不安を消しながら必要書類を自然に集める","source":"山田支店長 2024/05/10 製造業B社案件","closing_point":"「受注見込みの資料をいただけますか」で融資実行に向けた協力体制を作る"},{"id":"BL-002","category":"事業融資","scenario":"新規取引先からの融資相談","customer_type":"40代・IT企業社長・メイン銀行は地銀","customer_says":"メインバンク以外にも取引先を増やしたい","talk_script":"ありがとうございます。メインバンクが別にあること自体は全く問題ないです。むしろ、複数の金融機関と取引することで、お互いに良い条件を引き出せるようになります。最初は小さい金額から始めて、取引実績を作っていきましょう。例えば短期の運転資金を100万円からでも。実績ができれば、将来大きな設備投資の時に選択肢が増えます。御社の事業内容をもう少し詳しく教えていただけますか。","key_technique":"「小さく始める」で双方のリスクを下げる。将来の大型案件への布石として位置づける","source":"佐藤副支店長 2024/10/28 新規開拓研修","closing_point":"「事業内容を教えてください」で関係構築の第一歩を踏む"},{"id":"BL-003","category":"事業融資","scenario":"コロナ融資の返済が始まる事業者","customer_type":"60代・飲食店オーナー","customer_says":"コロナの借入の返済が始まるんだけど、正直きつい","talk_script":"率直に教えていただいてありがとうございます。今の段階で相談いただけたのは本当に良かったです。返済が始まってから滞ってしまうと対応が難しくなりますが、今なら選択肢があります。返済期間の延長、据置期間の再設定、場合によっては借換えで月々の返済額を下げることもできます。まず今の売上と経費の状況を整理させてください。一緒にどのプランが一番楽になるか考えましょう。","key_technique":"「今の段階で相談してくれてよかった」で相談したことを肯定する。選択肢を複数提示して安心させる","source":"山田支店長 2025/01/15 コロナ融資返済対策会議","closing_point":"「一緒に考えましょう」で伴走姿勢を見せる"},{"id":"CL-001","category":"カーローン","scenario":"ディーラーのローンと迷っている顧客","customer_type":"20代・会社員","customer_says":"ディーラーでもローン組めるって言われたんですけど","talk_script":"ディーラーさんのローンは手続きが楽なんですよね。ただ、金利を比べると年2〜3%くらい差が出ることが多いです。200万円の車で計算すると、5年で15万円くらい総支払額が変わります。それと、うちのマイカーローンは車の所有権が最初からお客様のものになるので、途中で売りたくなった時も自由にできます。ディーラーローンだと完済まで所有権がディーラーのままなんです。審査は最短で翌日には結果が出ますよ。","key_technique":"金利差を総額に変換して実感させる。所有権の違いという意外な差別化ポイントを出す","source":"田中主任 2024/09/05 カーローンキャンペーン報告","closing_point":"「最短翌日」でスピード感を出してディーラーの手軽さに対抗"},{"id":"EL-001","category":"教育ローン","scenario":"大学進学費用の相談","customer_type":"40代・会社員・子どもが高校3年生","customer_says":"来年大学なんだけど、奨学金だけじゃ足りなさそうで","talk_script":"受験から入学までは一番お金が動く時期ですもんね。教育ローンと奨学金は併用できますので、足りない分をローンで補うのが一番無理のない方法です。入学金と初年度の学費で大体200万円くらいが目安ですが、教育ローンは在学中は利息だけの返済にできるので、月々数千円で済みます。お子さんが卒業して就職してから本格的に返していく形です。合格発表前でも仮審査できますので、早めに枠だけ確保しておきませんか。","key_technique":"在学中は利息のみ返済で「今の負担は小さい」と安心させる。仮審査で時間的な不安を消す","source":"鈴木次長 2024/11/20 教育ローン推進月間","closing_point":"「合格発表前でも仮審査できる」で先手を打たせる"},{"id":"PN-001","category":"年金・保険","scenario":"年金受取口座の獲得","customer_type":"60代・定年退職直前","customer_says":"年金の受取口座をどこにしようか考えてるんですよ","talk_script":"ぜひうちに任せてください。年金をお受け取りいただくと、定期預金の金利を上乗せする特典があります。それと、年金受給者専用の総合口座を作ると、公共料金の引き落としやカードの支払いもまとめて管理できます。一番大きいのは、年金に関する届出や相談を窓口でまとめてできることです。年金事務所に行かなくても、うちの窓口で手続きを代行できるものがかなりあります。退職日が決まったら、手続きの段取りを一緒に確認しましょう。","key_technique":"金利特典だけでなく「窓口で年金手続き代行」という利便性で差別化","source":"山田支店長 2024/03/25 年金受取キャンペーン","closing_point":"「退職日が決まったら」で具体的なタイミングを約束させる"},{"id":"PN-002","category":"年金・保険","scenario":"個人年金保険の提案","customer_type":"30代・会社員","customer_says":"老後が不安なんですけど、何かやったほうがいいですか？","talk_script":"不安に思ってるということは、もう一歩踏み出す準備ができてるってことですね。一番手軽なのは、iDeCoか個人年金保険です。iDeCoは税金の控除が大きいですが、60歳まで引き出せない。個人年金保険は控除は小さいですが、途中で解約もできます。月1万円からでいいんです。30歳から始めれば、60歳で360万円に利息がつく。何もしなかったら0円です。まずどちらが合うか、一緒に見てみましょう。","key_technique":"「不安 = 準備ができてる」とポジティブに変換。2択に絞って迷わせない","source":"田中主任 2024/06/10 若手向け研修","closing_point":"「一緒に見てみましょう」で共同作業に持ち込む"},{"id":"IH-001","category":"相続・事業承継","scenario":"高齢顧客への相続対策の切り出し","customer_type":"70代・預金残高5,000万円以上","customer_says":"（特に相談はないが満期手続きで来店）","talk_script":"満期の手続きありがとうございます。ところで○○様、最近お客様の中で、お元気なうちに相続のことを整理しておきたいという方が増えていまして。相続って何も準備しないと、残されたご家族が大変なんですよね。預金の名義変更だけでも数か月かかることがあります。今日じゃなくていいんですが、一度うちの相続の専門スタッフとお話ししてみませんか。費用はかかりませんし、聞くだけでも全然大丈夫です。","key_technique":"「最近こういう方が増えている」で一般化して個人攻撃にしない。「今日じゃなくていい」で圧をかけない","source":"山田支店長 2024/08/30 相続セミナー後フォロー","closing_point":"「聞くだけでも大丈夫」でハードルを最小化"},{"id":"IH-002","category":"相続・事業承継","scenario":"事業承継の相談","customer_type":"60代・建設業社長・息子が後継者","customer_says":"そろそろ息子に会社を継がせたいんだけど、何から始めればいい？","talk_script":"一番大事なのは、今の会社の価値を把握することです。株式の評価額によって、贈与でいくか売買でいくか、やり方が変わってきます。うちの取引先で税理士の先生を紹介できますが、その前にまず会社の決算書3期分を見せていただければ、おおよその方向性は出せます。あと、事業承継税制という税金の優遇制度があって、条件に合えば株式の贈与税がゼロになるケースもあります。期限がある制度なので、早めに動いたほうがいいですよ。","key_technique":"「会社の価値を把握する」という最初のステップを明確にする。税制優遇の期限で緊急性を出す","source":"佐藤副支店長 2024/12/05 事業承継セミナー","closing_point":"「期限がある制度」で先送り防止"},{"id":"INV-001","category":"投資信託","scenario":"初めての投資相談","customer_type":"40代・会社員・投資経験なし","customer_says":"NISAが気になるんですけど、投資って怖くないですか？","talk_script":"怖いと思うのは正常な感覚です。大事なお金ですからね。投資信託は、プロが何百社もの株式や債券に分散して運用するので、1社が潰れても全体への影響は小さいんです。NISAの積立枠なら、月5,000円から始められて、利益に税金がかかりません。仮に月1万円を20年間、年利3%で運用できたら、240万円の元本が約328万円になる計算です。もちろん下がるリスクもありますが、20年という時間が味方してくれます。まずはNISAの口座だけ開設して、始めるかどうかはその後ゆっくり決めても大丈夫ですよ。","key_technique":"「怖いのは正常」と受け止める。少額と長期でリスクを最小化するイメージを作る","source":"田中主任 2024/07/18 NISA推進研修","closing_point":"「口座だけ開設」で意思決定を分割する"},{"id":"INV-002","category":"投資信託","scenario":"基準価額が下がってクレームが来た","customer_type":"60代・投資信託保有者","customer_says":"買った時より下がってるじゃないか。どうしてくれるんだ","talk_script":"ご心配をおかけして申し訳ありません。お気持ちはよく分かります。ただ、今の基準価額は一時的な市場全体の下落によるもので、○○様が持っている商品の中身は健全な企業ばかりです。過去にも同じような下落は何度もありましたが、長期で見ると回復しています。今売ってしまうと、下がった分が確定してしまいます。ここは持ち続けて回復を待つのが一番得策です。もしどうしてもご不安であれば、一部だけ売却して気持ちを楽にする方法もあります。来月の運用報告会でファンドマネージャーが直接説明する機会もありますので、ぜひご参加ください。","key_technique":"感情を受け止めてから冷静に事実を伝える。「今売ると損が確定する」で売却を踏みとどまらせる","source":"佐藤副支店長 2025/02/10 市場急落時の対応指導","closing_point":"「運用報告会」で専門家に説明させ、自分一人で説得しない"},{"id":"SB-001","category":"創業支援","scenario":"創業融資の相談","customer_type":"30代・脱サラで飲食店開業予定","customer_says":"カフェを開きたいんですけど、融資って受けられますか？","talk_script":"もちろん検討できます。創業融資は実績がないぶん、事業計画書の中身が勝負になります。見るポイントは3つです。1つ目は、ご自身の経験。飲食店で働いた経験があると非常に有利です。2つ目は自己資金。開業資金の3分の1くらい自己資金があると信用力が上がります。3つ目は売上の見込み。席数×回転率×客単価で、月の売上がいくらになるかの計算です。この3つが揃っていれば、十分融資のテーブルに乗ります。まずは事業計画書を一緒に作りましょう。ひな型がありますので。","key_technique":"審査のポイントを3つに絞って分かりやすく。「一緒に作りましょう」で伴走姿勢","source":"鈴木次長 2024/04/20 創業支援セミナー","closing_point":"「ひな型がある」で事業計画書のハードルを下げる"},{"id":"SB-002","category":"創業支援","scenario":"日本政策金融公庫との併用提案","customer_type":"40代・IT企業から独立予定","customer_says":"公庫と信金、どっちに借りればいいですか？","talk_script":"結論から言うと、両方から借りるのが一番賢いやり方です。公庫は創業融資の実績が豊富で金利も低い。うちは地元の事業者さんとの日常的なお付き合いが強みです。公庫は融資を出したらあまり接点がないんですが、うちは困った時にすぐ相談できます。金額も分散することで、片方に断られても全滅しません。両方に出す事業計画書は同じもので大丈夫ですので、まずは計画書を固めて、同時に申し込みましょう。","key_technique":"「両方から借りる」を正解として提示。競合を否定せず共存を勧めることで信頼を得る","source":"山田支店長 2024/09/30 創業支援事例検討会","closing_point":"「同時に申し込みましょう」で公庫に先を越されるリスクを消す"},{"id":"FX-001","category":"外国為替","scenario":"海外送金の相談","customer_type":"40代・貿易業","customer_says":"海外送金の手数料って安くならないですか？","talk_script":"送金の頻度と金額によっては、条件を見直せる可能性があります。月にどれくらいの回数と金額を送金されていますか。まとまった取引量があれば、為替の優遇レートを適用できるケースがあります。あと、送金の通貨と相手国によっては、中継銀行の手数料が変わることもあるので、送金ルートの見直しで全体のコストを下げられることもあります。まず直近3か月の送金明細を見せていただければ、具体的な提案ができますよ。","key_technique":"「条件を見直せる可能性」で期待を持たせつつ断言しない。送金明細を求めて取引の全体像を把握する","source":"佐藤副支店長 2024/06/15 外為研修","closing_point":"「送金明細を見せてください」で取引実態の開示を促す"},{"id":"WM-001","category":"資産運用全般","scenario":"退職金の運用相談","customer_type":"60代・定年退職直後・退職金2,000万円","customer_says":"退職金が入ったんだけど、どうすればいいか分からなくて","talk_script":"大きなお金が入ると、焦って全部何かに投資しなきゃと思うかもしれませんが、逆です。まず半年から1年は何もしないでください。生活費を計算して、年金と退職金で何年暮らせるかを把握するのが先です。その上で、すぐ使うお金・5年以内に使うお金・10年以上先のお金に分けます。すぐ使うお金は普通預金、5年以内は定期預金、10年以上先は投資信託。この3つに分けるだけで、安全とリターンのバランスが取れます。今日は生活費の整理だけやりましょう。","key_technique":"「半年何もしないで」で信頼を勝ち取る。商品を売りつけない姿勢が最強の営業","source":"山田支店長 2024/04/01 退職金セミナー","closing_point":"「今日は整理だけ」で長期の関係構築を優先"},{"id":"DX-001","category":"デジタル推進","scenario":"ネットバンキングの利用促進","customer_type":"50代・来店中心の顧客","customer_says":"ネットは怖いからいいよ","talk_script":"お気持ち分かります。ただ、最近は窓口に来られなくなった時のほうが困るんですよね。体調を崩した時や、天気が悪い日に振込が必要になった時。ネットバンキングは振込と残高確認だけでも使えるようにしておくと、いざという時の保険になります。セキュリティも、ワンタイムパスワードという仕組みで、毎回違う番号を使うので、仮に番号を見られても次は使えません。今日、お時間あれば一緒に登録してみませんか。5分で終わりますし、操作も一緒にやってみましょう。","key_technique":"「来られなくなった時」で必要性を具体化。「一緒にやる」で不安を消す","source":"田中主任 2024/10/15 デジタル推進月間","closing_point":"「5分で終わる」「一緒にやる」で今この場で行動させる"},{"id":"CM-001","category":"地域貢献・関係構築","scenario":"地元企業との関係構築","customer_type":"50代・地元商店街の会長","customer_says":"（商店街のイベントの相談）","talk_script":"商店街のイベント、ぜひ協力させてください。うちの信金として協賛も検討できますし、チラシの印刷費くらいはお手伝いできると思います。それと、イベント当日にうちのブースを出させていただければ、住宅ローンの相談会や子ども向けの貯金教室みたいなことができます。商店街のお客さん、うちの見込み客、お互いにメリットがあると思うんです。まずはイベントの概要を教えてください。企画書があれば支店の中で掛け合ってみます。","key_technique":"「お互いにメリット」で対等な関係を作る。金を出すだけでなく自分たちも参加する","source":"山田支店長 2024/05/20 地域連携会議","closing_point":"「掛け合ってみます」で社内調整を引き受ける姿勢を見せる"}];
+
+// --- Bigram tokenizer ---
+function tokenize(t){
+  t=t.toLowerCase();
+  var w=t.match(/[\w\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff]+/g)||[];
+  var b=[];
+  for(var i=0;i<w.length;i++){if(w[i].length>=2)for(var j=0;j<w[i].length-1;j++)b.push(w[i].substring(j,j+2))}
+  return w.concat(b);
+}
+
+// --- TF-IDF in browser ---
+function buildText(s){return s.category+" "+s.scenario+" "+s.customer_type+" "+s.customer_says+" "+s.key_technique+" "+s.talk_script}
+var docs=DATA.map(buildText);
+var docTokens=docs.map(tokenize);
+var vocab={};var vi=0;
+docTokens.forEach(function(d){d.forEach(function(t){if(!(t in vocab)){vocab[t]=vi++}})});
+var idf={};
+Object.keys(vocab).forEach(function(t){var df=0;docTokens.forEach(function(d){if(d.indexOf(t)!==-1)df++});idf[t]=Math.log((docTokens.length+1)/(df+1))+1});
+var tfidf=docTokens.map(function(d){
+  var tf={};d.forEach(function(t){tf[t]=(tf[t]||0)+1});
+  var vec={};var norm=0;
+  Object.keys(tf).forEach(function(t){var v=tf[t]*idf[t];vec[t]=v;norm+=v*v});
+  norm=Math.sqrt(norm)||1;
+  Object.keys(vec).forEach(function(t){vec[t]/=norm});
+  return vec;
+});
+
+function searchQ(q,cat,lim){
+  var qt=tokenize(q);
+  var tf={};qt.forEach(function(t){tf[t]=(tf[t]||0)+1});
+  var qv={};var qn=0;
+  Object.keys(tf).forEach(function(t){if(t in idf){var v=tf[t]*idf[t];qv[t]=v;qn+=v*v}});
+  qn=Math.sqrt(qn)||1;
+  Object.keys(qv).forEach(function(t){qv[t]/=qn});
+  var scores=tfidf.map(function(dv,i){
+    if(cat&&DATA[i].category!==cat)return-1;
+    var s=0;Object.keys(qv).forEach(function(t){if(t in dv)s+=qv[t]*dv[t]});return s;
+  });
+  var idx=scores.map(function(_,i){return i}).sort(function(a,b){return scores[b]-scores[a]}).slice(0,lim);
+  return idx.filter(function(i){return scores[i]>0}).map(function(i){return{s:DATA[i],score:scores[i]}});
+}
+
+// --- Categories ---
+var CATS=[];
+DATA.forEach(function(d){if(CATS.indexOf(d.category)===-1)CATS.push(d.category)});
+CATS.sort();
+var activeCat=null;
+
+var catEl=document.getElementById("cats");
+var allB=document.createElement("div");allB.className="cb on";allB.textContent="すべて";
+allB.addEventListener("click",function(){selCat(null,allB)});catEl.appendChild(allB);
+CATS.forEach(function(c){
+  var b=document.createElement("div");b.className="cb";b.textContent=c;
+  b.addEventListener("click",function(){selCat(c,b)});catEl.appendChild(b);
+});
+
+function selCat(c,b){
+  activeCat=c;
+  document.querySelectorAll(".cb").forEach(function(x){x.classList.remove("on")});
+  b.classList.add("on");
+  if(document.getElementById("si").value.trim())doSearch();
+}
+
+// --- Examples ---
+var EX=["金利が高いと言われた","赤字だけど融資したい","相続の話を切り出したい","NISAが怖い","退職金の相談","コロナ融資の返済がきつい"];
+var ecEl=document.getElementById("ec");
+EX.forEach(function(q){
+  var ch=document.createElement("div");ch.className="ep";ch.textContent=q;
+  ch.addEventListener("click",function(){document.getElementById("si").value=q;doSearch()});
+  ecEl.appendChild(ch);
+});
+
+// --- ChatGPT comparison ---
+var GEN={"金利":"住宅ローンの金利交渉では、複数の金融機関の見積もりを比較し、最も条件の良い金融機関を選ぶことが重要です。金利だけでなく、手数料や保証料も含めた総コストで比較しましょう。","赤字":"融資審査では、決算書の内容が重視されます。赤字の場合は、事業計画書をしっかり作成し、今後の収益見込みを明確にすることが大切です。","相続":"相続対策としては、遺言書の作成や生前贈与の活用が一般的です。専門家に相談することをお勧めします。","NISA":"NISAは少額投資非課税制度で、投資初心者にもおすすめです。つみたて投資枠と成長投資枠があり、自分に合った方法を選びましょう。","退職":"退職金の運用は、リスク許容度に応じて預金と投資を分散させることが基本です。焦らず慎重に判断しましょう。","コロナ":"コロナ関連融資の返済にお困りの場合は、金融機関に返済条件の変更を相談することができます。早めの相談をお勧めします。"};
+function getGPT(q){var k=Object.keys(GEN);for(var i=0;i<k.length;i++){if(q.indexOf(k[i])!==-1)return GEN[k[i]]}return"一般的なアドバイスとしては、お客様のニーズをよく聞き、最適な商品やサービスを提案することが大切です。信頼関係の構築を心がけましょう。"}
+
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+
+function renderCmp(q,top){
+  var a=document.getElementById("cmpA");a.textContent="";
+  if(!top)return;
+  var s=el("div","cmp");
+  var h=el("div","cmp-h");
+  h.appendChild(el("div","gl","\uD83D\uDCAC 一般的なAI"));
+  h.appendChild(el("div","ol","\uD83D\uDCCB 当システム"));
+  s.appendChild(h);
+  var b=el("div","cmp-b");
+  b.appendChild(el("div","cmp-g",getGPT(q)));
+  var o=el("div","cmp-o");
+  o.appendChild(el("strong","",top.source));
+  o.appendChild(document.createElement("br"));o.appendChild(document.createElement("br"));
+  o.appendChild(document.createTextNode(top.talk_script.substring(0,120)+"\u2026"));
+  o.appendChild(document.createElement("br"));o.appendChild(document.createElement("br"));
+  var cp=el("span","","\uD83C\uDFAF "+top.closing_point);
+  cp.style.color="#b7791f";cp.style.fontWeight="600";o.appendChild(cp);
+  b.appendChild(o);s.appendChild(b);a.appendChild(s);
+}
+
+function renderRes(results){
+  var c=document.getElementById("res");c.textContent="";
+  if(!results.length){var em=el("div","es");em.appendChild(el("p","","該当するトークが見つかりませんでした"));c.appendChild(em);return}
+  results.forEach(function(r){
+    var d=r.s,sc=r.score;
+    var card=el("div","rc");
+    var m=el("div","m");
+    m.appendChild(el("span","ct",d.category));
+    m.appendChild(el("span","badge","一致度 "+Math.round(sc*100)+"%"));
+    card.appendChild(m);
+    card.appendChild(el("div","sc",d.scenario));
+    card.appendChild(el("div","cu",d.customer_type));
+    card.appendChild(el("div","cs",d.customer_says));
+    card.appendChild(el("div","tk",d.talk_script));
+    card.appendChild(el("div","te","\u26A1 "+d.key_technique));
+    card.appendChild(el("div","cl","\uD83C\uDFAF "+d.closing_point));
+    card.appendChild(el("div","sr","\uD83D\uDCCB 出典: "+d.source));
+    c.appendChild(card);
+  });
+}
+
+function doSearch(){
+  var q=document.getElementById("si").value.trim();
+  if(!q)return;
+  document.getElementById("ex").style.display="none";
+  var results=searchQ(q,activeCat,5);
+  renderCmp(q,results.length?results[0].s:null);
+  renderRes(results);
+}
+
+document.getElementById("btn").addEventListener("click",doSearch);
+document.getElementById("si").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch()});
+</script>
+</body>
+</html>
